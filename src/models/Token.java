@@ -11,8 +11,12 @@ public class Token {
         this.tokenValue = tokenValue;
         this.lineNumber = lineNumber;
         this.columnNumber = columnNumber;
-
+        updateColumnNumber();
         checkForReservedToken();
+    }
+
+    private void updateColumnNumber() {
+        this.columnNumber -= tokenValue.length();
     }
 
     private void checkForReservedToken() {

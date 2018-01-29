@@ -15,8 +15,8 @@ public class Laxer {
         initialize();
     }
 
-    private void initialize(){
-        generatedTokenList  =new ArrayList<>();
+    private void initialize() {
+        generatedTokenList = new ArrayList<>();
     }
 
     public List<Token> getGeneratedTokenList() {
@@ -57,32 +57,26 @@ public class Laxer {
                 for (StateTransition currentState : currentStateList) {
                     State state = StateTransitionTable.getInstance().getStateInfo(currentState.getTransitionState());
                     if (state != null && state.isFinalState()) {
-                        Token token = new Token(currentState.getTokenTypeGenerated(),generatedToken.toString(),BufferManager.getInstance().getCurrentLineNumber(),BufferManager.getInstance().getLexemeForward());
+                        Token token = new Token(currentState.getTokenTypeGenerated(), generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
                         generatedTokenList.add(token);
-                        /*System.out.println("Generated Token Type::" + currentState.getTokenTypeGenerated().getReservedTokenType());
-                        System.out.println("Generated Token::" + generatedToken);*/
                         isTokenFound = true;
                     }
                 }
 
-                // TODO check for token not generated if invalid lexemes ...
+                // check for token not generated if invalid lexemes ...
                 if (!isTokenFound) {
                     if (generatedToken.length() == 0) {
                         //TODO add whitespace issue ...
                         List<Lexeme> lexemeList = TokenManager.getInstance().getPossibleTokenListFromInput(lexeme);
-                        if(!lexemeList.isEmpty()) {
+                        if (!lexemeList.isEmpty()) {
                             generatedToken.append(lexeme);
                         }
                         lexeme = BufferManager.getInstance().getNextCharFromBuffer();
                     }
-                    if(generatedToken.length() >0) {
-
-                        TokenType tokenType = TokenManager.getInstance().getErrorTypeFromGeneratedErrorToken(generatedToken.toString(),currentStateList);
-                        Token token = new Token(tokenType,generatedToken.toString(),BufferManager.getInstance().getCurrentLineNumber(),BufferManager.getInstance().getLexemeForward());
+                    if (generatedToken.length() > 0) {
+                        TokenType tokenType = TokenManager.getInstance().getErrorTypeFromGeneratedErrorToken(generatedToken.toString(), currentStateList);
+                        Token token = new Token(tokenType, generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
                         generatedTokenList.add(token);
-                        /*System.out.println("Generated Token Type::" + TokenType.INVALID_NUMBER );
-                        System.out.println("Generated Token::" + generatedToken);
-                        System.out.println("CurrentStatus::" + currentStateList.get(0).getTransitionState());*/
                     }
                 }
                 generatedToken = new StringBuilder();

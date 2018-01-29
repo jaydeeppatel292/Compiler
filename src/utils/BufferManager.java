@@ -15,6 +15,7 @@ public class BufferManager {
     private int bufferIndex = 1;
     private boolean isEOF = false;
     private int currentLineNumber = 1;
+    private int columnNumber = 0;
 
     public static BufferManager getInstance() {
         if (scanner == null) {
@@ -40,6 +41,10 @@ public class BufferManager {
 
     public int getLexemeForward() {
         return lexemeForward;
+    }
+
+    public int getColumnNumber() {
+        return columnNumber;
     }
 
     public int getCurrentLineNumber() {
@@ -69,6 +74,7 @@ public class BufferManager {
             case 1:
                 if (buffer1 != null) {
                     charfromBuffer = (char) buffer1[lexemeForward++];
+                    columnNumber++;
                     if (lexemeForward >= buffer1.length) {
                         lexemeForward = 0;
                         bufferIndex = 2;
@@ -86,6 +92,7 @@ public class BufferManager {
             case 2:
                 if (buffer2 != null) {
                     charfromBuffer = (char) buffer2[lexemeForward++];
+                    columnNumber++;
                     if (lexemeForward >= buffer2.length) {
                         lexemeForward = 0;
                         bufferIndex = 1;
@@ -103,6 +110,7 @@ public class BufferManager {
         }
         if(charfromBuffer=='\n'){
             currentLineNumber++;
+            columnNumber = 0;
         }
         return charfromBuffer;
     }
