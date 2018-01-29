@@ -1,0 +1,9 @@
+program:{
+    int abc = 123;
+    intabc = 123;
+    float abc=123.2;
+    float abc=123.20;
+    float abc=123.2E23;
+    float[] abc={1.2E1,0.2E-1,12.2E-2};
+
+}

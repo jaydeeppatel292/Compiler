@@ -23,7 +23,7 @@ public class Laxer {
         return generatedTokenList;
     }
 
-    public void getNextToken() {
+    public void generateAllTokens() {
         currentStateList.clear();
         currentStateList.add(new StateTransition("Q0", null));
         char lexeme = BufferManager.getInstance().getNextCharFromBuffer();
