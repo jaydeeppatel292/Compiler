@@ -32,15 +32,12 @@ public class Laxer {
         while (!BufferManager.getInstance().isEOF()) {
             exploredNewState.clear();
             for (StateTransition currentState : currentStateList) {
-//                System.out.println("Current State:" + currentState.getTransitionState());
                 List<Lexeme> lexemeList = TokenManager.getInstance().getPossibleTokenListFromInput(lexeme);
                 for (Lexeme token : lexemeList) {
                     try {
-//                        System.out.println("Found Lexeme:" + token);
                         StateTransition transitionState = StateTransitionTable.getInstance().getStateTransition(currentState.getTransitionState(), token);
                         if (transitionState != null) {
                             exploredNewState.add(transitionState);
-//                            System.out.println("Transition State:" + transitionState.getTransitionState());
                         }
                     } catch (StateNotFoundException e) {
                     }
@@ -63,16 +60,19 @@ public class Laxer {
                     }
                 }
 
-                // check for token not generated if invalid lexemes ...
+                // Manage invalid token
                 if (!isTokenFound) {
                     if (generatedToken.length() == 0) {
-                        //TODO add whitespace issue ...
+
+                        // below code will work with whitespace also ..
+                        // if lexeme not in the list of valid list then it will invalid token ..
                         List<Lexeme> lexemeList = TokenManager.getInstance().getPossibleTokenListFromInput(lexeme);
                         if (!lexemeList.isEmpty()) {
                             generatedToken.append(lexeme);
                         }
                         lexeme = BufferManager.getInstance().getNextCharFromBuffer();
                     }
+                    // check for invalid token ..
                     if (generatedToken.length() > 0) {
                         TokenType tokenType = TokenManager.getInstance().getErrorTypeFromGeneratedErrorToken(generatedToken.toString(), currentStateList);
                         Token token = new Token(tokenType, generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());

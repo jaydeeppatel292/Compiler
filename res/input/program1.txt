@@ -6,7 +6,7 @@ program:{
 _abv
 abc_
 int abc = 12.e
-float afsfs= 3456.45E45
+float afsfs= 3456.45e45
 
 }
 
