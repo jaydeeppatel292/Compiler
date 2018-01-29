@@ -16,10 +16,17 @@ public class Token {
     }
 
     private void checkForReservedToken() {
+        // Check if tokenvalue consist of punctuation like and,or,not
+        if(this.tokenValue.equals(ReservedToken.AND.getReservedTokenType()) || this.tokenValue.equals(ReservedToken.NOT.getReservedTokenType()) || this.tokenValue.equals(ReservedToken.OR.getReservedTokenType())){
+            this.tokenType = TokenType.OPERATOR;
+            return;
+        }
+
         // Check if tokenvalue consist of reserved word ...
         for(ReservedToken reservedToken : ReservedToken.values()){
             if(reservedToken.getReservedTokenType().equals(this.tokenValue)){
                 this.tokenType = TokenType.RESERVED;
+                return;
             }
         }
     }
