@@ -14,7 +14,7 @@ public class Main {
 
         Laxer laxer = new Laxer();
 
-        laxer.generateAllTokens();
+        laxer.generateNextToken();
 
         for (Token token : laxer.getGeneratedTokenList()) {
 //            System.out.println(token.getTokenType()+", \""+token.getTokenValue()+"\",  "+token.getLineNumber()+"  ,   "+token.getColumnNumber());

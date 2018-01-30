@@ -1,9 +1,13 @@
-
 program:{
+
+    for(int i=0;i<5;i++){
+
+    }
+
+    .567
 
     int abc = 123 + 123;
 
-    // given test cases
     0123
     01.23
     12.340
@@ -26,5 +30,4 @@ program:{
     float abc=123.20;
     float abc=123.2E23;
     float[] abc={1.2E1,0.2E-1,12.2E-2};
-
 }

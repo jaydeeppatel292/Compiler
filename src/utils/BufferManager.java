@@ -67,7 +67,11 @@ public class BufferManager {
     public char getNextChar() {
         return scanner.next().charAt(0);
     }
-
+    public void backtrackLexemeForward(){
+        if(lexemeForward>0) {
+            lexemeForward--;
+        }
+    }
     public char getNextCharFromBuffer() {
         char charfromBuffer = 0;
         switch (bufferIndex) {

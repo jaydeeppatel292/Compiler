@@ -22,7 +22,7 @@ public class LexerTest {
 
         Laxer laxer = new Laxer();
 
-        laxer.generateAllTokens();
+        laxer.generateNextToken();
 
         for(int tokenIndex=0;tokenIndex<laxer.getGeneratedTokenList().size();tokenIndex++){
             Token token = laxer.getGeneratedTokenList().get(tokenIndex);
