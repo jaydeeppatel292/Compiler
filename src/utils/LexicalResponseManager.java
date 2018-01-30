@@ -43,6 +43,8 @@ public class LexicalResponseManager {
         errorWriterFile.close();
     }
     public void writeLexicalResponseToFile(List<Token> tokenList){
+        errorWriterFile.println("Format: ErrorType , TokenValue , TokenLineNumber : TokenColumnNumber");
+        tokenWriterFile.println("Format: TokenType , TokenValue , TokenLineNumber : TokenColumnNumber");
         for(int tokenIndex=0;tokenIndex<tokenList.size();tokenIndex++){
             Token token = tokenList.get(tokenIndex);
 
