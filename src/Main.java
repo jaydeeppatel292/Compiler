@@ -12,17 +12,15 @@ public class Main {
 
         initializeParser(args);
 
-        Laxer laxer = new Laxer();
+        Lexer lexer = new Lexer();
 
-        laxer.generateNextToken();
+        lexer.generateNextToken();
 
-        for (Token token : laxer.getGeneratedTokenList()) {
-//            System.out.println(token.getTokenType()+", \""+token.getTokenValue()+"\",  "+token.getLineNumber()+"  ,   "+token.getColumnNumber());
+        for (Token token : lexer.getGeneratedTokenList()) {
             System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
-//            System.out.println(token.getTokenValue());
         }
 
-        LexicalResponseManager.getInstance().writeLexicalResponseToFile(laxer.getGeneratedTokenList());
+        LexicalResponseManager.getInstance().writeLexicalResponseToFile(lexer.getGeneratedTokenList());
     }
 
     public static void initializeParser(String[] args) {

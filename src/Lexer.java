@@ -6,12 +6,12 @@ import utils.TokenManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Laxer {
+public class Lexer {
 
     private List<StateTransition> currentStateList = new ArrayList<>();
     private List<Token> generatedTokenList;
 
-    public Laxer() {
+    public Lexer() {
         initialize();
     }
 

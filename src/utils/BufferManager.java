@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class BufferManager {
     private static BufferManager ourInstance = new BufferManager();
-    private static Scanner scanner;
     private byte[] buffer1;
     private byte[] buffer2;
     private int lexemeForward = 0;
@@ -18,9 +17,6 @@ public class BufferManager {
     private int columnNumber = 0;
 
     public static BufferManager getInstance() {
-        if (scanner == null) {
-            scanner = new Scanner(System.in);
-        }
         return ourInstance;
     }
 
@@ -33,10 +29,6 @@ public class BufferManager {
 
     public static BufferManager getOurInstance() {
         return ourInstance;
-    }
-
-    public static Scanner getScanner() {
-        return scanner;
     }
 
     public int getLexemeForward() {
@@ -64,9 +56,6 @@ public class BufferManager {
 
     }
 
-    public char getNextChar() {
-        return scanner.next().charAt(0);
-    }
     public void backtrackLexemeForward(){
         if(lexemeForward>0) {
             lexemeForward--;

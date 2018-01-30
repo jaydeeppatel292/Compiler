@@ -60,12 +60,14 @@ public class LexicalResponseManager {
             }
 
             // write atocc format to atocc file
-            if(token.getTokenType().equals(TokenType.ID) || token.getTokenType().equals(TokenType.INTEGER) || token.getTokenType().equals(TokenType.FLOAT)) {
-                aTOccWriterFile.print(token.getTokenType().getTokenType());
-            }else{
-                aTOccWriterFile.print(token.getTokenValue());
+            if(!token.getTokenValue().equals("/*") && !token.getTokenValue().equals("*/") && !token.getTokenValue().equals("//")) {
+                if (token.getTokenType().equals(TokenType.ID) || token.getTokenType().equals(TokenType.INTEGER) || token.getTokenType().equals(TokenType.FLOAT)) {
+                    aTOccWriterFile.print(token.getTokenType().getTokenType());
+                } else {
+                    aTOccWriterFile.print(token.getTokenValue());
+                }
+                aTOccWriterFile.print(" ");
             }
-            aTOccWriterFile.print(" ");
 
             // write token to the token file
             tokenWriterFile.print(token.getTokenType().getTokenType());

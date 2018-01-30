@@ -20,12 +20,12 @@ public class LexerTest {
         TableParserBuilder.getInstance().buildParser();
         BufferManager.getInstance().initialize(file);
 
-        Laxer laxer = new Laxer();
+        Lexer lexer = new Lexer();
 
-        laxer.generateNextToken();
+        lexer.generateNextToken();
 
-        for(int tokenIndex=0;tokenIndex<laxer.getGeneratedTokenList().size();tokenIndex++){
-            Token token = laxer.getGeneratedTokenList().get(tokenIndex);
+        for(int tokenIndex = 0; tokenIndex< lexer.getGeneratedTokenList().size(); tokenIndex++){
+            Token token = lexer.getGeneratedTokenList().get(tokenIndex);
             Token comareToken = testDataList.get(tokenIndex);
             assertEquals(token.getTokenType(),comareToken.getTokenType());
             assertEquals(token.getTokenValue(),comareToken.getTokenValue());
