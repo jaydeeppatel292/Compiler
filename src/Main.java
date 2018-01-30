@@ -25,6 +25,8 @@ public class Main {
 
     public static void initializeParser(String[] args) {
 
+        createRequiredFolders();
+
         // get filepath from user input args
         File inputFile = null;
         if (args.length > 0) {
@@ -37,6 +39,27 @@ public class Main {
         }
         TableParserBuilder.getInstance().buildParser();
         BufferManager.getInstance().initialize(inputFile);
+    }
+
+    private static void createRequiredFolders() {
+        File resDir = new File("res");
+        if(!resDir.isFile()){
+            resDir.mkdir();
+        }
+
+        File inputDir = new File("res/input");
+        if(!inputDir.isFile()){
+            inputDir.mkdir();
+        }
+
+        File outputDir = new File("res/output");
+        if(!outputDir.isFile()){
+            outputDir.mkdir();
+        }
+        File assetsDir = new File("res/assets");
+        if(!assetsDir.isFile()){
+            assetsDir.mkdir();
+        }
     }
 }
 
