@@ -14,9 +14,16 @@ public class Main {
 
         Lexer lexer = new Lexer();
 
-        lexer.generateNextToken();
+//        lexer.generateNextToken();
 
-        for (Token token : lexer.getGeneratedTokenList()) {
+        /*for (Token token : lexer.getGeneratedTokenList()) {
+            System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
+        }*/
+        Token token;
+        while (true){
+            token =TokenGenerator.getInstance().getNextToken();
+            if(token==null)
+                break;
             System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
         }
 
