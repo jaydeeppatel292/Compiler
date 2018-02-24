@@ -1,33 +1,59 @@
-program:{
+class id:id,id  {
+	int id; float id; int id ();
+};
 
-    for(int i=0;i<5;i++){
+int id :: id (int id [234][234], int id)
+{
+	id[234][234].id().id[234].id().id = 234 * 234 + 234 and 234 == 234 / 234;
+	id[234][234].id().id[234].id().id[234] = 234 * 234 + 234 and 234 == 234 / 234;
+	id = 234 * 234 + 234 and 234 == 234 / 234;
 
-    }
+	if (234 * 234 + 234 and 234 == 234 / 234)
+		then
+		{ return (234 * 234 + 234 and 234 == 234 / 234);
+		}
+	else
+		{
+			return (234 * 234 + 234 and 234 == 234 / 234);
+		};
+	get (id[234]);
+	put (234 + 234 * 234 and 234 == 234 / 234);
+	return (234 + 234 * 234 and 234 == 234 / 234);
+};
+float id(){
+ float id;
+ id id;
+ id = 234  * ( 234 + 23.43 / 43.34 );
+};
 
-    .567
+id id(){
 
-    int abc = 123 + 123;
-
-    0123
-    01.23
-    12.340
-    012.340
-    12.34e01
-    12345.6789e-123
-    12345
-    abc
-    abc1
-    abc_1
-    abc1_
-    _abc1
-    1abc
-    _1abc
+};
 
 
-    int abc = 123 + 123;
-    intabc = 123;
-    float abc=123.2;
-    float abc=123.20;
-    float abc=123.2E23;
-    float[] abc={1.2E1,0.2E-1,12.2E-2};
-}
+program {
+	int id [234];
+	int id;;;;;;;;;;;;;
+	int id;
+	int id;
+	id id;
+	id id[234][234][234][234];
+
+	for(int i=0; i<100;i=i+1){
+	    get(sample[i]);
+	    sample[i] = (sample[i] * randomize());
+	};
+    if (234 * 234 + 234 and 234 == 234 / 234)
+    		then
+    		{ return (234 * 234 + 234 and 234 == 234 / 234);
+    		}
+    	else
+    		{
+    			return (234 * 234 + 234 and 234 == 234 / 234);
+    		};
+	maxValue = utility.findMax(sample);
+	minValue = utility.findMin(sample);
+	arrayUtility[utility.var1[1][2][3][4][5][id+maxvalue]][1][1][1].var2 =2.5;
+    put(maxValue);
+    put(minValue);
+};

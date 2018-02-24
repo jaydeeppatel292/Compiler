@@ -19,15 +19,21 @@ public class Main {
         /*for (Token token : lexer.getGeneratedTokenList()) {
             System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
         }*/
+
+        Parser.getInstance().parse();
+
+        /*
         Token token;
         while (true){
             token =TokenGenerator.getInstance().getNextToken();
             if(token==null)
                 break;
             System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
-        }
+            LexicalResponseManager.getInstance().writeLexicalResponseToFile(token);
 
-        LexicalResponseManager.getInstance().writeLexicalResponseToFile(lexer.getGeneratedTokenList());
+        }*/
+        LexicalResponseManager.getInstance().finisheWriting();
+
     }
 
     public static void initializeParser(String[] args) {

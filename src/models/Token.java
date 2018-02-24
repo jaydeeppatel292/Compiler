@@ -14,6 +14,11 @@ public class Token {
         updateColumnNumber();
         checkForReservedToken();
     }
+    public Token(TokenType tokenType, String tokenValue) {
+        this.tokenType = tokenType;
+        this.tokenValue = tokenValue;
+        checkForReservedToken();
+    }
 
     private void updateColumnNumber() {
         this.columnNumber -= tokenValue.length();
@@ -28,8 +33,9 @@ public class Token {
 
         // Check if tokenvalue consist of reserved word ...
         for(ReservedToken reservedToken : ReservedToken.values()){
-            if(reservedToken.getReservedTokenType().equals(this.tokenValue)){
+            if(reservedToken.getTokenType().equals(this.tokenValue)){
                 this.tokenType = TokenType.RESERVED;
+                this.tokenValue = reservedToken.getReservedTokenType();
                 return;
             }
         }
