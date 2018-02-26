@@ -2,36 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f04583c-3596-43c5-9fa7-baf658a2177e" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/res/assets/productionExpression" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Parser.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/GrammarExpression.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/LL1ParseTable.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/NonTerminal.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/Terminal.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/ASTNode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/ASTNodeType.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/utils/ASTManager.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator_backup.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Assignment.iml" afterPath="$PROJECT_DIR$/Assignment.iml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/Main.class" afterPath="$PROJECT_DIR$/out/production/Assignment/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/exception/StateNotFoundException.class" afterPath="$PROJECT_DIR$/out/production/Assignment/exception/StateNotFoundException.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/BufferReadResponse.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/BufferReadResponse.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/Lexeme.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/Lexeme.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/ReservedToken.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/ReservedToken.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/State.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/State.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/StateTransition.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/StateTransition.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/StateTransitionTable.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/StateTransitionTable.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/Token.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/Token.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/models/TokenType.class" afterPath="$PROJECT_DIR$/out/production/Assignment/models/TokenType.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/utils/BufferManager.class" afterPath="$PROJECT_DIR$/out/production/Assignment/utils/BufferManager.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/utils/FileManager.class" afterPath="$PROJECT_DIR$/out/production/Assignment/utils/FileManager.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/utils/TableParserBuilder.class" afterPath="$PROJECT_DIR$/out/production/Assignment/utils/TableParserBuilder.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/utils/TokenManager.class" afterPath="$PROJECT_DIR$/out/production/Assignment/utils/TokenManager.class" />
       <change beforePath="$PROJECT_DIR$/res/input/program.txt" afterPath="$PROJECT_DIR$/res/input/program.txt" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/ReservedToken.java" afterPath="$PROJECT_DIR$/src/models/ReservedToken.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Token.java" afterPath="$PROJECT_DIR$/src/models/Token.java" />
-      <change beforePath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" afterPath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" afterPath="$PROJECT_DIR$/src/Parser.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/LL1ParseTable.java" afterPath="$PROJECT_DIR$/src/models/LL1ParseTable.java" />
+      <change beforePath="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java" afterPath="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,9 +28,21 @@
       <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/input/program.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="38" column="10" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+            <state relative-caret-position="364">
+              <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ASTManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,60 +50,14 @@
       <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+            <state relative-caret-position="115">
+              <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#553#554#0" expanded="true" />
-                <element signature="e#587#588#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BufferManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/BufferManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Terminal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Terminal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-462">
-              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-              <folding>
-                <element signature="e#956#957#0" expanded="true" />
-                <element signature="e#984#985#0" expanded="true" />
-                <element signature="e#1015#1016#0" expanded="true" />
-                <element signature="e#1042#1043#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LL1ParseTable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/LL1ParseTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Token.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Token.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="47" column="18" lean-forward="false" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
-              <folding>
-                <element signature="e#1635#1636#0" expanded="true" />
-                <element signature="e#1668#1669#0" expanded="true" />
+                <element signature="e#606#607#0" expanded="true" />
+                <element signature="e#640#641#0" expanded="true" />
+                <element signature="e#2800#2801#0" expanded="true" />
+                <element signature="e#2847#2848#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,8 +66,8 @@
       <file leaf-file-name="GrammarExpressionGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="25" column="83" lean-forward="true" selection-start-line="25" selection-start-column="83" selection-end-line="25" selection-end-column="83" />
+            <state relative-caret-position="616">
+              <caret line="68" column="116" lean-forward="false" selection-start-line="68" selection-start-column="80" selection-end-line="68" selection-end-column="116" />
               <folding />
             </state>
           </provider>
@@ -133,29 +78,48 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Singleton" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Singleton" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lexemeForward</find>
-      <find>reserved</find>
-      <find>generatedTokenList</find>
-      <find>terminal</find>
-      <find>pop</find>
-      <find>]</find>
-      <find>ε</find>
-      <find>if</find>
-      <find>syn</find>
-      <find>synta</find>
-      <find>Token</find>
+      <find>SEMANTIC_MAKE_FAMILY_PUT_STAT</find>
+      <find>put</find>
+      <find>SEMANTIC_MAKE_FAMILY_REL_EXPR</find>
+      <find>stBlock</find>
+      <find>termTail</find>
+      <find>statblock</find>
+      <find>SEMANTIC_MAKE_FAMILY_EXPR</find>
+      <find>statement</find>
+      <find>family_state</find>
+      <find>varDecl</find>
+      <find>stat_body</find>
+      <find>SEMANTIC_MAKE_FAMILY_STAT_BODY</find>
+      <find>SEMANTIC_MAKE_FAMILY_FUNC_DEF</find>
+      <find>decl</find>
+      <find>funcDef</find>
+      <find>forblock</find>
+      <find>for</find>
+      <find>make_family_term</find>
+      <find>term</find>
+      <find>factor</find>
+      <find>expr</find>
+      <find>SEMANTIC_MAKE_FAMILY_ar</find>
+      <find>SEMANTIC_MAKE_FAMILY_TERM</find>
+      <find>SEMANTIC_MAKE_FAMILY_FACTOR_ARITH_EXPR</find>
+      <find>SEMANTIC_MAKE_FAMILY_ARITH_EXPR</find>
+      <find>arith</find>
+      <find>assign</find>
+      <find>assign_stat</find>
+      <find>SEMANTIC_MAKE_FAMILY_ASSIGN_STAT</find>
+      <find>left</find>
     </findStrings>
     <replaceStrings>
-      <replace>EPSILON</replace>
       <replace>}</replace>
+      <replace>EPSILON</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -204,10 +168,14 @@
         <option value="$PROJECT_DIR$/src/models/NonTerminal__.java" />
         <option value="$PROJECT_DIR$/src/models/NonTerminal.java" />
         <option value="$PROJECT_DIR$/src/models/Token.java" />
-        <option value="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java" />
         <option value="$PROJECT_DIR$/src/models/LL1ParseTable.java" />
+        <option value="$PROJECT_DIR$/src/models/ASTNodeType.java" />
+        <option value="$PROJECT_DIR$/src/models/ASTNode.java" />
+        <option value="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator_backup.java" />
         <option value="$PROJECT_DIR$/src/Parser.java" />
         <option value="$PROJECT_DIR$/res/input/program.txt" />
+        <option value="$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java" />
+        <option value="$PROJECT_DIR$/src/utils/ASTManager.java" />
       </list>
     </option>
   </component>
@@ -302,12 +270,13 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="settings.editor.splitter.proportion" value="0.21824104" />
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="utils" />
       <recent name="models" />
       <recent name="" />
     </key>
@@ -407,7 +376,7 @@
       <workItem from="1517205816927" duration="30437000" />
       <workItem from="1518405949956" duration="1801000" />
       <workItem from="1518929313326" duration="9933000" />
-      <workItem from="1519414143617" duration="39046000" />
+      <workItem from="1519414143617" duration="81385000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -465,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517286943079</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="generated syntax directed translation with skip error functionality ..">
+      <created>1519507949427</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1519507949428</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -480,7 +456,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126989000" />
+    <option name="totallyTimeSpent" value="169328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -500,14 +476,14 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.4969697" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.067132115" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1009667" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43443558" sideWeight="0.4969697" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5381984" sideWeight="0.4969697" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -532,34 +508,55 @@
     <MESSAGE value="atocc format" />
     <MESSAGE value="updated atocc format" />
     <MESSAGE value="added auto create folders" />
-    <option name="LAST_COMMIT_MESSAGE" value="added auto create folders" />
+    <MESSAGE value="generated syntax directed translation with skip error functionality .." />
+    <option name="LAST_COMMIT_MESSAGE" value="generated syntax directed translation with skip error functionality .." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser.java</url>
-          <line>106</line>
+          <url>file://$PROJECT_DIR$/src/utils/ASTManager.java</url>
+          <line>28</line>
           <properties />
-          <option name="timeStamp" value="75" />
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/utils/ASTManager.java</url>
+          <line>289</line>
+          <properties />
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/utils/ASTManager.java</url>
+          <line>54</line>
+          <properties />
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/utils/ASTManager.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="123" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="token.getTokenValue()" language="JAVA" />
         <watch expression="Terminal.values()" language="JAVA" />
-        <watch expression="NonTerminal.values()" language="JAVA" />
         <watch expression="x" language="JAVA" />
-        <watch expression="Terminal.getTerminalIndexFromString(&quot;eq&quot;)" language="JAVA" />
-        <watch expression="LL1ParseTable.Table[43][29]" language="JAVA" />
-        <watch expression="LL1ParseTable.Table" />
+        <watch expression="semanticStack" language="JAVA" />
+        <watch expression="semanticStack.get(6)" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>semanticStack</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>LL1ParseTable.Table[43][29]</expression-string>
         <language-id>JAVA</language-id>
@@ -605,48 +602,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>token.getTokenValue()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="58" lean-forward="true" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Lexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="21" column="48" lean-forward="false" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -928,14 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="25" column="83" lean-forward="true" selection-start-line="25" selection-start-column="83" selection-end-line="25" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/BufferManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
@@ -970,28 +920,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/LL1ParseTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="231">
+          <caret line="11" column="93" lean-forward="false" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/ASTNodeType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="29" lean-forward="false" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="e#148#149#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/ASTNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding>
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#256#257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator_backup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+        <state relative-caret-position="115">
+          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#606#607#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#2800#2801#0" expanded="true" />
+            <element signature="e#2847#2848#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="68" column="116" lean-forward="false" selection-start-line="68" selection-start-column="80" selection-end-line="68" selection-end-column="116" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/input/program.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="38" column="10" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+        <state relative-caret-position="364">
+          <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
           <folding />
         </state>
       </provider>

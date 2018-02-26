@@ -1,6 +1,8 @@
 import models.*;
+import utils.ASTManager;
 import utils.GrammarExpressionGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -35,15 +37,20 @@ public class Parser {
             return false;
         }
         boolean success = true;
-        while (!stack.peek().equals("$") && token!=null) {
+        while (!stack.peek().equals("$") && token != null) {
             String x = stack.peek();
-            if (isTerminal(x)) {
+            if (isSemanticAction(x)) {
+                ASTManager.getInstance().takeSemanticAction(x);
+                stack.pop();
+            } else if (isTerminal(x)) {
                 String tokenString;
                 if (token.getTokenType().getTokenType().equals(TokenType.ID.getTokenType()) || token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType()) || token.getTokenType().getTokenType().equals(TokenType.FLOAT.getTokenType())) {
                     tokenString = (token.getTokenType().getTokenType());
                 } else {
                     tokenString = token.getTokenValue();
                 }
+                ASTManager.getInstance().makeNode(tokenString,token);
+
                 if (x.equals(tokenString)) {
                     stack.pop();
                     System.out.println(stack.toString());
@@ -67,6 +74,12 @@ public class Parser {
             }
         }
         return (!token.getTokenType().getTokenType().equals("$")) && (success);
+    }
+
+
+
+    private boolean isSemanticAction(String x) {
+        return (x.contains("SEMANTIC"));
     }
 
 

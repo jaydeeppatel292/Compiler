@@ -1,10 +1,10 @@
-class id:id,id  {
+class a:b,c  {
 	int id; float id; int id ();
 };
 
 int id :: id (int id [234][234], int id)
 {
-	id[234][234].id().id[234].id().id = 234 * 234 + 234 and 234 == 234 / 234;
+	id[234][234].id().id[234].id().id = 2341 * 2342 + 2343 and 2344 == 2345 / 2346;
 	id[234][234].id().id[234].id().id[234] = 234 * 234 + 234 and 234 == 234 / 234;
 	id = 234 * 234 + 234 and 234 == 234 / 234;
 
@@ -20,6 +20,7 @@ int id :: id (int id [234][234], int id)
 	put (234 + 234 * 234 and 234 == 234 / 234);
 	return (234 + 234 * 234 and 234 == 234 / 234);
 };
+
 float id(){
  float id;
  id id;
