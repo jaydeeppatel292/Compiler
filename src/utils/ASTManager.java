@@ -127,8 +127,6 @@ public class ASTManager {
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_INDICE": {
-                    List<ASTNode> astNodeList = new ArrayList<>();
-                    astNodeList.add(semanticStack.pop());
                     transferFromOneFamilyToOther(semanticStack.peek(), "indice");
                     break;
                 }
@@ -136,6 +134,10 @@ public class ASTManager {
                     List<ASTNode> astNodeList = new ArrayList<>();
                     astNodeList.add(semanticStack.pop());
                     makeFamily("num", astNodeList);
+                    transferFromOneFamilyToOther(semanticStack.peek(), "factor");
+                    break;
+                }
+                case "SEMANTIC_MAKE_FAMILY_FACTOR": {
                     transferFromOneFamilyToOther(semanticStack.peek(), "factor");
                     break;
                 }

@@ -7,9 +7,6 @@ import java.util.List;
 
 public class GrammarExpressionGenerator {
 
-    //SEMANTIC_MAKE_NODE
-    //SEMANTIC_MAKE_FAMILY
-//    SEMANTIC_MAKE_SIBLING
     public static List<GrammarExpression> generateGrammarExpression() {
         List<GrammarExpression> grammarExpressionList = new ArrayList<>();
         grammarExpressionList.add(new GrammarExpression("prog", "cd SEMANTIC_MAKE_FAMILY_CLASSLIST fd SEMANTIC_MAKE_FAMILY_FUNCTION_LIST program funcBody ; SEMANTIC_MAKE_FAMILY_PROG"));
@@ -80,7 +77,7 @@ public class GrammarExpressionGenerator {
         grammarExpressionList.add(new GrammarExpression("term", "factor termTail"));
         grammarExpressionList.add(new GrammarExpression("termTail", "EPSILON"));
         grammarExpressionList.add(new GrammarExpression("termTail", "multOp factor SEMANTIC_MAKE_FAMILY_TERM termTail"));
-        grammarExpressionList.add(new GrammarExpression("factor", "factorTemp"));
+        grammarExpressionList.add(new GrammarExpression("factor", "factorTemp SEMANTIC_MAKE_FAMILY_FACTOR"));
         grammarExpressionList.add(new GrammarExpression("factor", "integer SEMANTIC_MAKE_FAMILY_FACTOR_NUM"));
         grammarExpressionList.add(new GrammarExpression("factor", "float SEMANTIC_MAKE_FAMILY_FACTOR_NUM"));
         grammarExpressionList.add(new GrammarExpression("factor", "( arithExpr ) SEMANTIC_MAKE_FAMILY_FACTOR_ARITH_EXPR"));
