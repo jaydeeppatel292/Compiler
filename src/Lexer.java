@@ -10,6 +10,7 @@ public class Lexer {
 
     private List<StateTransition> currentStateList = new ArrayList<>();
     private List<Token> generatedTokenList;
+    private boolean skipMultiLineCommnent;
 
     public Lexer() {
         initialize();
@@ -54,9 +55,23 @@ public class Lexer {
                 for (StateTransition currentState : currentStateList) {
                     State state = StateTransitionTable.getInstance().getStateInfo(currentState.getTransitionState());
                     if (state != null && state.isFinalState()) {
-                        Token token = new Token(currentState.getTokenTypeGenerated(), generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
-                        generatedTokenList.add(token);
-                        isTokenFound = true;
+                        if (generatedToken.toString().equals("//")) {
+                            BufferManager.getInstance().skipThisLine();
+                            generatedToken =new StringBuilder();
+                        }else if (generatedToken.toString().equals("/*")) {
+                            skipMultiLineCommnent = true;
+                            generatedToken =new StringBuilder();
+                        }else if (generatedToken.toString().equals("*/")) {
+                            generatedToken =new StringBuilder();
+                            skipMultiLineCommnent = false;
+                        } else if(skipMultiLineCommnent){
+                            generatedToken =new StringBuilder();
+                        }else{
+                            Token token = new Token(currentState.getTokenTypeGenerated(), generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
+                            generatedTokenList.add(token);
+                            isTokenFound = true;
+                        }
+
                     }
                 }
 

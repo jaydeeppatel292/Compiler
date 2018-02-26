@@ -12,6 +12,7 @@ public class TokenGenerator {
     private char lexeme;
     public static TokenGenerator instance;
     public StringBuilder generatedToken ;
+    private boolean skipMultiLineCommnent=false;
 
     public static TokenGenerator getInstance() {
         if (instance == null) {
@@ -60,8 +61,21 @@ public class TokenGenerator {
                 for (StateTransition currentState : currentStateList) {
                     State state = StateTransitionTable.getInstance().getStateInfo(currentState.getTransitionState());
                     if (state != null && state.isFinalState()) {
-                        Token token = new Token(currentState.getTokenTypeGenerated(), generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
-                        return token;
+                        if (generatedToken.toString().equals("//")) {
+                            BufferManager.getInstance().skipThisLine();
+                            generatedToken =new StringBuilder();
+                        }else if (generatedToken.toString().equals("/*")) {
+                            skipMultiLineCommnent = true;
+                            generatedToken =new StringBuilder();
+                        }else if (generatedToken.toString().equals("*/")) {
+                            generatedToken =new StringBuilder();
+                            skipMultiLineCommnent = false;
+                        } else if(skipMultiLineCommnent){
+                            generatedToken =new StringBuilder();
+                        }else {
+                            Token token = new Token(currentState.getTokenTypeGenerated(), generatedToken.toString(), BufferManager.getInstance().getCurrentLineNumber(), BufferManager.getInstance().getColumnNumber());
+                            return token;
+                        }
                     }
                 }
 
@@ -69,9 +83,11 @@ public class TokenGenerator {
                 if (generatedToken.length() == 0) {
                     // below code will work with whitespace also ..
                     // if lexeme not in the list of valid list then it will invalid token ..
-                    List<Lexeme> lexemeList = TokenManager.getInstance().getPossibleTokenListFromInput(lexeme);
-                    if (!lexemeList.isEmpty()) {
-                        generatedToken.append(lexeme);
+                    if(!skipMultiLineCommnent) {
+                        List<Lexeme> lexemeList = TokenManager.getInstance().getPossibleTokenListFromInput(lexeme);
+                        if (!lexemeList.isEmpty()) {
+                            generatedToken.append(lexeme);
+                        }
                     }
                     lexeme = BufferManager.getInstance().getNextCharFromBuffer();
                 }

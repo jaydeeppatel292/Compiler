@@ -11,27 +11,13 @@ public class Main {
     public static void main(String[] args) {
 
         initializeParser(args);
-
-        Lexer lexer = new Lexer();
-
-//        lexer.generateNextToken();
-
-        /*for (Token token : lexer.getGeneratedTokenList()) {
+        /*Token token = TokenGenerator.getInstance().getNextToken();
+        while(token!=null){
             System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
+            token = TokenGenerator.getInstance().getNextToken();
         }*/
 
         Parser.getInstance().parse();
-
-        /*
-        Token token;
-        while (true){
-            token =TokenGenerator.getInstance().getNextToken();
-            if(token==null)
-                break;
-            System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
-            LexicalResponseManager.getInstance().writeLexicalResponseToFile(token);
-
-        }*/
         LexicalResponseManager.getInstance().finisheWriting();
 
     }

@@ -107,4 +107,11 @@ public class BufferManager {
         }
         return charfromBuffer;
     }
+
+    public void skipThisLine() {
+        char nextChar = getNextCharFromBuffer();
+        while(nextChar!='\n') {
+             nextChar = getNextCharFromBuffer();
+        }
+    }
 }

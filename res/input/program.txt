@@ -1,3 +1,8 @@
+// afdsfsfsfsf safsfdsfs class a:b,c  {
+/* flkajlkfjksajflk
+
+*/
+
 class a:b,c  {
 	int id; float id; int id ();
 };

@@ -14,6 +14,7 @@ public class LexicalResponseManager {
     private PrintWriter errorWriterFile;
     private PrintWriter aTOccWriterFile;
     private PrintWriter tokenWriterFile;
+    private PrintWriter derivationWriterFile;
 
     public static LexicalResponseManager getInstance() {
         return ourInstance;
@@ -25,6 +26,7 @@ public class LexicalResponseManager {
             tokenWriterFile = new PrintWriter(Constants.OUTPUT_TOKEN_GENERATED_FILE_PATH, "UTF-8");
             aTOccWriterFile = new PrintWriter(Constants.OUTPUT_ATOCC_FILE_NAME_PATH, "UTF-8");
             errorWriterFile = new PrintWriter(Constants.OUTPUT_ERROR_FILE_NAME_PATH, "UTF-8");
+            derivationWriterFile = new PrintWriter(Constants.OUTPUT_DERIVATION, "UTF-8");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -40,6 +42,14 @@ public class LexicalResponseManager {
         tokenWriterFile.close();
         aTOccWriterFile.close();
         errorWriterFile.close();
+        derivationWriterFile.close();
+    }
+
+    public void addDerivationToFIle(List<String> dataList){
+        for(String data : dataList){
+            derivationWriterFile.print(data+" ");
+        }
+        derivationWriterFile.println();
     }
 
     public void writeLexicalResponseToFile(Token token) {

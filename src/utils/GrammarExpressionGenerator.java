@@ -93,7 +93,7 @@ public class GrammarExpressionGenerator {
         grammarExpressionList.add(new GrammarExpression("factorTempA", "EPSILON"));
         grammarExpressionList.add(new GrammarExpression("indiceRep", "indice SEMANTIC_MAKE_SIBLING_COMMON indiceRep SEMANTIC_MAKE_FAMILY_INDEX_LIST"));
         grammarExpressionList.add(new GrammarExpression("indiceRep", "EPSILON"));
-        grammarExpressionList.add(new GrammarExpression("indice", "[ arithExpr ]"));
+        grammarExpressionList.add(new GrammarExpression("indice", "[ arithExpr ] SEMANTIC_MAKE_FAMILY_INDICE"));
         grammarExpressionList.add(new GrammarExpression("variable", "id variableTail"));
         grammarExpressionList.add(new GrammarExpression("variableTail", "indiceRep SEMANTIC_MAKE_FAMILY_DATA_MEMBER SEMANTIC_MAKE_SIBLING_VAR_ELEMENT variablePrime"));
         grammarExpressionList.add(new GrammarExpression("variableTail", "( aParams ) SEMANTIC_MAKE_FAMILY_F_CALL SEMANTIC_MAKE_SIBLING_VAR_ELEMENT . variable"));

@@ -1,10 +1,9 @@
 import models.*;
 import utils.ASTManager;
 import utils.GrammarExpressionGenerator;
+import utils.LexicalResponseManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Parser {
     private static Parser ourInstance = new Parser();
@@ -14,6 +13,8 @@ public class Parser {
     private static final int POP_ERROR_CODE = 108;
     private boolean isTokenStringCompleted = false;
     private Token token;
+    private List<String> derivation = new ArrayList<>();
+    private int lastIndexPushed=0;
 
     public static Parser getInstance() {
         return ourInstance;
@@ -32,6 +33,8 @@ public class Parser {
     public boolean parse() {
         stack.push("$");
         stack.push(grammarExpressionList.get(0).getName());
+        derivation.add(stack.peek());
+        LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
         token = nextToken();
         if (token == null) {
             return false;
@@ -42,6 +45,7 @@ public class Parser {
             if (isSemanticAction(x)) {
                 ASTManager.getInstance().takeSemanticAction(x);
                 stack.pop();
+                removeDerivation(x);
             } else if (isTerminal(x)) {
                 String tokenString;
                 if (token.getTokenType().getTokenType().equals(TokenType.ID.getTokenType()) || token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType()) || token.getTokenType().getTokenType().equals(TokenType.FLOAT.getTokenType())) {
@@ -49,9 +53,10 @@ public class Parser {
                 } else {
                     tokenString = token.getTokenValue();
                 }
-                ASTManager.getInstance().makeNode(tokenString,token);
+                ASTManager.getInstance().makeNode(tokenString, token);
 
                 if (x.equals(tokenString)) {
+                    addDerivation(x,token.getTokenValue());
                     stack.pop();
                     System.out.println(stack.toString());
                     token = nextToken();
@@ -67,15 +72,63 @@ public class Parser {
                 if (grammarExpression != null) {
                     stack.pop();
                     inverseRHSPush(grammarExpression);
+                    addDerivation(x, grammarExpression.getProudctionList());
                 } else {
                     skipError(x);
                     success = false;
                 }
             }
         }
+        LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
         return (!token.getTokenType().getTokenType().equals("$")) && (success);
     }
 
+    private void addDerivation(String x, List<String> proudctionList) {
+        int indexToPush = -1;
+        for (int index = 0; index < derivation.size(); index++) {
+            String der = derivation.get(index);
+            if (der.equals(x) && lastIndexPushed<=index) {
+                indexToPush = index;
+                break;
+            }
+        }
+        for (Iterator<String> iterator = proudctionList.iterator(); iterator.hasNext();) {
+            String string = iterator.next();
+            if (string.contains("EPSILON")) {
+                // Remove the current element from the iterator and the list.
+                iterator.remove();
+            }
+        }
+        derivation.remove(indexToPush);
+        lastIndexPushed=indexToPush;
+        derivation.addAll(indexToPush,proudctionList);
+        LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
+    }
+    private void addDerivation(String x, String terminal) {
+        int indexToPush = -1;
+        for (int index = 0; index < derivation.size(); index++) {
+            String der = derivation.get(index);
+            if (der.equals(x) && lastIndexPushed<=index) {
+                indexToPush = index;
+                break;
+            }
+        }
+        derivation.remove(indexToPush);
+        lastIndexPushed=indexToPush;
+        derivation.add(indexToPush,terminal);
+        LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
+    }
+    private void removeDerivation(String x) {
+        int indexToPush = -1;
+        for (int index = 0; index < derivation.size(); index++) {
+            String der = derivation.get(index);
+            if (der.equals(x)) {
+                indexToPush = index;
+                break;
+            }
+        }
+        derivation.remove(indexToPush);
+    }
 
 
     private boolean isSemanticAction(String x) {
@@ -106,7 +159,7 @@ public class Parser {
         int nonTerminalIndex = NonTerminal.getNonTerminalIndexFromString(x);
         if (terminalIndex != -1 && nonTerminalIndex != -1) {
             int LL1ParseTableEntry = LL1ParseTable.Table[nonTerminalIndex][terminalIndex];
-            System.out.println("Grammar for top:" + x + "  token:" + tokenString + " terminalIndex:" + terminalIndex + " nonTerminalIndex:" + nonTerminalIndex + " LLEntry:" + LL1ParseTableEntry);
+//            System.out.println("Grammar for top:" + x + "  token:" + tokenString + " terminalIndex:" + terminalIndex + " nonTerminalIndex:" + nonTerminalIndex + " LLEntry:" + LL1ParseTableEntry);
             if (LL1ParseTableEntry != POP_ERROR_CODE && LL1ParseTableEntry != SCAN_ERROR_CODE) {
                 GrammarExpression grammarExpression = grammarExpressionList.get(LL1ParseTableEntry - 1);
                 System.out.println("Grammar:" + grammarExpression.getProudctionList().toString());
