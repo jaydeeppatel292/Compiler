@@ -39,7 +39,7 @@ id id(){
 
 program {
 	int id [234];
-	int id;;;;;;;;;;;;;
+	int id
 	int id;
 	int id;
 	id id;

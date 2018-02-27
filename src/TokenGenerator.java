@@ -1,6 +1,7 @@
 import exception.StateNotFoundException;
 import models.*;
 import utils.BufferManager;
+import utils.LexicalResponseManager;
 import utils.TokenManager;
 
 import java.util.ArrayList;

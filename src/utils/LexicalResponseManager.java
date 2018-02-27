@@ -27,6 +27,8 @@ public class LexicalResponseManager {
             aTOccWriterFile = new PrintWriter(Constants.OUTPUT_ATOCC_FILE_NAME_PATH, "UTF-8");
             errorWriterFile = new PrintWriter(Constants.OUTPUT_ERROR_FILE_NAME_PATH, "UTF-8");
             derivationWriterFile = new PrintWriter(Constants.OUTPUT_DERIVATION, "UTF-8");
+            errorWriterFile.println("Format: ErrorType , TokenValue , TokenLineNumber : TokenColumnNumber");
+            tokenWriterFile.println("Format: TokenType , TokenValue , TokenLineNumber : TokenColumnNumber");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -45,19 +47,16 @@ public class LexicalResponseManager {
         derivationWriterFile.close();
     }
 
-    public void addDerivationToFIle(List<String> dataList){
-        for(String data : dataList){
-            derivationWriterFile.print(data+" ");
+    public void addDerivationToFIle(List<String> dataList) {
+        for (String data : dataList) {
+            derivationWriterFile.print(data + " ");
         }
         derivationWriterFile.println();
     }
 
-    public void writeLexicalResponseToFile(Token token) {
-        errorWriterFile.println("Format: ErrorType , TokenValue , TokenLineNumber : TokenColumnNumber");
-        tokenWriterFile.println("Format: TokenType , TokenValue , TokenLineNumber : TokenColumnNumber");
-
-        if (token.getTokenType() == TokenType.INVALID_IDENTIFIER || token.getTokenType() == TokenType.INVALID_NUMBER) {
-            errorWriterFile.print(token.getTokenType().getTokenType());
+    public void writeSyntacticalError(Token token) {
+        if (token != null) {
+            errorWriterFile.print("Syntax Error ");
             errorWriterFile.print(",");
             errorWriterFile.print(token.getTokenValue());
             errorWriterFile.print(",");
@@ -65,28 +64,42 @@ public class LexicalResponseManager {
             errorWriterFile.print(":");
             errorWriterFile.print(token.getColumnNumber());
             errorWriterFile.println();
-
-            return;
         }
+    }
 
-        // write atocc format to atocc file
-        if (!token.getTokenValue().equals("/*") && !token.getTokenValue().equals("*/") && !token.getTokenValue().equals("//")) {
-            if (token.getTokenType().equals(TokenType.ID) || token.getTokenType().equals(TokenType.INTEGER) || token.getTokenType().equals(TokenType.FLOAT)) {
-                aTOccWriterFile.print(token.getTokenType().getTokenType());
-            } else {
-                aTOccWriterFile.print(token.getTokenValue());
+    public void writeLexicalResponseToFile(Token token) {
+        if (token != null) {
+            if (token.getTokenType() == TokenType.INVALID_IDENTIFIER || token.getTokenType() == TokenType.INVALID_NUMBER) {
+                errorWriterFile.print(token.getTokenType().getTokenType());
+                errorWriterFile.print(",");
+                errorWriterFile.print(token.getTokenValue());
+                errorWriterFile.print(",");
+                errorWriterFile.print(token.getLineNumber());
+                errorWriterFile.print(":");
+                errorWriterFile.print(token.getColumnNumber());
+                errorWriterFile.println();
+                return;
             }
-            aTOccWriterFile.print(" ");
-        }
 
-        // write token to the token file
-        tokenWriterFile.print(token.getTokenType().getTokenType());
-        tokenWriterFile.print(",");
-        tokenWriterFile.print(token.getTokenValue());
-        tokenWriterFile.print(",");
-        tokenWriterFile.print(token.getLineNumber());
-        tokenWriterFile.print(":");
-        tokenWriterFile.print(token.getColumnNumber());
-        tokenWriterFile.println();
+            // write atocc format to atocc file
+            if (!token.getTokenValue().equals("/*") && !token.getTokenValue().equals("*/") && !token.getTokenValue().equals("//")) {
+                if (token.getTokenType().equals(TokenType.ID) || token.getTokenType().equals(TokenType.INTEGER) || token.getTokenType().equals(TokenType.FLOAT)) {
+                    aTOccWriterFile.print(token.getTokenType().getTokenType());
+                } else {
+                    aTOccWriterFile.print(token.getTokenValue());
+                }
+                aTOccWriterFile.print(" ");
+            }
+
+            // write token to the token file
+            tokenWriterFile.print(token.getTokenType().getTokenType());
+            tokenWriterFile.print(",");
+            tokenWriterFile.print(token.getTokenValue());
+            tokenWriterFile.print(",");
+            tokenWriterFile.print(token.getLineNumber());
+            tokenWriterFile.print(":");
+            tokenWriterFile.print(token.getColumnNumber());
+            tokenWriterFile.println();
+        }
     }
 }

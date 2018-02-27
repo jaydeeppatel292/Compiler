@@ -1,4 +1,6 @@
+import com.sun.corba.se.impl.orb.ParserTable;
 import global.Constants;
+import models.LL1ParseTable;
 import models.Token;
 import utils.BufferManager;
 import utils.LexicalResponseManager;
@@ -11,15 +13,14 @@ public class Main {
     public static void main(String[] args) {
 
         initializeParser(args);
-        /*Token token = TokenGenerator.getInstance().getNextToken();
-        while(token!=null){
-            System.out.println("[" + token.getTokenType().getTokenType() + ": " + token.getTokenValue()+"]");
-            token = TokenGenerator.getInstance().getNextToken();
-        }*/
 
-        Parser.getInstance().parse();
+        boolean success = Parser.getInstance().parse();
+        if(success){
+            System.out.println("Successfully Parsed Input");
+        }else{
+            System.out.println("Error while parsing Input");
+        }
         LexicalResponseManager.getInstance().finisheWriting();
-
     }
 
     public static void initializeParser(String[] args) {

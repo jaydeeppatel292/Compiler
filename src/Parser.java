@@ -58,7 +58,7 @@ public class Parser {
                 if (x.equals(tokenString)) {
                     addDerivation(x,token.getTokenValue());
                     stack.pop();
-                    System.out.println(stack.toString());
+//                    System.out.println(stack.toString());
                     token = nextToken();
                     if (token == null) {
                         return false;
@@ -144,7 +144,7 @@ public class Parser {
                     stack.push(production);
                 }
             }
-            System.out.println(stack.toString());
+//            System.out.println(stack.toString());
         }
     }
 
@@ -162,7 +162,7 @@ public class Parser {
 //            System.out.println("Grammar for top:" + x + "  token:" + tokenString + " terminalIndex:" + terminalIndex + " nonTerminalIndex:" + nonTerminalIndex + " LLEntry:" + LL1ParseTableEntry);
             if (LL1ParseTableEntry != POP_ERROR_CODE && LL1ParseTableEntry != SCAN_ERROR_CODE) {
                 GrammarExpression grammarExpression = grammarExpressionList.get(LL1ParseTableEntry - 1);
-                System.out.println("Grammar:" + grammarExpression.getProudctionList().toString());
+//                System.out.println("Grammar:" + grammarExpression.getProudctionList().toString());
                 return grammarExpression;
             }
         }
@@ -171,8 +171,9 @@ public class Parser {
 
     private void skipError(String input) {
         System.out.println("Syntax error at:" + token.getLineNumber());
+        LexicalResponseManager.getInstance().writeSyntacticalError(token);
         int LL1ParseTableEntry = getParseTableEntry(input);
-        if (LL1ParseTableEntry == POP_ERROR_CODE) {
+        if (LL1ParseTableEntry == POP_ERROR_CODE || LL1ParseTableEntry==-1) {
             stack.pop();
         } else {
             while (LL1ParseTableEntry == SCAN_ERROR_CODE) {
@@ -203,6 +204,7 @@ public class Parser {
 
     private Token nextToken() {
         Token token = TokenGenerator.getInstance().getNextToken();
+        LexicalResponseManager.getInstance().writeLexicalResponseToFile(token);
         if (token == null) {
             if (!isTokenStringCompleted) {
                 token = new Token(TokenType.RESERVED, "$");
@@ -212,7 +214,14 @@ public class Parser {
                 return null;
             }
         }
-        System.out.println("Token:" + token.getTokenValue());
+        while (token.getTokenType()==(TokenType.INVALID_IDENTIFIER) || token.getTokenType()==(TokenType.INVALID_NUMBER)){
+            token = TokenGenerator.getInstance().getNextToken();
+            if(token==null){
+                break;
+            }
+            LexicalResponseManager.getInstance().writeLexicalResponseToFile(token);
+        }
+
         return token;
     }
 

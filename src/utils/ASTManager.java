@@ -20,7 +20,7 @@ public class ASTManager {
     }
 
     public void takeSemanticAction(String x) {
-        System.out.println("Semantic Action:" + x);
+//        System.out.println("Semantic Action:" + x);
         try {
             switch (x) {
                 case "SEMANTIC_MAKE_NODE":
@@ -53,7 +53,7 @@ public class ASTManager {
                 }
                 case "SEMANTIC_MAKE_FAMILY_FUNCTION_LIST": {
                     List<ASTNode> astNodeList = new ArrayList<>();
-                    if(semanticStack.peek().nodeType.equals("funcDef")) {
+                    if (semanticStack.peek().nodeType.equals("funcDef")) {
                         astNodeList.add(semanticStack.pop());
                         makeFamily("funcDefList", astNodeList);
                     }
@@ -213,7 +213,6 @@ public class ASTManager {
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_FUNC_DEF": {
-                    //TODO
                     List<ASTNode> astNodeList = new ArrayList<>();
                     if (semanticStack.peek().nodeType.equals("statBlock")) {
                         astNodeList.add(semanticStack.pop());
@@ -376,7 +375,7 @@ public class ASTManager {
                 }
 
                 case "SEMANTIC_MAKE_SIBLING_VAR_ELEMENT": {
-                    if(semanticStack.size()>1) {
+                    if (semanticStack.size() > 1) {
                         ASTNode astNode = semanticStack.pop();
                         if (semanticStack.peek().nodeType.equals("dataMember") || semanticStack.peek().nodeType.equals("fCall")) {
                             semanticStack.peek().sibling = astNode;
@@ -429,7 +428,9 @@ public class ASTManager {
                 childNode.sibling = astNodeList.get(index - 1);
             }
         }
-        astNode.firstChild = astNodeList.get(astNodeList.size() - 1);
+        if (astNodeList.size() > 1) {
+            astNode.firstChild = astNodeList.get(astNodeList.size() - 1);
+        }
         semanticStack.push(astNode);
     }
 
