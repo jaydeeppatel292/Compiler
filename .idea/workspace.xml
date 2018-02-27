@@ -19,25 +19,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/input/program.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
+            <state relative-caret-position="217">
+              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ASTManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ASTManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="359" column="26" lean-forward="true" selection-start-line="359" selection-start-column="26" selection-end-line="359" selection-end-column="26" />
+            <state relative-caret-position="354">
+              <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
               <folding>
                 <element signature="e#351#352#0" expanded="true" />
                 <element signature="e#385#386#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="172" column="0" lean-forward="false" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TokenGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="948">
+              <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GrammarExpression.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/GrammarExpression.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GrammarExpressionGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>arith</find>
       <find>assign</find>
       <find>assign_stat</find>
       <find>SEMANTIC_MAKE_FAMILY_ASSIGN_STAT</find>
@@ -81,10 +120,11 @@
       <find>term</find>
       <find>skiperror</find>
       <find>Action</find>
-      <find>prog</find>
       <find>system</find>
       <find>var</find>
       <find>printsta</find>
+      <find>.sibling</find>
+      <find>prog</find>
     </findStrings>
     <replaceStrings>
       <replace>}</replace>
@@ -189,7 +229,30 @@
             <path>
               <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="input" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -311,7 +374,7 @@
       <workItem from="1517205816927" duration="30437000" />
       <workItem from="1518405949956" duration="1801000" />
       <workItem from="1518929313326" duration="9933000" />
-      <workItem from="1519414143617" duration="111413000" />
+      <workItem from="1519414143617" duration="113882000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -404,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519700247578</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="finalizing code ..">
+      <created>1519703039819</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1519703039819</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -419,7 +489,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199356000" />
+    <option name="totallyTimeSpent" value="201825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -475,7 +545,8 @@
     <MESSAGE value="working on AST generation" />
     <MESSAGE value="can generate all the derivatiion and store them into derivation.txt" />
     <MESSAGE value="successfully generated AST" />
-    <option name="LAST_COMMIT_MESSAGE" value="successfully generated AST" />
+    <MESSAGE value="finalizing code .." />
+    <option name="LAST_COMMIT_MESSAGE" value="finalizing code .." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -486,20 +557,8 @@
           <properties />
           <option name="timeStamp" value="136" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/utils/ASTManager.java</url>
-          <line>34</line>
-          <properties />
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser.java</url>
-          <line>172</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="155" />
+      <option name="time" value="157" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -676,17 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/GrammarExpression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="e#607#608#0" expanded="false" />
-            <element signature="e#644#645#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/ASTNodeType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -834,14 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/token.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -866,26 +906,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="61" column="39" lean-forward="true" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="24" column="60" lean-forward="false" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -906,17 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="359" column="26" lean-forward="true" selection-start-line="359" selection-start-column="26" selection-end-line="359" selection-end-column="26" />
-          <folding>
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/derivation.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -925,11 +938,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="948">
+          <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/GrammarExpression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="172" column="0" lean-forward="false" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/input/program.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
+        <state relative-caret-position="217">
+          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
+          <folding>
+            <element signature="e#351#352#0" expanded="true" />
+            <element signature="e#385#386#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

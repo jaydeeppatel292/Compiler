@@ -378,8 +378,9 @@ public class ASTManager {
                     if (semanticStack.size() > 1) {
                         ASTNode astNode = semanticStack.pop();
                         if (semanticStack.peek().nodeType.equals("dataMember") || semanticStack.peek().nodeType.equals("fCall")) {
-                            semanticStack.peek().sibling = astNode;
-                            astNode.parent = semanticStack.peek().parent;
+                            /*semanticStack.peek().sibling = astNode;
+                            astNode.parent = semanticStack.peek().parent;*/
+                            makeSibling(semanticStack.peek(),astNode);
                         } else {
                             semanticStack.push(astNode);
                         }
@@ -389,8 +390,10 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_SIBLING": {
                     if (semanticStack.size() > 1) {
                         ASTNode astNode = semanticStack.pop();
-                        semanticStack.peek().sibling = astNode;
-                        astNode.parent = semanticStack.peek().parent;
+                        /*semanticStack.peek().sibling = astNode;
+                        astNode.parent = semanticStack.peek().parent;*/
+                        makeSibling(semanticStack.peek(),astNode);
+
                     }
                     break;
                 }
@@ -400,8 +403,10 @@ public class ASTManager {
                     if (semanticStack.size() > 1) {
                         ASTNode astNode = semanticStack.pop();
                         if (astNode.nodeType.equals(semanticStack.peek().nodeType)) {
-                            semanticStack.peek().sibling = astNode;
-                            astNode.parent = semanticStack.peek().parent;
+                            /*semanticStack.peek().sibling = astNode;
+                            astNode.parent = semanticStack.peek().parent;*/
+                            makeSibling(semanticStack.peek(),astNode);
+
                         } else {
                             semanticStack.push(astNode);
                         }
@@ -414,6 +419,15 @@ public class ASTManager {
         }
     }
 
+    public void makeSibling(ASTNode astNode,ASTNode newSibling){
+        ASTNode currentAstNode = astNode;
+        while (currentAstNode.sibling!=null){
+            currentAstNode = currentAstNode.sibling;
+        }
+        currentAstNode.sibling = newSibling;
+        newSibling.parent = currentAstNode.parent;
+
+    }
     public void transferFromOneFamilyToOther(ASTNode astNode, String newName) {
         astNode.data = astNode.nodeType;
         astNode.nodeType = newName;

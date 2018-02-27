@@ -1,41 +1,65 @@
-class Utility {
+// afdsfsfsfsf safsfdsfs class a:b,c  {
+/* flkajlkfjksajflk
 
-	int var1[4][5][7][8][9][1][0];;
-	float var2;;;;;/
+*/
+
+class a:b,c  {
+	int id; float id; int id ();
+};
+
+int id :: id (int id [234][234], int id)
+{
+	id[234][234].id().id[234].id().id = 2341 * 2342 + 2343 and 2344 == 2345 / 2346;
+	id[234][234].id().id[234].id().id[234] = 234 * 234 + 234 and 234 == 234 / 234;
+	id = 234 * 234 + 234 and 234 == 234 / 234;
+
+	if (234 * 234 + 234 and 234 == 234 / 234)
+		then
+		{ return (234 * 234 + 234 and 234 == 234 / 234);
+		}
+	else
+		{
+			return (234 * 234 + 234 and 234 == 234 / 234);
+		};
+	get (id[234]);
+	put (234 + 234 * 234 and 234 == 234 / 234);
+	return (234 + 234 * 234 and 234 == 234 / 234);
+};
+
+float id(){
+ float id;
+ id id;
+ id = 234  * ( 234 + 23.43 / 43.34 );
+};
+
+id id(){
 
 };
 
 
-/*float randomize()
-{
-  float value;
-  value = 100 * (2+3.0/7.00006);
-  value = 1.05 * ((2.04*2.47)-3.0) +7.00006 > 1 and not -1;
-  value = 1.05;
-};*/
+program {
+	int id [234];
+	int id;;;;;;;;;;;;;
+	int id;
+	int id;
+	id id;
+	id id[234][234][234][234];
 
-program{
-
-  int sample[100];
-	int idx;
-	int maxValue;
-	int minValue;
-
-	Utility utility;
-	Utility arrayUtility[2][3][6][7];
-
-	for(int t = 0; t<=100 ; t = t + 1) {
-		get(sample[t]);
-		sample[t] = (sample[t] * randomize());
+	for(int i=0; i<100;i=i+1){
+	    get(sample[i]);
+	    sample[i] = (sample[i] * randomize());
 	};
-
+    if (234 * 234 + 234 and 234 == 234 / 234)
+    		then
+    		{ return (234 * 234 + 234 and 234 == 234 / 234);
+    		}
+    	else
+    		{
+    			return (234 * 234 + 234 and 234 == 234 / 234);
+    		};
 	maxValue = utility.findMax(sample);
 	minValue = utility.findMin(sample);
-
-	utility. var1[4][1][0][0][0][0][0] = 10;
-
-	arrayUtility[1][1][1][1].var1[4][1][0][0][0][0][0] = 2;
-
-	put(maxValue);
-	put(minValue);
+	arrayUtility[utility.var1[1][2][3][4][5][id+maxvalue]][1][1][1].var2 =2.5;
+    put(maxValue);
+    put(minValue);
 };
