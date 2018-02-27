@@ -410,7 +410,7 @@ public class ASTManager {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -446,7 +446,7 @@ public class ASTManager {
                 semanticStack.push(astNode);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
     }
 }
