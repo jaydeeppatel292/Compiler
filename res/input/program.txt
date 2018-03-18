@@ -32,14 +32,9 @@ float id(){
  id = 234  * ( 234 + 23.43 / 43.34 );
 };
 
-id id(){
-
-};
-
-
 program {
 	int id [234];
-	int id;;;;;;;;;;;;;
+	int id;
 	int id;
 	int id;
 	id id;
