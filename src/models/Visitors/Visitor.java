@@ -51,5 +51,6 @@ import models.AST.*;
 	 public void visit(DataMemberNode node)		{};
 	 public void visit(FCallNode node)			{};
 	 public void visit(ExprNode node)			{};
+	 public void visit(RelExprNode node)			{};
 
     }

@@ -14,6 +14,8 @@ public abstract class Node {
     private String data            = null;
     private static int nodelevel   = 0;
     private String nodeCategory;
+    public int lineNumber=-1;
+    public int colNumber=-1;
     // The following data members have been added
     // during the implementation of the visitors
     // These could be added using a decorator pattern
@@ -52,6 +54,21 @@ public abstract class Node {
         for (Node node:nodeList) {
             this.setData(this.getData()+ appendLeft +node.getData()+appendRight);
         }
+    }
+
+    public void generatePosition(){
+        generatePosition(this);
+    }
+    private void generatePosition(Node node){
+        if(node==null){
+            return;
+        }
+        if(node.lineNumber !=-1){
+            this.lineNumber = node.lineNumber;
+            this.colNumber = node.colNumber;
+            return;
+        }
+        generatePosition(node.parent);
     }
 
     public String getNodeCategory() {

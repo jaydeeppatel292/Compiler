@@ -1,6 +1,7 @@
 package utils;
 
 import global.Constants;
+import models.AST.Node;
 import models.Token;
 import models.TokenType;
 
@@ -59,6 +60,7 @@ public class LexicalResponseManager {
         ErrorMessage errorMessage = new ErrorMessage(errorType,lineNum,colNum,message);
         errorMessageList.add(errorMessage);
     }
+
     public void finisheWriting() {
         tokenWriterFile.close();
         aTOccWriterFile.close();
@@ -75,7 +77,7 @@ public class LexicalResponseManager {
 
     public void writeSyntacticalMissingError(String expected,Token token) {
         if (token != null) {
-            errorWriterFile.print("Syntax Error Missing token");
+            errorWriterFile.print("Syntax Error ");
             errorWriterFile.print(",");
             errorWriterFile.print("Expected: "+expected+" but found: "+token.getTokenValue());
             errorWriterFile.print(",");

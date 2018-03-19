@@ -22,15 +22,12 @@ public class TypeCheckingVisitor extends Visitor {
         System.out.println("Visiting AddOppNode");
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType == rightOperandType)
+        if (leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
-            System.out.println("TYPE ERROR DETECTED between "
-                    + node.getChildren().get(0).getData()
-                    + " and "
-                    + node.getChildren().get(1).getData()
-            );
+            node.generatePosition();
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
         }
     }
 
@@ -47,6 +44,7 @@ public class TypeCheckingVisitor extends Visitor {
             node.setData(node.getChildren().get(0).getData());
         }
     }
+
     public void visit(ExprNode node) {
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
@@ -68,15 +66,12 @@ public class TypeCheckingVisitor extends Visitor {
         // multop as child ..
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType == rightOperandType)
+        if (leftOperandType .equals( rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
-            System.out.println("TYPE ERROR DETECTED between "
-                    + node.getChildren().get(0).getData()
-                    + " and "
-                    + node.getChildren().get(1).getData()
-            );
+            node.generatePosition();
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
         }
     }
 
@@ -84,15 +79,25 @@ public class TypeCheckingVisitor extends Visitor {
         System.out.println("Visiting MultOpNode");
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType == rightOperandType)
+        if (leftOperandType .equals( rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
-            System.out.println("TYPE ERROR DETECTED between "
-                    + node.getChildren().get(0).getData()
-                    + " and "
-                    + node.getChildren().get(1).getData()
-            );
+            node.generatePosition();
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+        }
+    }
+
+    public void visit(RelExprNode node) {
+        System.out.println("Visiting MultOpNode");
+        String leftOperandType = node.getChildren().get(0).getType();
+        String rightOperandType = node.getChildren().get(1).getType();
+        if (leftOperandType .equals( rightOperandType))
+            node.setType(leftOperandType);
+        else {
+            node.setType("typeerror");
+            node.generatePosition();
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
         }
     }
 
@@ -100,23 +105,21 @@ public class TypeCheckingVisitor extends Visitor {
         System.out.println("Visiting AssignStatNode");
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType == rightOperandType)
+        if (leftOperandType .equals( rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
-            System.out.println("TYPE ERROR DETECTED between "
-                    + node.getChildren().get(0).getData()
-                    + " and "
-                    + node.getChildren().get(1).getData()
-            );
+            node.generatePosition();
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
         }
     }
 
     public void visit(VarNode node) {
         Node currentNode = node;
-        SymTab currentSymTable = null;
+        SymTabEntry currentSymTable = null;
         String nodeType = null;
-        for (int i=0;i<node.getChildren().size();i++) {
+        String nodeData ="";
+        for (int i = 0; i < node.getChildren().size(); i++) {
             Node child = node.getChildren().get(i);
             String type = child.getType();
             String typeArray[];
@@ -125,100 +128,130 @@ public class TypeCheckingVisitor extends Visitor {
                 case "DATA":
                     typeArray = type.split("#");
                     varName = typeArray[1];
+                    if(i!=0){
+                        nodeData+="_";
+                    }
+                    nodeData += varName;
                     int dimension = Integer.parseInt(typeArray[2]);
-                    SymTabEntry varType = getTypeForVarFromSymbolTable(type, currentNode,currentSymTable);
-                    if(varType==null){
+                    SymTabEntry varType = getTypeForVarFromSymbolTable(type, currentNode, currentSymTable);
+                    if (varType == null) {
                         node.setType("typeerror");
-                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varName);
+                        node.generatePosition();
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varName);
                         return;
                     }
-                    if(!varType.extraData.equals("int")&& !varType.extraData.equals("float")){
+                    if (!varType.extraData.equals("int") && !varType.extraData.equals("float")) {
                         currentSymTable = findSymbolTableForClass(varType.extraData);
-                        if(currentSymTable==null){
+                        if (currentSymTable==null || currentSymTable.m_subtable == null) {
                             node.setType("typeerror");
-                            LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varType.symbolName);
+                            node.generatePosition();
+                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varType.symbolName);
                             return;
                         }
-                    }
-                    else {
-                        if(dimension==0 && varType.varDimensionSize>0){
-                            nodeType = varType.extraData+":"+varType.varDimensionSize;
-                        }else if(dimension == varType.varDimensionSize){
+                    } else {
+                        if (dimension == 0 && varType.varDimensionSize > 0) {
+                            nodeType = varType.extraData + ":" + varType.varDimensionSize;
+                        } else if (dimension == varType.varDimensionSize) {
                             nodeType = varType.extraData;
-                        }else{
+                        } else {
                             nodeType = varType.extraData;
-                            LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Invalid dimension size!!");
+                            node.generatePosition();
+                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Invalid dimension size!!");
                         }
                     }
                     break;
                 case "FCALL":
                     typeArray = type.split("#");
                     varName = typeArray[1];
-                    String  fParams ="";
-                    if(typeArray.length==3){
+                    String fParams = "";
+                    if(i!=0){
+                        nodeData+="_";
+                    }nodeData += varName;
+                    if (typeArray.length == 3) {
                         fParams = (typeArray[2]);
                     }
-                    if(i!=0 && currentSymTable==null){
+                    if (i != 0 && currentSymTable == null) {
                         node.setType("typeerror");
-                        String errorParams = fParams.replaceAll(":","dim:").replaceAll("_",",");
-                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varName);
+                        String errorParams = fParams.replaceAll(":", ":dim:").replaceAll("_", ",");
+                        node.generatePosition();
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varName + "(" + errorParams + ")");
                         return;
                     }
 
-                    SymTabEntry funcType  = getTypeForFuncCall(type,currentSymTable);
-                    if(funcType!=null) {
+                    SymTabEntry funcType = getTypeForFuncCall(type, currentSymTable);
+                    if (funcType != null) {
                         nodeType = funcType.returnType;
-                    }else{
+                    } else {
                         node.setType("typeerror");
-                        String errorParams = fParams.replaceAll(":","dim:").replaceAll("_",",");
-                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Undefined func:"+varName+"("+errorParams+")");
+                        node.generatePosition();
+                        String errorParams = fParams.replaceAll(":", ":dim:").replaceAll("_", ",");
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Undefined func:" + varName + "(" + errorParams + ")");
                     }
                     break;
             }
         }
-        if(nodeType!=null){
+        if (nodeType != null) {
             node.setType(nodeType);
         }
+        node.setData(nodeData);
     }
 
-    public SymTab findSymbolTableForClass(String name) {
+    public SymTabEntry findSymbolTableForClass(String name) {
         Node progNode = ASTManager.getInstance().getProgNode();
-        for(SymTabEntry symTabEntry : progNode.symtab.m_symlist) {
-            if (symTabEntry.symbolType == SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable.m_name.equals(name)){
-                return symTabEntry.m_subtable;
+        for (SymTabEntry symTabEntry : progNode.symtab.m_symlist) {
+            if (symTabEntry.symbolType == SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable.m_name.equals(name)) {
+                return symTabEntry;
             }
         }
         return null;
     }
 
-    public SymTabEntry getTypeForFuncCall(String type,SymTab symTab){
+    public SymTabEntry getTypeForFuncCall(String type, SymTabEntry currentSymTabEntry) {
+        SymTab symTab =null;
+        if (currentSymTabEntry != null) {
+            symTab = currentSymTabEntry.m_subtable;
+        }
         String[] typeArray = type.split("#");
         String varName = typeArray[1];
-        String  fParams ="" ;
-        if(typeArray.length==3){
+        String fParams = "";
+        if (typeArray.length == 3) {
             fParams = (typeArray[2]);
         }
-        if(symTab==null){
+        if (symTab == null) {
             symTab = ASTManager.getInstance().getProgNode().symtab;
         }
-        for(SymTabEntry symTabEntry : symTab.m_symlist){
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
             if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
-                if((symTabEntry.extraData!=null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData ==null && fParams.isEmpty())){
+                if ((symTabEntry.extraData != null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData == null && fParams.isEmpty())) {
                     return symTabEntry;
                 }
             }
         }
+
+        for (SymTabEntry inheritedSymTab : currentSymTabEntry.multiLevelInheritedSymTab) {
+            for (SymTabEntry symTabEntry : inheritedSymTab.m_subtable.m_symlist) {
+                if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
+                    if ((symTabEntry.extraData != null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData == null && fParams.isEmpty())) {
+                        return symTabEntry;
+                    }
+                }
+            }
+        }
+
         return null;
     }
 
-    public SymTabEntry getTypeForVarFromSymbolTable(String type, Node currentNode,SymTab symTab) {
-
+    public SymTabEntry getTypeForVarFromSymbolTable(String type, Node currentNode, SymTabEntry currentSymTabEntry) {
+        SymTab symTab =null;
+        if (currentSymTabEntry != null) {
+            symTab = currentSymTabEntry.m_subtable;
+        }
         String typeArray[] = type.split("#");
         String varName = typeArray[1];
         int dimension = Integer.parseInt(typeArray[2]);
         Node searchNode = currentNode;
 
-        if(symTab!=null){
+        if (symTab != null) {
             for (SymTabEntry symTabEntry : symTab.m_symlist) {
                 if (symTabEntry.symbolType == SymTabEntry.SymbolType.VARIABLE || symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER) {
                     if (symTabEntry.symbolName.equals(varName)) {
@@ -226,6 +259,17 @@ public class TypeCheckingVisitor extends Visitor {
                     }
                 }
             }
+
+            for (SymTabEntry inheritedSymTab : currentSymTabEntry.multiLevelInheritedSymTab) {
+                for (SymTabEntry symTabEntry : inheritedSymTab.m_subtable.m_symlist) {
+                    if (symTabEntry.symbolType == SymTabEntry.SymbolType.VARIABLE || symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER) {
+                        if (symTabEntry.symbolName.equals(varName)) {
+                            return symTabEntry;
+                        }
+                    }
+                }
+            }
+
             return null;
         }
 
@@ -242,27 +286,32 @@ public class TypeCheckingVisitor extends Visitor {
             }
             searchNode = searchNode.getParent();
         }
+
+
+
         return null;
     }
 
     public void visit(VarElementNode node) {
         node.setType(node.getChildren().get(0).getType());
+        node.setData(node.getChildren().get(0).getData());
     }
 
 
     public void visit(IndexListNode node) {
         node.setType("" + node.getChildren().size());
-        for(Node child :node.getChildren()){
-            if(!child.getType().equals(Terminal.INT.getData())){
-                LexicalResponseManager.getInstance().addErrorMessage(0,0,"SemanticError","Incompatible types: Required Int");
+        for (Node child : node.getChildren()) {
+            if (!child.getType().equals(Terminal.INT.getData())) {
+                node.generatePosition();
+                LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "SemanticError", "Incompatible types: Required Int");
             }
         }
     }
 
     public void visit(AParamsNode node) {
         String type = "";
-        for(int i=0;i<node.getChildren().size();i++){
-            type +=  node.getChildren().get(i).getType()+"_";
+        for (int i = 0; i < node.getChildren().size(); i++) {
+            type += node.getChildren().get(i).getType() + "_";
         }
         node.setType(type);
     }
@@ -270,12 +319,14 @@ public class TypeCheckingVisitor extends Visitor {
     public void visit(DataMemberNode node) {
         if (node.getChildren().size() > 1) {
             node.setType("DATA#" + node.getChildren().get(0).getData() + "#" + node.getChildren().get(1).getType());
+            node.setData(node.getChildren().get(0).getData());
         }
     }
 
     public void visit(FCallNode node) {
         if (node.getChildren().size() > 1) {
             node.setType("FCALL#" + node.getChildren().get(0).getData() + "#" + node.getChildren().get(1).getType());
+            node.setData(node.getChildren().get(0).getData());
         }
     }
 }

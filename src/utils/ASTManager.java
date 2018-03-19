@@ -83,6 +83,9 @@ public class ASTManager {
 
                     Node idNode = (semanticStack.pop()); //  id ....
                     Node classDecl = new ClassNode(idNode, inherList, memberList);
+                    classDecl.lineNumber = idNode.lineNumber;
+                    classDecl.colNumber = idNode.colNumber;
+
                     classDecl.setNodeCategory("classDecl");
                     semanticStack.push(classDecl);
                     break;
@@ -186,6 +189,8 @@ public class ASTManager {
                     Node factorVarFCallNode = semanticStack.pop();
                     Node factorNode = new FactorNode(factorVarFCallNode);
                     factorNode.setNodeCategory("factor");
+                    factorNode.lineNumber = factorVarFCallNode.lineNumber;
+                    factorNode.colNumber = factorVarFCallNode.colNumber;
                     semanticStack.push(factorNode);
                     break;
                 }
@@ -193,6 +198,8 @@ public class ASTManager {
                     Node numNode = semanticStack.pop();
                     Node factorNumNode = new FactorNode(numNode);
                     factorNumNode.setNodeCategory("factor");
+                    factorNumNode.lineNumber = numNode.lineNumber;
+                    factorNumNode.colNumber = numNode.colNumber;
                     semanticStack.push(factorNumNode);
                     break;
                 }
@@ -216,7 +223,11 @@ public class ASTManager {
                     Node signNode = semanticStack.pop();
                     Node factorSignNode = new FactorNode(signNode.getData(), factor);
                     factorSignNode.setNodeCategory("factor");
+                    factorSignNode.lineNumber = signNode.lineNumber;
+                    factorSignNode.colNumber = signNode.colNumber;
+
                     semanticStack.push(factorSignNode);
+
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_VAR_DECL": {
@@ -227,6 +238,8 @@ public class ASTManager {
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
                     Node varDeclNode = new VarDeclNode(typeNode, idNode, dimListNode);
+                    varDeclNode.lineNumber = idNode.lineNumber;
+                    varDeclNode.colNumber = idNode.colNumber;
                     varDeclNode.setNodeCategory("varDecl");
                     semanticStack.push(varDeclNode);
                     break;
@@ -240,6 +253,8 @@ public class ASTManager {
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
                     Node funcDeclNode = new FuncDeclNode(typeNode, idNode, fParamListNode);
+                    funcDeclNode.lineNumber = idNode.lineNumber;
+                    funcDeclNode.colNumber = idNode.colNumber;
                     funcDeclNode.setNodeCategory("funcDecl");
                     semanticStack.push(funcDeclNode);
                     break;
@@ -253,6 +268,8 @@ public class ASTManager {
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
                     Node fparamNode = new FParamNode(typeNode, idNode, dimListNode);
+                    fparamNode.lineNumber = idNode.lineNumber;
+                    fparamNode.colNumber = idNode.colNumber;
                     fparamNode.setNodeCategory("fparam");
                     semanticStack.push(fparamNode);
                     break;
@@ -286,6 +303,8 @@ public class ASTManager {
                     Node typeNode = (semanticStack.pop()); // Type
 
                     Node funcDefNode = new FuncDefNode(typeNode, scopSpecNode, idNode, fParamListNode, statBlockNode);
+                    funcDefNode.lineNumber = idNode.lineNumber;
+                    funcDefNode.colNumber = idNode.colNumber;
                     funcDefNode.setNodeCategory("funcDef");
                     semanticStack.push(funcDefNode);
                     break;
@@ -305,6 +324,8 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_VAR_ELEMENT": {
                     Node varElementNode = new VarElementNode();
                     if (semanticStack.peek().getNodeCategory().equals("dataMember") || semanticStack.peek().getNodeCategory().equals("fCall")) {
+                        varElementNode.lineNumber = semanticStack.peek().lineNumber;
+                        varElementNode.colNumber = semanticStack.peek().colNumber;
                         varElementNode.addChild(semanticStack.pop());
                     }
                     varElementNode.setNodeCategory("varElement");
@@ -324,6 +345,8 @@ public class ASTManager {
                     Node leftChild = semanticStack.pop();
                     Node multOpNode = new MultOpNode(opNode.getData(), leftChild, rightChild);
                     multOpNode.setNodeCategory("multOp");
+                    multOpNode.lineNumber = opNode.lineNumber;
+                    multOpNode.colNumber = opNode.colNumber;
                     semanticStack.push(multOpNode);
                     break;
                 }
@@ -333,6 +356,8 @@ public class ASTManager {
                     Node leftChild = semanticStack.pop();
                     Node arithExprNode = new ArithExprNode(opNode.getData(), leftChild, rightChild);
                     arithExprNode.setNodeCategory("arithExpr");
+                    arithExprNode.lineNumber = opNode.lineNumber;
+                    arithExprNode.colNumber = opNode.colNumber;
                     semanticStack.push(arithExprNode);
                     break;
                 }
@@ -342,6 +367,8 @@ public class ASTManager {
                         Node arithExprNode = new ArithExprNode();
                         arithExprNode.addChild(termNode);
                         arithExprNode.setNodeCategory("arithExpr");
+                        arithExprNode.lineNumber = termNode.lineNumber;
+                        arithExprNode.colNumber = termNode.colNumber;
                         semanticStack.push(arithExprNode);
                     }
                     break;
@@ -352,6 +379,8 @@ public class ASTManager {
                     Node leftChild = semanticStack.pop();
                     Node relExprNode = new RelExprNode(opNode.getData(), leftChild, rightChild);
                     relExprNode.setNodeCategory("relExpr");
+                    relExprNode.lineNumber = opNode.lineNumber;
+                    relExprNode.colNumber = opNode.colNumber;
                     semanticStack.push(relExprNode);
                     break;
                 }
@@ -362,6 +391,8 @@ public class ASTManager {
                     }
                     Node idNode = (semanticStack.pop());
                     Node dataMemberNode = new DataMemberNode(idNode, indexListNode);
+                    dataMemberNode.lineNumber = idNode.lineNumber;
+                    dataMemberNode.colNumber = idNode.colNumber;
                     dataMemberNode.setNodeCategory("dataMember");
                     semanticStack.push(dataMemberNode);
                     break;
@@ -374,6 +405,8 @@ public class ASTManager {
                     Node idNode = (semanticStack.pop());
                     Node fcallNode = new FCallNode(idNode, aparamsNode);
                     fcallNode.setNodeCategory("fCall");
+                    fcallNode.lineNumber = idNode.lineNumber;
+                    fcallNode.colNumber = idNode.colNumber;
                     semanticStack.push(fcallNode);
                     break;
                 }
@@ -415,6 +448,8 @@ public class ASTManager {
                     Node idNode = (semanticStack.pop());
                     Node typeNode = (semanticStack.pop());
                     Node forNode = new ForStatNode(typeNode, idNode, exprNode, relExprNode, assignStatNode, statBlockNode);
+                    forNode.lineNumber = idNode.lineNumber;
+                    forNode.colNumber = idNode.colNumber;
                     forNode.setNodeCategory("forStat");
                     semanticStack.push(forNode);
                     break;
@@ -501,22 +536,33 @@ public class ASTManager {
                 if(token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType())) {
                     numNode.setType(Terminal.INT.getData());
                 }
+                numNode.lineNumber = token.getLineNumber();
+                numNode.colNumber = token.getColumnNumber();
                 semanticStack.push(numNode);
             } else if (tokenType.equals(Terminal.id.getData())) {
                 Node node = new IdNode(token.getTokenValue());
                 node.setNodeCategory("id");
+                node.lineNumber = token.getLineNumber();
+                node.colNumber = token.getColumnNumber();
                 semanticStack.push(node);
             } else if (tokenType.equals(Terminal.INT.getData()) || tokenType.equals(Terminal.FLOAT.getData())) {
                 Node typeNode = new TypeNode(tokenType);
                 typeNode.setNodeCategory("type");
+                typeNode.lineNumber = token.getLineNumber();
+                typeNode.colNumber = token.getColumnNumber();
                 semanticStack.push(typeNode);
+
             } else if (tokenType.equals(Terminal.EQ.getData()) || tokenType.equals(Terminal.NEQ.getData()) || tokenType.equals(Terminal.GT.getData()) || tokenType.equals(Terminal.LT.getData()) || tokenType.equals(Terminal.LEQ.getData()) || tokenType.equals(Terminal.GEQ.getData())) {
                 Node relOpNode = new OpNode(tokenType);
                 relOpNode.setNodeCategory("relOp");
+                relOpNode.lineNumber = token.getLineNumber();
+                relOpNode.colNumber = token.getColumnNumber();
                 semanticStack.push(relOpNode);
             } else if (tokenType.equals(Terminal.ADD.getData()) || tokenType.equals(Terminal.MINUS.getData()) || tokenType.equals(Terminal.OR.getData()) || tokenType.equals(Terminal.MUL.getData()) || tokenType.equals(Terminal.DIV.getData()) || tokenType.equals(Terminal.AND.getData())) {
                 Node multOpNode = new OpNode(tokenType);
                 multOpNode.setNodeCategory("multOp");
+                multOpNode.lineNumber = token.getLineNumber();
+                multOpNode.colNumber = token.getColumnNumber();
                 semanticStack.push(multOpNode);
             }
 
