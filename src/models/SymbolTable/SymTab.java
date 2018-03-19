@@ -40,7 +40,7 @@ public class SymTab {
 		}
 		for (int i = 0; i < SymTab.tablelevel; i++)
 			stringtoreturn += toindent;
-		stringtoreturn += "===== end " + m_name + " =====";  
+		stringtoreturn += "===== end " + m_name + " =====";
 		SymTab.tablelevel--;
 		return stringtoreturn;
 	}

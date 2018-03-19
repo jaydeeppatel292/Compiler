@@ -38,6 +38,22 @@ public abstract class Node {
         this.setType(type);
     }
 
+    public void addAllChildInReverse(List<Node> nodeList) {
+        for (int i = nodeList.size() - 1; i >= 0; i--) {
+            this.addChild(nodeList.get(i));
+        }
+    }
+    public void setDataFromAllChildReverse(List<Node> nodeList) {
+        for (int i = nodeList.size() - 1; i >= 0; i--) {
+            this.setData(this.getData()+ "["+nodeList.get(i).getData()+"]");
+        }
+    }
+    public void setDataFromAllChild(List<Node> nodeList,String appendLeft,String appendRight) {
+        for (Node node:nodeList) {
+            this.setData(this.getData()+ appendLeft +node.getData()+appendRight);
+        }
+    }
+
     public String getNodeCategory() {
         return nodeCategory;
     }
@@ -115,10 +131,10 @@ public abstract class Node {
     	for (int i = 0; i < Node.nodelevel; i++ )
     		System.out.print("  ");
     	
-    	String toprint = String.format("%-50s" , this.getClass().getSimpleName());
+    	String toprint = String.format("%-100s" , this.getClass().getSimpleName());
     	for (int i = 0; i < Node.nodelevel; i++ )
     		toprint = toprint.substring(0, toprint.length() - 2);
-    	toprint += String.format("%-8s" , (this.getData() == null || this.getData().isEmpty())         ? " | " : " | " + this.getData());    	
+    	toprint += String.format("%-20s" , (this.getData() == null || this.getData().isEmpty())         ? " | " : " | " + this.getData());
     	toprint += String.format("%-12s" , (this.getType() == null || this.getType().isEmpty())         ? " | " : " | " + this.getType());
     	toprint += String.format("%-16s" , (this.subtreeString == null || this.subtreeString.isEmpty()) ? " | " : " | " + this.subtreeString);
     	toprint += (this.symtabentry == null)                                   ? " | " : " | " + this.symtabentry.m_entry;

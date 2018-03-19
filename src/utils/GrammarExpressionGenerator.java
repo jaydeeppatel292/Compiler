@@ -31,7 +31,7 @@ public class GrammarExpressionGenerator {
         grammarExpressionList.add(new GrammarExpression("type", "float"));
         grammarExpressionList.add(new GrammarExpression("type", "id"));
         grammarExpressionList.add(new GrammarExpression("arraySize", "[ integer ]"));
-        grammarExpressionList.add(new GrammarExpression("idsrid", "sr id SEMANTIC_MAKE_FAMILY_SR_ID"));
+        grammarExpressionList.add(new GrammarExpression("idsrid", "sr SEMANTIC_MAKE_FAMILY_SR_ID id"));
         grammarExpressionList.add(new GrammarExpression("idsrid", "EPSILON"));
         grammarExpressionList.add(new GrammarExpression("funcBody", "{ VDST } SEMANTIC_MAKE_FAMILY_STAT_BODY"));
         grammarExpressionList.add(new GrammarExpression("VDST", "id VDSTPrime"));
@@ -88,8 +88,8 @@ public class GrammarExpressionGenerator {
         grammarExpressionList.add(new GrammarExpression("factorPrime", "( aParams ) SEMANTIC_MAKE_FAMILY_F_CALL SEMANTIC_MAKE_FAMILY_VAR_ELEMENT factorTempA"));
         grammarExpressionList.add(new GrammarExpression("factorTempA", ". factorTemp"));
         grammarExpressionList.add(new GrammarExpression("factorTempA", "EPSILON SEMANTIC_MAKE_FAMILY_VAR"));
-        grammarExpressionList.add(new GrammarExpression("indiceRep", "indice SEMANTIC_MAKE_SIBLING_COMMON indiceRep SEMANTIC_MAKE_FAMILY_INDEX_LIST"));
-        grammarExpressionList.add(new GrammarExpression("indiceRep", "EPSILON"));
+        grammarExpressionList.add(new GrammarExpression("indiceRep", "indice SEMANTIC_MAKE_SIBLING_COMMON indiceRep"));
+        grammarExpressionList.add(new GrammarExpression("indiceRep", "EPSILON SEMANTIC_MAKE_FAMILY_INDEX_LIST"));
         grammarExpressionList.add(new GrammarExpression("indice", "[ arithExpr ] SEMANTIC_MAKE_FAMILY_INDICE"));
         grammarExpressionList.add(new GrammarExpression("variable", "id variableTail"));
         grammarExpressionList.add(new GrammarExpression("variableTail", "indiceRep SEMANTIC_MAKE_FAMILY_DATA_MEMBER SEMANTIC_MAKE_FAMILY_VAR_ELEMENT variablePrime"));

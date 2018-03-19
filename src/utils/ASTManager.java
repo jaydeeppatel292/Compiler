@@ -14,11 +14,16 @@ public class ASTManager {
     private static ASTManager ourInstance = new ASTManager();
     private Stack<Node> semanticStack = new Stack<>();
     private Node progNode;
+
     public static ASTManager getInstance() {
         return ourInstance;
     }
 
     private ASTManager() {
+    }
+
+    public Node getProgNode() {
+        return progNode;
     }
 
     public void takeSemanticAction(String x) {
@@ -40,23 +45,27 @@ public class ASTManager {
                     progNode = new ProgNode(classList, funcDefList, statBlock);
                     progNode.setNodeCategory("prog");
                     semanticStack.push(progNode);
-                    progNode.print();
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_CLASSLIST": {
                     Node classList = new ClassListNode();
-                    while(semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("classDecl"))){
-                        classList.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("classDecl"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    classList.addAllChildInReverse(childNodeList);
                     classList.setNodeCategory("classList");
                     semanticStack.push(classList);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_FUNCTION_LIST": {
                     Node functionListNode = new FuncDefListNode();
-                    while(semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("funcDef"))){
-                        functionListNode.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("funcDef"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    functionListNode.addAllChildInReverse(childNodeList);
                     functionListNode.setNodeCategory("funcDefList");
                     semanticStack.push(functionListNode);
                     break;
@@ -80,24 +89,29 @@ public class ASTManager {
                 }
                 case "SEMANTIC_MAKE_FAMILY_VAR_FUNC_DECL": {
                     Node memberList = new MemberListNode();
+                    List<Node> childNodeList = new ArrayList<>();
 
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("funcDecl"))){
-                        memberList.addChild(semanticStack.pop());
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("funcDecl"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("varDecl"))){
-                        memberList.addChild(semanticStack.pop());
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("varDecl"))) {
+                        childNodeList.add(semanticStack.pop());
 
                     }
+                    memberList.addAllChildInReverse(childNodeList);
                     memberList.setNodeCategory("memberList");
                     semanticStack.push(memberList);
                     break;
 
                 }
                 case "SEMANTIC_MAKE_FAMILY_INHER_LIST": {
-                    Node inherList  =new InherListNode();
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("id"))) {
-                        inherList.addChild(semanticStack.pop());
+                    Node inherList = new InherListNode();
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("id"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    inherList.addAllChildInReverse(childNodeList);
                     inherList.setNodeCategory("inherList");
                     semanticStack.push(inherList);
                     break;
@@ -115,38 +129,49 @@ public class ASTManager {
                 }
                 case "SEMANTIC_MAKE_FAMILY_DIM_LIST": {
                     Node dimListNode = new DimListNode();
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("num"))) {
-                        dimListNode.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("num"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    dimListNode.addAllChildInReverse(childNodeList);
                     dimListNode.setNodeCategory("dimList");
                     semanticStack.push(dimListNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_FPARAM_LIST": {
                     Node fParamListNode = new FParamListNode();
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("fparam"))) {
-                        fParamListNode.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("fparam"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    fParamListNode.addAllChildInReverse(childNodeList);
                     fParamListNode.setNodeCategory("fparmList");
                     semanticStack.push(fParamListNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_INDEX_LIST": {
                     Node indexListNode = new IndexListNode();
-                    while(semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("arithExpr"))) {
-                        indexListNode.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("arithExpr"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    indexListNode.addAllChildInReverse(childNodeList);
                     indexListNode.setNodeCategory("indexList");
-                    if(indexListNode.getChildren().size()>0) {
+                    if (indexListNode.getChildren().size() > 0) {
                         semanticStack.push(indexListNode);
                     }
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_A_PARAMS": {
                     Node aParams = new AParamsNode();
-                    while(semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("expr"))) {
-                        aParams.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("expr"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    aParams.addAllChildInReverse(childNodeList);
                     aParams.setNodeCategory("aParams");
                     semanticStack.push(aParams);
                     break;
@@ -173,35 +198,35 @@ public class ASTManager {
                 }
 
                 case "SEMANTIC_MAKE_FAMILY_FACTOR_ARITH_EXPR": {
-                    Node arithExprNode =(semanticStack.pop());
+                    Node arithExprNode = (semanticStack.pop());
                     Node factorNotNode = new FactorNode(arithExprNode);
                     factorNotNode.setNodeCategory("factor");
                     semanticStack.push(factorNotNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_FACTOR_NOT": {
-                    Node factor =(semanticStack.pop());
-                    Node factorNotNode = new FactorNode("not",factor);
+                    Node factor = (semanticStack.pop());
+                    Node factorNotNode = new FactorNode("not", factor);
                     factorNotNode.setNodeCategory("factor");
                     semanticStack.push(factorNotNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_FACTOR_SIGN": {
-                    Node factor =(semanticStack.pop());
+                    Node factor = (semanticStack.pop());
                     Node signNode = semanticStack.pop();
-                    Node factorSignNode = new FactorNode(signNode.getData(),factor);
+                    Node factorSignNode = new FactorNode(signNode.getData(), factor);
                     factorSignNode.setNodeCategory("factor");
                     semanticStack.push(factorSignNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_VAR_DECL": {
-                    Node dimListNode  = new DimListNode();
+                    Node dimListNode = new DimListNode();
                     if (semanticStack.peek().getNodeCategory().equals("dimList")) {
                         dimListNode = (semanticStack.pop());
                     }
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
-                    Node varDeclNode =new VarDeclNode(typeNode,idNode,dimListNode);
+                    Node varDeclNode = new VarDeclNode(typeNode, idNode, dimListNode);
                     varDeclNode.setNodeCategory("varDecl");
                     semanticStack.push(varDeclNode);
                     break;
@@ -214,20 +239,20 @@ public class ASTManager {
                     }
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
-                    Node funcDeclNode =new FuncDeclNode(typeNode,idNode,fParamListNode);
+                    Node funcDeclNode = new FuncDeclNode(typeNode, idNode, fParamListNode);
                     funcDeclNode.setNodeCategory("funcDecl");
                     semanticStack.push(funcDeclNode);
                     break;
                 }
 
                 case "SEMANTIC_MAKE_FAMILY_FPARAM": {
-                    Node dimListNode  = new DimListNode();
+                    Node dimListNode = new DimListNode();
                     if (semanticStack.peek().getNodeCategory().equals("dimList")) {
                         dimListNode = (semanticStack.pop());
                     }
                     Node idNode = (semanticStack.pop()); // IdNode
                     Node typeNode = (semanticStack.pop());
-                    Node fparamNode =new FParamNode(typeNode,idNode,dimListNode);
+                    Node fparamNode = new FParamNode(typeNode, idNode, dimListNode);
                     fparamNode.setNodeCategory("fparam");
                     semanticStack.push(fparamNode);
                     break;
@@ -235,8 +260,8 @@ public class ASTManager {
 
                 case "SEMANTIC_MAKE_FAMILY_EXPR": {
                     //TODO factor should not be come here it should automatically set as arithexpr or relexpr
-                    Node expNode =new ExprNode();
-                    if (semanticStack.peek().getNodeCategory().equals("arithExpr") || semanticStack.peek().getNodeCategory().equals("relExpr") || (semanticStack.peek().getNodeCategory().equals("factor")))   {
+                    Node expNode = new ExprNode();
+                    if (semanticStack.peek().getNodeCategory().equals("arithExpr") || semanticStack.peek().getNodeCategory().equals("relExpr") || (semanticStack.peek().getNodeCategory().equals("factor"))) {
                         expNode.addChild(semanticStack.pop());
                     }
                     expNode.setNodeCategory("expr");
@@ -252,24 +277,27 @@ public class ASTManager {
                         statBlockNode = (semanticStack.pop());
                     }
                     if (semanticStack.peek().getNodeCategory().equals("fparmList")) {
-                        fParamListNode =(semanticStack.pop());
-                    }
-                    if (semanticStack.peek().getNodeCategory().equals("scopeSpec")) {
-                        scopSpecNode =(semanticStack.pop());
+                        fParamListNode = (semanticStack.pop());
                     }
                     Node idNode = (semanticStack.pop()); // ID
+                    if (semanticStack.peek().getNodeCategory().equals("scopeSpec")) {
+                        scopSpecNode = (semanticStack.pop());
+                    }
                     Node typeNode = (semanticStack.pop()); // Type
 
-                    Node funcDefNode = new FuncDefNode(typeNode,scopSpecNode,idNode,fParamListNode,statBlockNode);
+                    Node funcDefNode = new FuncDefNode(typeNode, scopSpecNode, idNode, fParamListNode, statBlockNode);
                     funcDefNode.setNodeCategory("funcDef");
                     semanticStack.push(funcDefNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_VAR": {
-                    Node varNode  = new VarNode();
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("varElement"))) {
-                        varNode.addChild(semanticStack.pop());
+                    Node varNode = new VarNode();
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("varElement"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    varNode.addAllChildInReverse(childNodeList);
                     varNode.setNodeCategory("var");
                     semanticStack.push(varNode);
                     break;
@@ -294,7 +322,7 @@ public class ASTManager {
                     Node rightChild = semanticStack.pop();
                     Node opNode = semanticStack.pop();
                     Node leftChild = semanticStack.pop();
-                    Node multOpNode = new MultOpNode(opNode.getData(),leftChild,rightChild);
+                    Node multOpNode = new MultOpNode(opNode.getData(), leftChild, rightChild);
                     multOpNode.setNodeCategory("multOp");
                     semanticStack.push(multOpNode);
                     break;
@@ -303,13 +331,13 @@ public class ASTManager {
                     Node rightChild = semanticStack.pop();
                     Node opNode = semanticStack.pop();
                     Node leftChild = semanticStack.pop();
-                    Node arithExprNode = new ArithExprNode(opNode.getData(),leftChild,rightChild);
+                    Node arithExprNode = new ArithExprNode(opNode.getData(), leftChild, rightChild);
                     arithExprNode.setNodeCategory("arithExpr");
                     semanticStack.push(arithExprNode);
                     break;
                 }
                 case "SEMANTIC_MAKE_FAMILY_ARITH_EXPR_FINAL": {
-                    if(semanticStack.peek().getNodeCategory().equals("term")){
+                    if (semanticStack.peek().getNodeCategory().equals("term")) {
                         Node termNode = semanticStack.pop();
                         Node arithExprNode = new ArithExprNode();
                         arithExprNode.addChild(termNode);
@@ -322,7 +350,7 @@ public class ASTManager {
                     Node rightChild = semanticStack.pop();
                     Node opNode = semanticStack.pop();
                     Node leftChild = semanticStack.pop();
-                    Node relExprNode = new RelExprNode(opNode.getData(),leftChild,rightChild);
+                    Node relExprNode = new RelExprNode(opNode.getData(), leftChild, rightChild);
                     relExprNode.setNodeCategory("relExpr");
                     semanticStack.push(relExprNode);
                     break;
@@ -330,10 +358,10 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_DATA_MEMBER": {
                     Node indexListNode = new IndexListNode();
                     if (semanticStack.peek().getNodeCategory().equals("indexList")) {
-                        indexListNode= (semanticStack.pop());
+                        indexListNode = (semanticStack.pop());
                     }
-                    Node idNode =(semanticStack.pop());
-                    Node dataMemberNode =new DataMemberNode(idNode,indexListNode);
+                    Node idNode = (semanticStack.pop());
+                    Node dataMemberNode = new DataMemberNode(idNode, indexListNode);
                     dataMemberNode.setNodeCategory("dataMember");
                     semanticStack.push(dataMemberNode);
                     break;
@@ -341,10 +369,10 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_F_CALL": {
                     Node aparamsNode = new AParamsNode();
                     if (semanticStack.peek().getNodeCategory().equals("aParams")) {
-                        aparamsNode  = (semanticStack.pop());
+                        aparamsNode = (semanticStack.pop());
                     }
-                    Node idNode =(semanticStack.pop());
-                    Node fcallNode =new FCallNode(idNode,aparamsNode);
+                    Node idNode = (semanticStack.pop());
+                    Node fcallNode = new FCallNode(idNode, aparamsNode);
                     fcallNode.setNodeCategory("fCall");
                     semanticStack.push(fcallNode);
                     break;
@@ -362,7 +390,7 @@ public class ASTManager {
                     if (semanticStack.peek().getNodeCategory().equals("expr")) {
                         exprNode = (semanticStack.pop());
                     }
-                    Node ifStatNode = new IfStatNode(exprNode,ifStatBlockNode,elseStatBlockNode);
+                    Node ifStatNode = new IfStatNode(exprNode, ifStatBlockNode, elseStatBlockNode);
                     ifStatNode.setNodeCategory("ifStat");
                     semanticStack.push(ifStatNode);
                     break;
@@ -386,7 +414,7 @@ public class ASTManager {
                     }
                     Node idNode = (semanticStack.pop());
                     Node typeNode = (semanticStack.pop());
-                    Node forNode = new ForStatNode(typeNode,idNode,exprNode,relExprNode,assignStatNode,statBlockNode);
+                    Node forNode = new ForStatNode(typeNode, idNode, exprNode, relExprNode, assignStatNode, statBlockNode);
                     forNode.setNodeCategory("forStat");
                     semanticStack.push(forNode);
                     break;
@@ -430,11 +458,14 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_ST_BLOCK": {
                     //TODO should not have statblock in while condition fix it...
                     Node stateBlock = new StatBlockNode();
-                    while (semanticStack.size()>0 && (semanticStack.peek().getNodeCategory().equals("statement") || semanticStack.peek().getNodeCategory().equals("varDecl"))) {
-                        stateBlock.addChild(semanticStack.pop());
+                    List<Node> childNodeList = new ArrayList<>();
+
+                    while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("statement") || semanticStack.peek().getNodeCategory().equals("varDecl"))) {
+                        childNodeList.add(semanticStack.pop());
                     }
+                    stateBlock.addAllChildInReverse(childNodeList);
                     stateBlock.setNodeCategory("statBlock");
-                    if(stateBlock.getChildren().size()>0) {
+                    if (stateBlock.getChildren().size() > 0) {
                         semanticStack.push(stateBlock);
                     }
                     break;
@@ -460,47 +491,31 @@ public class ASTManager {
         }
     }
 
-    public void makeSibling(ASTNode astNode, ASTNode newSibling) {
-        ASTNode currentAstNode = astNode;
-        while (currentAstNode.sibling != null) {
-            currentAstNode = currentAstNode.sibling;
-        }
-        currentAstNode.sibling = newSibling;
-        newSibling.parent = currentAstNode.parent;
-
-    }
-
-    public void transferFromOneFamilyToOther(Node astNode, String newName) {
-//        astNode.data = astNode.nodeType;
-//        astNode.nodeType = newName;
-        astNode.setNodeCategory(newName);
-    }
-
 
     public void makeNode(String tokenType, Token token) {
         try {
-            if (token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType())|| token.getTokenType().getTokenType().equals(TokenType.FLOAT.getTokenType())){
+            if (token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType()) || token.getTokenType().getTokenType().equals(TokenType.FLOAT.getTokenType())) {
                 Node numNode = new NumNode(token.getTokenValue());
                 numNode.setNodeCategory("num");
                 numNode.setType(token.getTokenType().getTokenType());
+                if(token.getTokenType().getTokenType().equals(TokenType.INTEGER.getTokenType())) {
+                    numNode.setType(Terminal.INT.getData());
+                }
                 semanticStack.push(numNode);
-            }else if(tokenType.equals(Terminal.id.getData())){
+            } else if (tokenType.equals(Terminal.id.getData())) {
                 Node node = new IdNode(token.getTokenValue());
                 node.setNodeCategory("id");
                 semanticStack.push(node);
-            }
-            else if (tokenType.equals(Terminal.INT.getData()) || tokenType.equals(Terminal.FLOAT.getData())) {
+            } else if (tokenType.equals(Terminal.INT.getData()) || tokenType.equals(Terminal.FLOAT.getData())) {
                 Node typeNode = new TypeNode(tokenType);
                 typeNode.setNodeCategory("type");
                 semanticStack.push(typeNode);
-            }
-            else if(tokenType.equals(Terminal.EQ.getData()) || tokenType.equals(Terminal.NEQ.getData()) || tokenType.equals(Terminal.GT.getData()) || tokenType.equals(Terminal.LT.getData()) || tokenType.equals(Terminal.LEQ.getData()) || tokenType.equals(Terminal.GEQ.getData())){
-                Node relOpNode= new OpNode(tokenType);
+            } else if (tokenType.equals(Terminal.EQ.getData()) || tokenType.equals(Terminal.NEQ.getData()) || tokenType.equals(Terminal.GT.getData()) || tokenType.equals(Terminal.LT.getData()) || tokenType.equals(Terminal.LEQ.getData()) || tokenType.equals(Terminal.GEQ.getData())) {
+                Node relOpNode = new OpNode(tokenType);
                 relOpNode.setNodeCategory("relOp");
                 semanticStack.push(relOpNode);
-            }
-            else if(tokenType.equals(Terminal.ADD.getData()) || tokenType.equals(Terminal.MINUS.getData()) || tokenType.equals(Terminal.OR.getData()) || tokenType.equals(Terminal.MUL.getData()) || tokenType.equals(Terminal.DIV.getData()) || tokenType.equals(Terminal.AND.getData())){
-                Node multOpNode= new OpNode(tokenType);
+            } else if (tokenType.equals(Terminal.ADD.getData()) || tokenType.equals(Terminal.MINUS.getData()) || tokenType.equals(Terminal.OR.getData()) || tokenType.equals(Terminal.MUL.getData()) || tokenType.equals(Terminal.DIV.getData()) || tokenType.equals(Terminal.AND.getData())) {
+                Node multOpNode = new OpNode(tokenType);
                 multOpNode.setNodeCategory("multOp");
                 semanticStack.push(multOpNode);
             }

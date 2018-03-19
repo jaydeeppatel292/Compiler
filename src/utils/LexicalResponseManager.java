@@ -7,7 +7,22 @@ import models.TokenType;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
+
+class ErrorMessage{
+    private String type;
+    private int lineNum;
+    private int colNum;
+    private String message;
+
+    public ErrorMessage(String type, int lineNum, int colNum, String message) {
+        this.type = type;
+        this.lineNum = lineNum;
+        this.colNum = colNum;
+        this.message = message;
+    }
+}
 
 public class LexicalResponseManager {
     private static LexicalResponseManager ourInstance = new LexicalResponseManager();
@@ -15,11 +30,10 @@ public class LexicalResponseManager {
     private PrintWriter aTOccWriterFile;
     private PrintWriter tokenWriterFile;
     private PrintWriter derivationWriterFile;
-
+    private List<ErrorMessage> errorMessageList = new ArrayList<>();
     public static LexicalResponseManager getInstance() {
         return ourInstance;
     }
-
 
     private LexicalResponseManager() {
         try {
@@ -40,6 +54,11 @@ public class LexicalResponseManager {
 
     }
 
+    public void addErrorMessage(int lineNum,int colNum,String errorType,String message){
+        System.out.println(errorType+" Error at "+lineNum+":"+colNum+" :"+message);
+        ErrorMessage errorMessage = new ErrorMessage(errorType,lineNum,colNum,message);
+        errorMessageList.add(errorMessage);
+    }
     public void finisheWriting() {
         tokenWriterFile.close();
         aTOccWriterFile.close();
@@ -54,6 +73,18 @@ public class LexicalResponseManager {
         derivationWriterFile.println();
     }
 
+    public void writeSyntacticalMissingError(String expected,Token token) {
+        if (token != null) {
+            errorWriterFile.print("Syntax Error Missing token");
+            errorWriterFile.print(",");
+            errorWriterFile.print("Expected: "+expected+" but found: "+token.getTokenValue());
+            errorWriterFile.print(",");
+            errorWriterFile.print(token.getLineNumber());
+            errorWriterFile.print(":");
+            errorWriterFile.print(token.getColumnNumber());
+            errorWriterFile.println();
+        }
+    }
     public void writeSyntacticalError(Token token) {
         if (token != null) {
             errorWriterFile.print("Syntax Error ");

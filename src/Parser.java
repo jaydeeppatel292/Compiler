@@ -64,7 +64,7 @@ public class Parser {
                         return false;
                     }
                 } else {
-                    skipError(x);
+                    skipMissingError(x);
                     success = false;
                 }
             } else {
@@ -80,6 +80,9 @@ public class Parser {
             }
         }
         LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
+        if(token==null){
+            return success;
+        }
         return (!token.getTokenType().getTokenType().equals("$")) && (success);
     }
 
@@ -167,6 +170,11 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    private void skipMissingError(String input){
+        LexicalResponseManager.getInstance().writeSyntacticalMissingError(input,token);
+        stack.pop();
     }
 
     private void skipError(String input) {

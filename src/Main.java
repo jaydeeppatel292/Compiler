@@ -2,6 +2,9 @@ import com.sun.corba.se.impl.orb.ParserTable;
 import global.Constants;
 import models.LL1ParseTable;
 import models.Token;
+import models.Visitors.SymTabCreationVisitor;
+import models.Visitors.TypeCheckingVisitor;
+import utils.ASTManager;
 import utils.BufferManager;
 import utils.LexicalResponseManager;
 import utils.TableParserBuilder;
@@ -15,6 +18,35 @@ public class Main {
         initializeParser(args);
 
         boolean success = Parser.getInstance().parse();
+
+
+        if(ASTManager.getInstance().getProgNode()==null){
+            System.out.println("Could not able to create AST for given program!");
+            // Report Error ..
+            return;
+        }
+
+        SymTabCreationVisitor STCVisitor = new SymTabCreationVisitor();
+
+        ASTManager.getInstance().getProgNode().accept(STCVisitor);
+
+
+        System.out.println("==PRINTING TABLE=====");
+        System.out.println(ASTManager.getInstance().getProgNode().symtab);
+
+
+        System.out.println("==TYPE CHECKING PHASE STARTED======");
+
+        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
+        ASTManager.getInstance().getProgNode().accept(typeCheckingVisitor);
+
+
+        System.out.println("==PRINTING TREE======");
+
+        ASTManager.getInstance().getProgNode().print();
+
+        System.out.println("==TABLE PRINTED=======");
+
         if(success){
             System.out.println("Successfully Parsed Input");
         }else{
