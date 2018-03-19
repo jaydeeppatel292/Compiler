@@ -116,29 +116,63 @@ public class TypeCheckingVisitor extends Visitor {
         Node currentNode = node;
         SymTab currentSymTable = null;
         String nodeType = null;
-        for (Node child : node.getChildren()) {
+        for (int i=0;i<node.getChildren().size();i++) {
+            Node child = node.getChildren().get(i);
             String type = child.getType();
+            String typeArray[];
+            String varName;
             switch (type.split("#")[0]) {
                 case "DATA":
+                    typeArray = type.split("#");
+                    varName = typeArray[1];
+                    int dimension = Integer.parseInt(typeArray[2]);
                     SymTabEntry varType = getTypeForVarFromSymbolTable(type, currentNode,currentSymTable);
                     if(varType==null){
                         node.setType("typeerror");
-                        System.out.println("Semantic Error Could not able to find :"+type);
+                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varName);
                         return;
                     }
                     if(!varType.extraData.equals("int")&& !varType.extraData.equals("float")){
                         currentSymTable = findSymbolTableForClass(varType.extraData);
                         if(currentSymTable==null){
                             node.setType("typeerror");
-                            System.out.println("Semantic Error Class Not Found :"+varType.symbolName);
+                            LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varType.symbolName);
                             return;
                         }
                     }
                     else {
-                        nodeType = varType.extraData;
+                        if(dimension==0 && varType.varDimensionSize>0){
+                            nodeType = varType.extraData+":"+varType.varDimensionSize;
+                        }else if(dimension == varType.varDimensionSize){
+                            nodeType = varType.extraData;
+                        }else{
+                            nodeType = varType.extraData;
+                            LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Invalid dimension size!!");
+                        }
                     }
                     break;
                 case "FCALL":
+                    typeArray = type.split("#");
+                    varName = typeArray[1];
+                    String  fParams ="";
+                    if(typeArray.length==3){
+                        fParams = (typeArray[2]);
+                    }
+                    if(i!=0 && currentSymTable==null){
+                        node.setType("typeerror");
+                        String errorParams = fParams.replaceAll(":","dim:").replaceAll("_",",");
+                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Can not resolved symbol:"+varName);
+                        return;
+                    }
+
+                    SymTabEntry funcType  = getTypeForFuncCall(type,currentSymTable);
+                    if(funcType!=null) {
+                        nodeType = funcType.returnType;
+                    }else{
+                        node.setType("typeerror");
+                        String errorParams = fParams.replaceAll(":","dim:").replaceAll("_",",");
+                        LexicalResponseManager.getInstance().addErrorMessage(0,0,"Semantic","Undefined func:"+varName+"("+errorParams+")");
+                    }
                     break;
             }
         }
@@ -157,6 +191,26 @@ public class TypeCheckingVisitor extends Visitor {
         return null;
     }
 
+    public SymTabEntry getTypeForFuncCall(String type,SymTab symTab){
+        String[] typeArray = type.split("#");
+        String varName = typeArray[1];
+        String  fParams ="" ;
+        if(typeArray.length==3){
+            fParams = (typeArray[2]);
+        }
+        if(symTab==null){
+            symTab = ASTManager.getInstance().getProgNode().symtab;
+        }
+        for(SymTabEntry symTabEntry : symTab.m_symlist){
+            if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
+                if((symTabEntry.extraData!=null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData ==null && fParams.isEmpty())){
+                    return symTabEntry;
+                }
+            }
+        }
+        return null;
+    }
+
     public SymTabEntry getTypeForVarFromSymbolTable(String type, Node currentNode,SymTab symTab) {
 
         String typeArray[] = type.split("#");
@@ -167,7 +221,7 @@ public class TypeCheckingVisitor extends Visitor {
         if(symTab!=null){
             for (SymTabEntry symTabEntry : symTab.m_symlist) {
                 if (symTabEntry.symbolType == SymTabEntry.SymbolType.VARIABLE || symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER) {
-                    if (symTabEntry.symbolName.equals(varName) && symTabEntry.varDimensionSize == dimension) {
+                    if (symTabEntry.symbolName.equals(varName)) {
                         return symTabEntry;
                     }
                 }
@@ -180,7 +234,7 @@ public class TypeCheckingVisitor extends Visitor {
             if (searchNode.symtab != null) {
                 for (SymTabEntry symTabEntry : searchNode.symtab.m_symlist) {
                     if (symTabEntry.symbolType == SymTabEntry.SymbolType.VARIABLE || symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER) {
-                        if (symTabEntry.symbolName.equals(varName) && symTabEntry.varDimensionSize == dimension) {
+                        if (symTabEntry.symbolName.equals(varName)) {
                             return symTabEntry;
                         }
                     }
@@ -207,8 +261,8 @@ public class TypeCheckingVisitor extends Visitor {
 
     public void visit(AParamsNode node) {
         String type = "";
-        for (Node child : node.getChildren()) {
-            type += "_" + child.getType();
+        for(int i=0;i<node.getChildren().size();i++){
+            type +=  node.getChildren().get(i).getType()+"_";
         }
         node.setType(type);
     }

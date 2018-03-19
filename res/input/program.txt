@@ -7,14 +7,21 @@ class Utility{
 };
 
 int Utility:: getMax(){
-    var2 = 5;
+    int var2 = 5;
+};
+int getMin(int a[3],int b){
+
 };
 
 program {
     Utility utility;
+    int var3[3];
+    int max;
     Utility myUtility[3][4];
-    var2 = 40.4 * 40;
+    var3[1][2] = getMin(var3,3);
+    var3 = getMin(var3[3],3);
+    max = utility.getMax();
+    var3[3] = utility.getMax();
     myUtility[3][4].var2[1][2][3][4] = 30*30;
     utility.var2[1][2][3][4] = 10*19;
-    max = utility.getMax();
 };

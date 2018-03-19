@@ -101,7 +101,13 @@ public class SymTabCreationVisitor extends Visitor {
         // function name
         declrecstring += node.getChildren().get(2).getData() + ':';
         // loop over function parameter list
+        String extraData="";
         for (Node param : node.getChildren().get(3).getChildren()) {
+            extraData += param.getChildren().get(0).getData();
+            if(param.getChildren().get(2).getChildren().size()>0) {
+                extraData += ":" + param.getChildren().get(2).getChildren().size() ;
+            }
+            extraData +="_";
             // parameter type
             declrecstring += param.getChildren().get(0).getData() + ':';
             // parameter name
@@ -119,6 +125,11 @@ public class SymTabCreationVisitor extends Visitor {
 
         // add parameters of the function as local variables in the local symbol table
         addAllSymbolInParentTable(node.symtabentry.m_subtable, node, node.getChildren().get(3).getChildren());
+
+        node.symtabentry.extraData = extraData;
+        node.symtabentry.symbolName = node.getChildren().get(2).getData();
+        node.symtabentry.returnType = node.getChildren().get(0).getData();
+        node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
 
 		/*for (Node param : node.getChildren().get(3).getChildren())
 		node.symtabentry.m_subtable.addEntry(param.symtabentry);*/
