@@ -71,7 +71,7 @@ public class LexicalResponseManager {
             derivationWriterFile = new PrintWriter(Constants.OUTPUT_DERIVATION, "UTF-8");
             symbolTableWriter = new PrintWriter(Constants.OUTPUT_SYMTABLE, "UTF-8");
             ASTWriter = new PrintWriter(Constants.OUTPUT_AST, "UTF-8");
-            errorWriterFile.println("Format: ErrorType , TokenValue , TokenLineNumber : TokenColumnNumber");
+            errorWriterFile.println("Format: TokenLineNumber : TokenColumnNumber , ErrorType , TokenValue");
             tokenWriterFile.println("Format: TokenType , TokenValue , TokenLineNumber : TokenColumnNumber");
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9f04583c-3596-43c5-9fa7-baf658a2177e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/Main.class" afterPath="$PROJECT_DIR$/out/production/Assignment/Main.class" />
-      <change beforePath="$PROJECT_DIR$/res/input/program.txt" afterPath="$PROJECT_DIR$/res/input/program.txt" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/global/Constants.java" afterPath="$PROJECT_DIR$/src/global/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/AST/Node.java" afterPath="$PROJECT_DIR$/src/models/AST/Node.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" afterPath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -29,93 +22,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/input/program.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="error.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/output/error.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="777">
-              <caret line="60" column="49" lean-forward="false" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
+            <state relative-caret-position="334">
+              <caret line="78" column="55" lean-forward="true" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TypeCheckingVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
+      <file leaf-file-name="ASTManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="230" column="75" lean-forward="false" selection-start-line="230" selection-start-column="75" selection-end-line="230" selection-end-column="75" />
+            <state relative-caret-position="30">
+              <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SymTabCreationVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="95" column="20" lean-forward="false" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/AST/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-393">
-              <caret line="137" column="24" lean-forward="false" selection-start-line="137" selection-start-column="24" selection-end-line="137" selection-end-column="24" />
-              <folding>
-                <element signature="e#1848#1849#0" expanded="true" />
-                <element signature="e#1886#1887#0" expanded="true" />
-                <element signature="e#2226#2227#0" expanded="true" />
-                <element signature="e#2261#2262#0" expanded="true" />
-                <element signature="e#2317#2318#0" expanded="true" />
-                <element signature="e#2365#2366#0" expanded="true" />
-                <element signature="e#2404#2405#0" expanded="true" />
-                <element signature="e#2435#2436#0" expanded="true" />
-                <element signature="e#2477#2478#0" expanded="true" />
-                <element signature="e#2513#2514#0" expanded="true" />
-                <element signature="e#2544#2545#0" expanded="true" />
-                <element signature="e#2573#2574#0" expanded="true" />
-                <element signature="e#2715#2716#0" expanded="true" />
-                <element signature="e#2747#2748#0" expanded="true" />
-                <element signature="e#2787#2788#0" expanded="true" />
-                <element signature="e#2819#2820#0" expanded="true" />
-                <element signature="e#2850#2851#0" expanded="true" />
-                <element signature="e#2882#2883#0" expanded="true" />
-                <element signature="e#2922#2923#0" expanded="true" />
-                <element signature="e#2954#2955#0" expanded="true" />
-                <element signature="e#2994#2995#0" expanded="true" />
-                <element signature="e#3035#3036#0" expanded="true" />
-                <element signature="e#3084#3085#0" expanded="true" />
-                <element signature="e#3125#3126#0" expanded="true" />
-                <element signature="e#3156#3157#0" expanded="true" />
-                <element signature="e#3200#3201#0" expanded="true" />
-                <element signature="e#3375#3376#0" expanded="true" />
-                <element signature="e#3409#3410#0" expanded="true" />
-                <element signature="e#6836#6837#0" expanded="true" />
-                <element signature="e#6862#6863#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -159,10 +81,10 @@
       <find>:</find>
       <find>_</find>
       <find>size</find>
-      <find>print</find>
       <find>SemanticError,Could not resolve symbol</find>
       <find>findMax</find>
       <find>Could not resolve symbol</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>}</replace>
@@ -230,11 +152,11 @@
         <option value="$PROJECT_DIR$/res/output/error.txt" />
         <option value="$PROJECT_DIR$/src/global/Constants.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
         <option value="$PROJECT_DIR$/src/models/AST/Node.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
         <option value="$PROJECT_DIR$/res/input/program.txt" />
+        <option value="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
       </list>
     </option>
   </component>
@@ -279,12 +201,13 @@
             <path>
               <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -414,7 +337,7 @@
       <workItem from="1520729749915" duration="7732000" />
       <workItem from="1520790031416" duration="27000" />
       <workItem from="1521062561478" duration="1382000" />
-      <workItem from="1521160391753" duration="135518000" />
+      <workItem from="1521160391753" duration="138405000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -563,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521509330800</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fixed bugs and minor issues /">
+      <created>1521514964034</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1521514964034</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -578,7 +508,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="346857000" />
+    <option name="totallyTimeSpent" value="349744000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -611,7 +541,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.82559454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39411098" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39411098" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.4969697" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26960257" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
@@ -676,7 +606,8 @@
     <MESSAGE value="class function check working. .." />
     <MESSAGE value="Writing Error with line number and column number&#10;Type error with data .." />
     <MESSAGE value="Line number in symbol table also .." />
-    <option name="LAST_COMMIT_MESSAGE" value="Line number in symbol table also .." />
+    <MESSAGE value="fixed bugs and minor issues /" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs and minor issues /" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -965,14 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="73" column="126" lean-forward="false" selection-start-line="73" selection-start-column="89" selection-end-line="73" selection-end-column="126" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -1107,14 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="47" column="26" lean-forward="true" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/input/program1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1155,37 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1344">
-          <caret line="127" column="17" lean-forward="false" selection-start-line="127" selection-start-column="17" selection-end-line="127" selection-end-column="17" />
-          <folding>
-            <element signature="e#455#456#0" expanded="false" />
-            <element signature="e#482#483#0" expanded="false" />
-            <element signature="e#513#514#0" expanded="false" />
-            <element signature="e#543#544#0" expanded="false" />
-            <element signature="e#573#574#0" expanded="false" />
-            <element signature="e#602#603#0" expanded="false" />
-            <element signature="e#636#637#0" expanded="false" />
-            <element signature="e#666#667#0" expanded="false" />
-            <element signature="e#1373#1374#0" expanded="false" />
-            <element signature="e#1407#1408#0" expanded="false" />
-            <element signature="e#1456#1457#0" expanded="false" />
-            <element signature="e#1496#1497#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1569#1570#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="777">
-          <caret line="60" column="49" lean-forward="false" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -1198,6 +1082,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1241,34 +1133,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/GrammarExpressionGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="230" column="75" lean-forward="false" selection-start-line="230" selection-start-column="75" selection-end-line="230" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="95" column="20" lean-forward="false" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="630">
+          <caret line="30" column="74" lean-forward="true" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/output/error.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        <state relative-caret-position="231">
+          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="73" column="45" lean-forward="false" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="78" column="55" lean-forward="true" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/ASTManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding />
         </state>
       </provider>
