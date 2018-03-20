@@ -287,8 +287,6 @@ public class TypeCheckingVisitor extends Visitor {
             searchNode = searchNode.getParent();
         }
 
-
-
         return null;
     }
 

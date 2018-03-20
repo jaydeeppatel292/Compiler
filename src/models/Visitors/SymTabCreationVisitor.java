@@ -29,9 +29,20 @@ public class SymTabCreationVisitor extends Visitor {
         System.out.println("visiting ProgNode");
         node.symtab = new SymTab("global");
         // for classes, loop over all class declaration nodes
-        for (Node classelt : node.getChildren().get(0).getChildren())
+        for (Node classelt : node.getChildren().get(0).getChildren()) {
             //add the symbol table entry of each class in the global symbol table
+            if(classelt.symtabentry.symbolType == SymTabEntry.SymbolType.CLASS) {
+                for (SymTabEntry symTab : node.symtab.m_symlist) {
+                    try {
+                        if (symTab.symbolType == SymTabEntry.SymbolType.CLASS && symTab.m_subtable.m_name.equals(classelt.symtabentry.m_subtable.m_name)) {
+                            LexicalResponseManager.getInstance().addErrorMessage(-1,-1,"SemanticError","Class multiple declaration :"+symTab.m_subtable.m_name);
+                        }
+                    }catch (Exception ex){
+                    }
+                }
+            }
             node.symtab.addEntry(classelt.symtabentry);
+        }
         // for function definitions, loop over all function definition nodes
         for (Node fndefelt : node.getChildren().get(1).getChildren()) {
             //add the symbol table entry of each function definition in the global symbol table
@@ -91,7 +102,7 @@ public class SymTabCreationVisitor extends Visitor {
                     if(isCircularDependence(symTab,symTabEntryList)){
                         isCircular = true;
                     }
-                    allInheritedSymTab.addAll(symTabEntryList);
+                    addUniqueSymTabFromInheritence(allInheritedSymTab,symTabEntryList);
                 }
                 symTabEntry.multiLevelInheritedSymTab = allInheritedSymTab;
                 if(isCircular){
@@ -100,13 +111,39 @@ public class SymTabCreationVisitor extends Visitor {
             }
         }
 
+
             // for the program function, get its local symbol table from node 2 and create an entry for it in the global symbol table
         // first, get the table and change its name
         SymTab table = node.getChildren().get(2).symtab;
         table.m_name = "program";
         node.symtab.addEntry("function:program", table);
+        checkShadowedVarDecl(node.symtab);
     }
     ;
+
+    public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList,List<SymTabEntry> fromSymTabEntryList){
+        for(SymTabEntry symTabEntry : fromSymTabEntryList){
+            if(!intoSymTabEntryList.contains(symTabEntry)){
+                intoSymTabEntryList.add(symTabEntry);
+            }
+        }
+    }
+
+    public void checkShadowedVarDecl(SymTab symTab){
+        for(SymTabEntry tabEntry : symTab.m_symlist) {
+            if(tabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
+                for(SymTabEntry currentClassSymTab : tabEntry.m_subtable.m_symlist) {
+                    for (SymTabEntry inheritedTabEntry : tabEntry.multiLevelInheritedSymTab) {
+                        for (SymTabEntry inheritedTable : inheritedTabEntry.m_subtable.m_symlist) {
+                            if (inheritedTable.m_entry.equals(currentClassSymTab.m_entry)) {
+                                LexicalResponseManager.getInstance().addErrorMessage(0, 0, "Semantic Warning", "Shadowed variable::" + currentClassSymTab.m_entry + " in Class:"+tabEntry.m_subtable.m_name+" Already declared in:" + inheritedTabEntry.m_subtable.m_name);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public boolean isCircularDependence(SymTabEntry symTabEntry,List<SymTabEntry> classSymListTraversal){
         boolean isCircularDependence = false;
@@ -223,8 +260,14 @@ public class SymTabCreationVisitor extends Visitor {
         // get the id from the second child node and aggregate here
         declrecstring += node.getChildren().get(1).getData() + ':';
 
-        node.symtab.addEntry(new SymTabEntry(declrecstring));
+        SymTabEntry  symTabEntry = new SymTabEntry(declrecstring);
+        symTabEntry.extraData = node.getChildren().get(0).getData(); // type
+        symTabEntry.symbolName = node.getChildren().get(1).getData(); // var name
+        symTabEntry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+
+        node.symtab.addEntry(symTabEntry);
         node.symtabentry = new SymTabEntry("For:", node.symtab);
+
     }
 
     public void visit(VarDeclNode node) {

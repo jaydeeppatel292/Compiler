@@ -11,7 +11,7 @@ public class SymTabEntry {
 	public String symbolName;
 	public String returnType;
 	public String extraData;
-	public List<SymTabEntry> multiLevelInheritedSymTab;
+	public List<SymTabEntry> multiLevelInheritedSymTab =new ArrayList<>();
 
 	public SymTabEntry(String p_entry){
 		m_entry = p_entry;

@@ -25,11 +25,18 @@ public class SymTab {
 		String toindent = "   ";
 		for (int i = 0; i < SymTab.tablelevel; i++)
 			stringtoreturn += toindent;
-		stringtoreturn = "===== begin " + m_name + " =====\n";  
+		stringtoreturn = "===== begin " + m_name + " =====\n\n";
 		for (int i = 0; i < m_symlist.size(); i++){
 			for (int j = 0; j < SymTab.tablelevel; j++)
 				stringtoreturn += toindent;
-			stringtoreturn += m_symlist.get(i).m_entry + '\n'; 
+			stringtoreturn += m_symlist.get(i).m_entry+"\n";
+			if(m_symlist.get(i).multiLevelInheritedSymTab!=null && m_symlist.get(i).multiLevelInheritedSymTab.size()>0) {
+				stringtoreturn+="Inherited Classes:";
+				for (SymTabEntry symTabEntry : m_symlist.get(i).multiLevelInheritedSymTab) {
+					stringtoreturn += symTabEntry.m_subtable.m_name + ",";
+				}
+				stringtoreturn+="\n";
+			}
 			if (m_symlist.get(i).m_subtable != null){
 				SymTab.tablelevel++;
 //				System.out.print(SymTab.tablelevel);
@@ -40,7 +47,7 @@ public class SymTab {
 		}
 		for (int i = 0; i < SymTab.tablelevel; i++)
 			stringtoreturn += toindent;
-		stringtoreturn += "===== end " + m_name + " =====";
+		stringtoreturn += "===== end " + m_name + " =====\n";
 		SymTab.tablelevel--;
 		return stringtoreturn;
 	}

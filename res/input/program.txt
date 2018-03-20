@@ -1,7 +1,9 @@
 class x{
 int member1;
-
+int var1;
+    int getMax();
 };
+
 class a:x{
 };
 class InheritedUtility:a {
@@ -23,20 +25,13 @@ int getMin(int a[3],int b){
 
 };
 
-float randomize(){
- int value;
- return (value);};
-
 
 program {
-    Utility utility;
-    int var3[3];
-    int max;
-    Utility myUtility[3][4];
-    max = utility.xObject.member1;
-    var3[1] = (var3[1] * randomize());
-
-    myUtility[3][4].var2[1][2][3][4] = 30*30;
-    utility.var2[1][2][3][4] = 10*19;
-    myUtility[utility.var2[1][2][3][max+var3[1]]][1].var1 = 2;
+    int array[3];
+    int maxValue;
+    for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
+     if(array[idx] < maxValue + 1 / 8 or idx) then {
+     maxValue = array[idx];}
+     else{};
+     };
 };
