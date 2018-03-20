@@ -228,11 +228,13 @@ public class TypeCheckingVisitor extends Visitor {
             }
         }
 
-        for (SymTabEntry inheritedSymTab : currentSymTabEntry.multiLevelInheritedSymTab) {
-            for (SymTabEntry symTabEntry : inheritedSymTab.m_subtable.m_symlist) {
-                if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
-                    if ((symTabEntry.extraData != null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData == null && fParams.isEmpty())) {
-                        return symTabEntry;
+        if(currentSymTabEntry!=null && currentSymTabEntry.multiLevelInheritedSymTab!=null) {
+            for (SymTabEntry inheritedSymTab : currentSymTabEntry.multiLevelInheritedSymTab) {
+                for (SymTabEntry symTabEntry : inheritedSymTab.m_subtable.m_symlist) {
+                    if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
+                        if ((symTabEntry.extraData != null && fParams.equals(symTabEntry.extraData)) || (symTabEntry.extraData == null && fParams.isEmpty())) {
+                            return symTabEntry;
+                        }
                     }
                 }
             }

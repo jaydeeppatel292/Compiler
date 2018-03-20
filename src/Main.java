@@ -58,6 +58,9 @@ public class Main {
 
         System.out.println("==TABLE PRINTED=======");
 
+        ASTManager.getInstance().getProgNode().print( LexicalResponseManager.getInstance().getASTWriter());
+        LexicalResponseManager.getInstance().getSymbolTableWriter().println(ASTManager.getInstance().getProgNode().symtab);
+
     }
     public static void initializeParser(String[] args) {
 

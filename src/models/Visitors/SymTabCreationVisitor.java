@@ -70,7 +70,7 @@ public class SymTabCreationVisitor extends Visitor {
                 if (!isClassDeclFound) {
                     // Report symentic error func decl not found ...
                     fndefelt.generatePosition();
-                    LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"SemanticError","Could not resolve symbol :"+fndefelt.getChildren().get(1).getData());
+                    LexicalResponseManager.getInstance().addErrorMessage(fndefelt.lineNumber,fndefelt.colNumber,"SemanticError","Could not resolve symbol :"+fndefelt.getChildren().get(1).getData());
                 }
             }
         }
@@ -78,6 +78,7 @@ public class SymTabCreationVisitor extends Visitor {
         // add inherited symbol list in class symtab entry ::
         for (Node classNode : node.getChildren().get(0).getChildren()){
             for(Node inheritedNode : classNode.getChildren().get(1).getChildren()){
+                boolean clasSymTabFound = false;
                 for(SymTabEntry symTabEntry : node.symtab.m_symlist){
                     if(symTabEntry.symbolType== SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable !=null && symTabEntry.m_subtable.m_name.equals(inheritedNode.getData())){
                         // Circular dependence at first level: Check if already entry exist
@@ -86,8 +87,13 @@ public class SymTabCreationVisitor extends Visitor {
                             LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"SemanticError","Circular class dependencies found for "+inheritedNode.getData() +" In class inheritance :"+classNode.getChildren().get(0).getData());
                         }else{
                             classNode.symtabentry.addInheritedSymTab(symTabEntry);
+                            clasSymTabFound  = true;
                         }
                     }
+                }
+                if(!clasSymTabFound){
+                    classNode.generatePosition();
+                    LexicalResponseManager.getInstance().addErrorMessage(classNode.lineNumber,classNode.colNumber,"SemanticError","Could not resolve symbol "+inheritedNode.getData());
                 }
             }
         }
@@ -323,7 +329,7 @@ public class SymTabCreationVisitor extends Visitor {
         // loop over function parameter list
         String extraData = "";
         for (Node param : node.getChildren().get(2).getChildren()) {
-            extraData += param.getChildren().get(0).getData() + "_" + param.getChildren().get(2).getChildren().size() + ":";
+            extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
             // parameter type
             declrecstring += param.getChildren().get(0).getData() + ':';
             // parameter name

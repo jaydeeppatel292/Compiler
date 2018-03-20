@@ -48,9 +48,19 @@ public class LexicalResponseManager {
     private PrintWriter aTOccWriterFile;
     private PrintWriter tokenWriterFile;
     private PrintWriter derivationWriterFile;
+    private PrintWriter symbolTableWriter;
+    private PrintWriter ASTWriter;
     private List<ErrorMessage> errorMessageList = new ArrayList<>();
     public static LexicalResponseManager getInstance() {
         return ourInstance;
+    }
+
+    public PrintWriter getSymbolTableWriter() {
+        return symbolTableWriter;
+    }
+
+    public PrintWriter getASTWriter() {
+        return ASTWriter;
     }
 
     private LexicalResponseManager() {
@@ -59,6 +69,8 @@ public class LexicalResponseManager {
             aTOccWriterFile = new PrintWriter(Constants.OUTPUT_ATOCC_FILE_NAME_PATH, "UTF-8");
             errorWriterFile = new PrintWriter(Constants.OUTPUT_ERROR_FILE_NAME_PATH, "UTF-8");
             derivationWriterFile = new PrintWriter(Constants.OUTPUT_DERIVATION, "UTF-8");
+            symbolTableWriter = new PrintWriter(Constants.OUTPUT_SYMTABLE, "UTF-8");
+            ASTWriter = new PrintWriter(Constants.OUTPUT_AST, "UTF-8");
             errorWriterFile.println("Format: ErrorType , TokenValue , TokenLineNumber : TokenColumnNumber");
             tokenWriterFile.println("Format: TokenType , TokenValue , TokenLineNumber : TokenColumnNumber");
         } catch (FileNotFoundException e) {
@@ -67,6 +79,7 @@ public class LexicalResponseManager {
             e.printStackTrace();
         }
     }
+
 
     public void initialize() {
 
@@ -111,6 +124,8 @@ public class LexicalResponseManager {
         derivationWriterFile.close();
         finalWriteErroListToFile();
         errorWriterFile.close();
+        symbolTableWriter.close();
+        ASTWriter.close();
     }
 
     public void addDerivationToFIle(List<String> dataList) {

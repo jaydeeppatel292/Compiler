@@ -4,6 +4,7 @@ import models.SymbolTable.SymTab;
 import models.SymbolTable.SymTabEntry;
 import models.Visitors.Visitor;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public abstract class Node {
     private String subtreeString   = null;
     public SymTab symtab           = null;
     public SymTabEntry symtabentry = null;
-    
+
     public Node(String data) {
         this.setData(data);
     }
@@ -134,19 +135,24 @@ public abstract class Node {
     public void removeParent() {
         this.parent = null;
     }
-
     public void print(){
     	System.out.println("===================================================================================");
     	System.out.println("Node type                 | data  | type      | subtreestring | symtabentry");
     	System.out.println("===================================================================================");
     	this.printSubtree();
     	System.out.println("===================================================================================");
-
+    }
+    public void print(PrintWriter printWriter){
+        printWriter.println("===================================================================================");
+        printWriter.println("Node type                 | data  | type      | subtreestring | symtabentry");
+        printWriter.println("===================================================================================");
+    	this.printSubtree(printWriter);
+        printWriter.println("===================================================================================");
     }
 
-    public void printSubtree(){
+    public void printSubtree(PrintWriter printWriter){
     	for (int i = 0; i < Node.nodelevel; i++ )
-    		System.out.print("  ");
+            printWriter.print("  ");
     	
     	String toprint = String.format("%-100s" , this.getClass().getSimpleName());
     	for (int i = 0; i < Node.nodelevel; i++ )
@@ -155,10 +161,32 @@ public abstract class Node {
     	toprint += String.format("%-12s" , (this.getType() == null || this.getType().isEmpty())         ? " | " : " | " + this.getType());
     	toprint += String.format("%-16s" , (this.subtreeString == null || this.subtreeString.isEmpty()) ? " | " : " | " + this.subtreeString);
     	toprint += (this.symtabentry == null)                                   ? " | " : " | " + this.symtabentry.m_entry;
+
+
+        printWriter.println(toprint);
     	
-    	
+    	Node.nodelevel++;
+    	List<Node> children = this.getChildren();
+		for (int i = 0; i < children.size(); i++ ){
+			children.get(i).printSubtree(printWriter);
+		}
+		Node.nodelevel--;
+    }
+    public void printSubtree(){
+    	for (int i = 0; i < Node.nodelevel; i++ )
+    		System.out.print("  ");
+
+    	String toprint = String.format("%-100s" , this.getClass().getSimpleName());
+    	for (int i = 0; i < Node.nodelevel; i++ )
+    		toprint = toprint.substring(0, toprint.length() - 2);
+    	toprint += String.format("%-20s" , (this.getData() == null || this.getData().isEmpty())         ? " | " : " | " + this.getData());
+    	toprint += String.format("%-12s" , (this.getType() == null || this.getType().isEmpty())         ? " | " : " | " + this.getType());
+    	toprint += String.format("%-16s" , (this.subtreeString == null || this.subtreeString.isEmpty()) ? " | " : " | " + this.subtreeString);
+    	toprint += (this.symtabentry == null)                                   ? " | " : " | " + this.symtabentry.m_entry;
+
+
     	System.out.println(toprint);
-    	
+
     	Node.nodelevel++;
     	List<Node> children = this.getChildren();
 		for (int i = 0; i < children.size(); i++ ){

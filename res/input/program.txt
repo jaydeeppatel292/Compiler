@@ -1,40 +1,66 @@
-class x{
-int member1;
-int var1;
-    int getMax();
+class InheritedUtility{
 };
-class x{
 
+// Multiple declaration of class
+class InheritedUtility{
 };
-class a:x{
-};
-class InheritedUtility:a {
-    x xObject;
-};
-class Utility:InheritedUtility,a{
+
+
+
+// Should through error for NotDefinedClass
+
+class Utility:InheritedUtility,NotDefinedClass{
     int var1;
-    int var5[2];
-    int var2[1][2][3][4];
-    float var3;
     int getMax();
 };
 
 int Utility:: getMax(){
     int var2;
     var2 = 5;
+    return (var2);
 };
 int getMin(int a[3],int b){
-
+    int var2;
+    var2 = 5;
+    return (var2);
 };
+
+float randomize(){
+ int value;
+
+ // As I declared Relation operator will return int (0 for false and 1 for true) as we dont have bool type
+ value = 1>2;
+ return (value);};
 
 
 program {
-    int array[3];
-    int maxValue;
-    int maxValue;
-    for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
-     if(array[idx] < maxValue + 1 / 8 or idx) then {
-     maxValue = array[idx];}
-     else{};
-     };
+    Utility utility;
+    int var3[3];
+    int max;
+
+    // multiple declaration of variable
+    int max;
+
+    Utility myUtility[3][4];
+
+    // Success : type checking
+    max = 4*5;
+
+    // Error : type checking
+    max = 4 * 5.4;
+
+    // Error : type checking with function call
+    max = 4 * randomize();
+
+    // Success : type checking with function call
+    max = 4 * getMin(var3,max);
+
+    // Error : type checking for var3[] as getMin needs array type
+    max = 4 * getMin(var[3],max);
+
+    // Error: The . operator should be used only on variables of a class type. If so, its right operand must be a member of that class
+     max.var1 =5;
+
+    // Correct usage :
+     myUtility[3][4].var1 = 5;
 };
