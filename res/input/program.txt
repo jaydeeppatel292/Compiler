@@ -3,7 +3,9 @@ int member1;
 int var1;
     int getMax();
 };
+class x{
 
+};
 class a:x{
 };
 class InheritedUtility:a {
@@ -28,6 +30,7 @@ int getMin(int a[3],int b){
 
 program {
     int array[3];
+    int maxValue;
     int maxValue;
     for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
      if(array[idx] < maxValue + 1 / 8 or idx) then {

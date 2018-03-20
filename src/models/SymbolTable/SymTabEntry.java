@@ -1,5 +1,8 @@
 package models.SymbolTable;
 
+import models.AST.IdNode;
+import models.AST.Node;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,7 @@ public class SymTabEntry {
 	public String returnType;
 	public String extraData;
 	public List<SymTabEntry> multiLevelInheritedSymTab =new ArrayList<>();
-
+	public Node createdFromNode=new IdNode("");
 	public SymTabEntry(String p_entry){
 		m_entry = p_entry;
 	}

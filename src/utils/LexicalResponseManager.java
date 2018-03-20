@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 class ErrorMessage{
@@ -16,6 +17,22 @@ class ErrorMessage{
     private int lineNum;
     private int colNum;
     private String message;
+
+    public String getType() {
+        return type;
+    }
+
+    public int getLineNum() {
+        return lineNum;
+    }
+
+    public int getColNum() {
+        return colNum;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 
     public ErrorMessage(String type, int lineNum, int colNum, String message) {
         this.type = type;
@@ -55,17 +72,45 @@ public class LexicalResponseManager {
 
     }
 
+    public void sortErrorMessageListBasedOnLineNum(){
+        errorMessageList.sort(new Comparator<ErrorMessage>() {
+            @Override
+            public int compare(ErrorMessage o1, ErrorMessage o2) {
+                return o1.getLineNum()-o2.getLineNum();
+            }
+        });
+    }
+
     public void addErrorMessage(int lineNum,int colNum,String errorType,String message){
         System.out.println(errorType+" Error at "+lineNum+":"+colNum+" :"+message);
         ErrorMessage errorMessage = new ErrorMessage(errorType,lineNum,colNum,message);
         errorMessageList.add(errorMessage);
     }
 
+    public void finalWriteErroListToFile(){
+        sortErrorMessageListBasedOnLineNum();
+        for(ErrorMessage errorMessage : errorMessageList){
+            if(errorMessage.getLineNum()>0) {
+                errorWriterFile.print(errorMessage.getLineNum());
+                if(errorMessage.getColNum()>0) {
+                    errorWriterFile.print(":");
+                    errorWriterFile.print(errorMessage.getColNum());
+                }
+            }
+            errorWriterFile.print(",");
+            errorWriterFile.print(errorMessage.getType());
+            errorWriterFile.print(",");
+            errorWriterFile.print(errorMessage.getMessage());
+            errorWriterFile.println();
+        }
+    }
+
     public void finisheWriting() {
         tokenWriterFile.close();
         aTOccWriterFile.close();
-        errorWriterFile.close();
         derivationWriterFile.close();
+        finalWriteErroListToFile();
+        errorWriterFile.close();
     }
 
     public void addDerivationToFIle(List<String> dataList) {
@@ -77,40 +122,19 @@ public class LexicalResponseManager {
 
     public void writeSyntacticalMissingError(String expected,Token token) {
         if (token != null) {
-            errorWriterFile.print("Syntax Error ");
-            errorWriterFile.print(",");
-            errorWriterFile.print("Expected: "+expected+" but found: "+token.getTokenValue());
-            errorWriterFile.print(",");
-            errorWriterFile.print(token.getLineNumber());
-            errorWriterFile.print(":");
-            errorWriterFile.print(token.getColumnNumber());
-            errorWriterFile.println();
+            addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Syntax Error","Expected: "+expected+" but found: "+token.getTokenValue());
         }
     }
     public void writeSyntacticalError(Token token) {
         if (token != null) {
-            errorWriterFile.print("Syntax Error ");
-            errorWriterFile.print(",");
-            errorWriterFile.print(token.getTokenValue());
-            errorWriterFile.print(",");
-            errorWriterFile.print(token.getLineNumber());
-            errorWriterFile.print(":");
-            errorWriterFile.print(token.getColumnNumber());
-            errorWriterFile.println();
+            addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Syntax Error",token.getTokenValue());
         }
     }
 
     public void writeLexicalResponseToFile(Token token) {
         if (token != null) {
             if (token.getTokenType() == TokenType.INVALID_IDENTIFIER || token.getTokenType() == TokenType.INVALID_NUMBER) {
-                errorWriterFile.print(token.getTokenType().getTokenType());
-                errorWriterFile.print(",");
-                errorWriterFile.print(token.getTokenValue());
-                errorWriterFile.print(",");
-                errorWriterFile.print(token.getLineNumber());
-                errorWriterFile.print(":");
-                errorWriterFile.print(token.getColumnNumber());
-                errorWriterFile.println();
+                addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Syntax Error",token.getTokenValue());
                 return;
             }
 

@@ -35,7 +35,8 @@ public class SymTabCreationVisitor extends Visitor {
                 for (SymTabEntry symTab : node.symtab.m_symlist) {
                     try {
                         if (symTab.symbolType == SymTabEntry.SymbolType.CLASS && symTab.m_subtable.m_name.equals(classelt.symtabentry.m_subtable.m_name)) {
-                            LexicalResponseManager.getInstance().addErrorMessage(-1,-1,"SemanticError","Class multiple declaration :"+symTab.m_subtable.m_name);
+                            classelt.symtabentry.createdFromNode.generatePosition();
+                            LexicalResponseManager.getInstance().addErrorMessage(classelt.symtabentry.createdFromNode.lineNumber,classelt.symtabentry.createdFromNode.colNumber,"SemanticError","Class multiple declaration :"+symTab.m_subtable.m_name);
                         }
                     }catch (Exception ex){
                     }
@@ -106,7 +107,8 @@ public class SymTabCreationVisitor extends Visitor {
                 }
                 symTabEntry.multiLevelInheritedSymTab = allInheritedSymTab;
                 if(isCircular){
-                    LexicalResponseManager.getInstance().addErrorMessage(0,0,"SemanticError","Circular class dependencies found In class inheritance :"+symTabEntry.m_entry);
+                    symTabEntry.createdFromNode.generatePosition();
+                    LexicalResponseManager.getInstance().addErrorMessage(symTabEntry.createdFromNode.lineNumber,symTabEntry.createdFromNode.colNumber,"SemanticError","Circular class dependencies found In class inheritance :"+symTabEntry.m_entry);
                 }
             }
         }
@@ -136,7 +138,8 @@ public class SymTabCreationVisitor extends Visitor {
                     for (SymTabEntry inheritedTabEntry : tabEntry.multiLevelInheritedSymTab) {
                         for (SymTabEntry inheritedTable : inheritedTabEntry.m_subtable.m_symlist) {
                             if (inheritedTable.m_entry.equals(currentClassSymTab.m_entry)) {
-                                LexicalResponseManager.getInstance().addErrorMessage(0, 0, "Semantic Warning", "Shadowed variable::" + currentClassSymTab.m_entry + " in Class:"+tabEntry.m_subtable.m_name+" Already declared in:" + inheritedTabEntry.m_subtable.m_name);
+                                currentClassSymTab.createdFromNode.generatePosition();
+                                LexicalResponseManager.getInstance().addErrorMessage(currentClassSymTab.createdFromNode.lineNumber, currentClassSymTab.createdFromNode.colNumber, "Semantic Warning", "Shadowed variable:: Class: "+tabEntry.m_subtable.m_name+" : " + currentClassSymTab.m_entry +" Already declared in Class: " + inheritedTabEntry.m_subtable.m_name);
                             }
                         }
                     }
@@ -174,7 +177,9 @@ public class SymTabCreationVisitor extends Visitor {
 				node.symtab.addEntry(stat.symtabentry);*/
             if (stat.getNodeCategory().equals("statement") && stat.getChildren().get(0).getNodeCategory().equals("forStat")) {
                 SymTab table = stat.getChildren().get(0).symtab;
-                node.symtab.addEntry("For:", table);
+                SymTabEntry symTabEntry =new SymTabEntry("For:", table);
+                symTabEntry.createdFromNode = node;
+                node.symtab.addEntry(symTabEntry);
             }
         }
     }
@@ -223,6 +228,7 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.symbolName = node.getChildren().get(2).getData();
         node.symtabentry.returnType = node.getChildren().get(0).getData();
         node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
+        node.symtabentry.createdFromNode = node;
 
 		/*for (Node param : node.getChildren().get(3).getChildren())
 		node.symtabentry.m_subtable.addEntry(param.symtabentry);*/
@@ -243,6 +249,7 @@ public class SymTabCreationVisitor extends Visitor {
         // create the symbol table entry for the class
         node.symtabentry = new SymTabEntry("class:" + classname, node.symtab);
         node.symtabentry.symbolType = SymTabEntry.SymbolType.CLASS;
+        node.symtabentry.createdFromNode = node;
     }
 
     ;
@@ -264,6 +271,7 @@ public class SymTabCreationVisitor extends Visitor {
         symTabEntry.extraData = node.getChildren().get(0).getData(); // type
         symTabEntry.symbolName = node.getChildren().get(1).getData(); // var name
         symTabEntry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+        symTabEntry.createdFromNode = node;
 
         node.symtab.addEntry(symTabEntry);
         node.symtabentry = new SymTabEntry("For:", node.symtab);
@@ -295,6 +303,7 @@ public class SymTabCreationVisitor extends Visitor {
         // it will be picked-up by another node above later
         node.symtabentry = new SymTabEntry(declrecstring, null);
         node.setType(type);
+        node.symtabentry.createdFromNode = node;
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
         node.symtabentry.varDimensionSize = node.getChildren().get(2).getChildren().size();
@@ -329,6 +338,7 @@ public class SymTabCreationVisitor extends Visitor {
         // first, get the table and adapt its name to the function
         node.symtabentry = new SymTabEntry(declrecstring, null);
         node.symtabentry.extraData = extraData;
+        node.symtabentry.createdFromNode = node;
         node.symtabentry.symbolName = node.getChildren().get(1).getData();
         node.symtabentry.returnType = node.getChildren().get(0).getData();
         node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
@@ -350,6 +360,7 @@ public class SymTabCreationVisitor extends Visitor {
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
         node.symtabentry = new SymTabEntry(declrecstring, null);
+        node.symtabentry.createdFromNode = node;
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
         node.symtabentry.varDimensionSize = node.getChildren().get(2).getChildren().size();

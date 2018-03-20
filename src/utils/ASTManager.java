@@ -51,6 +51,10 @@ public class ASTManager {
                     Node classList = new ClassListNode();
                     List<Node> childNodeList = new ArrayList<>();
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("classDecl"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            classList.lineNumber = semanticStack.peek().lineNumber;
+                            classList.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     classList.addAllChildInReverse(childNodeList);
@@ -63,6 +67,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("funcDef"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            functionListNode.lineNumber = semanticStack.peek().lineNumber;
+                            functionListNode.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     functionListNode.addAllChildInReverse(childNodeList);
@@ -98,6 +106,10 @@ public class ASTManager {
                         childNodeList.add(semanticStack.pop());
                     }
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("varDecl"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            memberList.lineNumber = semanticStack.peek().lineNumber;
+                            memberList.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
 
                     }
@@ -112,6 +124,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("id"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            inherList.lineNumber = semanticStack.peek().lineNumber;
+                            inherList.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     inherList.addAllChildInReverse(childNodeList);
@@ -127,6 +143,8 @@ public class ASTManager {
                     Node idNode = semanticStack.pop();
                     Node scopeSpec = new ScopeSpecNode(idNode.getData());
                     scopeSpec.setNodeCategory("scopeSpec");
+                    scopeSpec.lineNumber = idNode.lineNumber;
+                    scopeSpec.colNumber = idNode.colNumber;
                     semanticStack.push(scopeSpec);
                     break;
                 }
@@ -135,6 +153,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("num"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            dimListNode.lineNumber = semanticStack.peek().lineNumber;
+                            dimListNode.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     dimListNode.addAllChildInReverse(childNodeList);
@@ -147,6 +169,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("fparam"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            fParamListNode.lineNumber = semanticStack.peek().lineNumber;
+                            fParamListNode.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     fParamListNode.addAllChildInReverse(childNodeList);
@@ -159,6 +185,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("arithExpr"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            indexListNode.lineNumber = semanticStack.peek().lineNumber;
+                            indexListNode.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     indexListNode.addAllChildInReverse(childNodeList);
@@ -172,6 +202,10 @@ public class ASTManager {
                     Node aParams = new AParamsNode();
                     List<Node> childNodeList = new ArrayList<>();
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("expr"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            aParams.lineNumber = semanticStack.peek().lineNumber;
+                            aParams.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     aParams.addAllChildInReverse(childNodeList);
@@ -208,6 +242,8 @@ public class ASTManager {
                     Node arithExprNode = (semanticStack.pop());
                     Node factorNotNode = new FactorNode(arithExprNode);
                     factorNotNode.setNodeCategory("factor");
+                    factorNotNode.lineNumber = arithExprNode.lineNumber;
+                    factorNotNode.colNumber = arithExprNode.colNumber;
                     semanticStack.push(factorNotNode);
                     break;
                 }
@@ -215,6 +251,8 @@ public class ASTManager {
                     Node factor = (semanticStack.pop());
                     Node factorNotNode = new FactorNode("not", factor);
                     factorNotNode.setNodeCategory("factor");
+                    factorNotNode.lineNumber = factor.lineNumber;
+                    factorNotNode.colNumber = factor.colNumber;
                     semanticStack.push(factorNotNode);
                     break;
                 }
@@ -279,6 +317,8 @@ public class ASTManager {
                     //TODO factor should not be come here it should automatically set as arithexpr or relexpr
                     Node expNode = new ExprNode();
                     if (semanticStack.peek().getNodeCategory().equals("arithExpr") || semanticStack.peek().getNodeCategory().equals("relExpr") || (semanticStack.peek().getNodeCategory().equals("factor"))) {
+                        expNode.lineNumber = semanticStack.peek().lineNumber;
+                        expNode.colNumber = semanticStack.peek().colNumber;
                         expNode.addChild(semanticStack.pop());
                     }
                     expNode.setNodeCategory("expr");
@@ -314,6 +354,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("varElement"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            varNode.lineNumber = semanticStack.peek().lineNumber;
+                            varNode.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     varNode.addAllChildInReverse(childNodeList);
@@ -336,6 +380,8 @@ public class ASTManager {
                     Node multOpOrFactorNode = semanticStack.pop();
                     Node termNode = new TermNode(multOpOrFactorNode);
                     termNode.setNodeCategory("term");
+                    termNode.lineNumber = multOpOrFactorNode.lineNumber;
+                    termNode.colNumber = multOpOrFactorNode.colNumber;
                     semanticStack.push(termNode);
                     break;
                 }
@@ -424,6 +470,8 @@ public class ASTManager {
                         exprNode = (semanticStack.pop());
                     }
                     Node ifStatNode = new IfStatNode(exprNode, ifStatBlockNode, elseStatBlockNode);
+                    ifStatNode.lineNumber = exprNode.lineNumber;
+                    ifStatNode.colNumber = exprNode.colNumber;
                     ifStatNode.setNodeCategory("ifStat");
                     semanticStack.push(ifStatNode);
                     break;
@@ -458,6 +506,8 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_GET_STAT": {
                     Node getStatNode = new GetStatNode();
                     getStatNode.setNodeCategory("getStat");
+                    getStatNode.lineNumber = semanticStack.peek().lineNumber;
+                    getStatNode.colNumber = semanticStack.peek().colNumber;
                     getStatNode.addChild(semanticStack.pop());
                     semanticStack.push(getStatNode);
                     break;
@@ -465,6 +515,8 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_PUT_STAT": {
                     Node putStatNode = new PutStatNode();
                     putStatNode.setNodeCategory("putStat");
+                    putStatNode.lineNumber = semanticStack.peek().lineNumber;
+                    putStatNode.colNumber = semanticStack.peek().colNumber;
                     putStatNode.addChild(semanticStack.pop());
                     semanticStack.push(putStatNode);
                     break;
@@ -472,6 +524,8 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_RETURN_STAT": {
                     Node returnStat = new ReturnStatNode();
                     returnStat.setNodeCategory("returnStat");
+                    returnStat.lineNumber = semanticStack.peek().lineNumber;
+                    returnStat.colNumber = semanticStack.peek().colNumber;
                     returnStat.addChild(semanticStack.pop());
                     semanticStack.push(returnStat);
                     break;
@@ -480,6 +534,8 @@ public class ASTManager {
                     // TODO also possible solution : semanticStack.peek().setNodeCategory("statement");
 
                     Node statementNode = new StatementNode();
+                    statementNode.lineNumber = semanticStack.peek().lineNumber;
+                    statementNode.colNumber = semanticStack.peek().colNumber;
                     statementNode.setNodeCategory("statement");
                     statementNode.addChild(semanticStack.pop());
                     semanticStack.push(statementNode);
@@ -496,6 +552,10 @@ public class ASTManager {
                     List<Node> childNodeList = new ArrayList<>();
 
                     while (semanticStack.size() > 0 && (semanticStack.peek().getNodeCategory().equals("statement") || semanticStack.peek().getNodeCategory().equals("varDecl"))) {
+                        if(semanticStack.peek().lineNumber>0) {
+                            stateBlock.lineNumber = semanticStack.peek().lineNumber;
+                            stateBlock.colNumber = semanticStack.peek().colNumber;
+                        }
                         childNodeList.add(semanticStack.pop());
                     }
                     stateBlock.addAllChildInReverse(childNodeList);
@@ -516,6 +576,8 @@ public class ASTManager {
                     Node leftChild = semanticStack.pop();
 
                     Node assignStatNode = new AssignStatNode(leftChild, rightChild);
+                    assignStatNode.lineNumber = leftChild.lineNumber;
+                    assignStatNode.colNumber = leftChild.colNumber;
                     assignStatNode.setNodeCategory("assignStat");
                     semanticStack.push(assignStatNode);
                     break;

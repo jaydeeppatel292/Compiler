@@ -19,13 +19,24 @@ public class Main {
 
         boolean success = Parser.getInstance().parse();
 
+        startSecondPhase();
 
+        if(success){
+            System.out.println("Successfully Parsed Input");
+        }else{
+            System.out.println("Error while parsing Input");
+        }
+        LexicalResponseManager.getInstance().finisheWriting();
+    }
+
+
+
+
+    public static void startSecondPhase(){
         if(ASTManager.getInstance().getProgNode()==null){
             System.out.println("Could not able to create AST for given program!");
-            // Report Error ..
             return;
         }
-
         SymTabCreationVisitor STCVisitor = new SymTabCreationVisitor();
 
         ASTManager.getInstance().getProgNode().accept(STCVisitor);
@@ -47,14 +58,7 @@ public class Main {
 
         System.out.println("==TABLE PRINTED=======");
 
-        if(success){
-            System.out.println("Successfully Parsed Input");
-        }else{
-            System.out.println("Error while parsing Input");
-        }
-        LexicalResponseManager.getInstance().finisheWriting();
     }
-
     public static void initializeParser(String[] args) {
 
         createRequiredFolders();
