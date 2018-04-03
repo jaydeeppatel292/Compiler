@@ -8,6 +8,7 @@ import utils.LexicalResponseManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Visitor to create symbol tables and their entries.
@@ -31,14 +32,14 @@ public class SymTabCreationVisitor extends Visitor {
         // for classes, loop over all class declaration nodes
         for (Node classelt : node.getChildren().get(0).getChildren()) {
             //add the symbol table entry of each class in the global symbol table
-            if(classelt.symtabentry.symbolType == SymTabEntry.SymbolType.CLASS) {
+            if (classelt.symtabentry.symbolType == SymTabEntry.SymbolType.CLASS) {
                 for (SymTabEntry symTab : node.symtab.m_symlist) {
                     try {
                         if (symTab.symbolType == SymTabEntry.SymbolType.CLASS && symTab.m_subtable.m_name.equals(classelt.symtabentry.m_subtable.m_name)) {
                             classelt.symtabentry.createdFromNode.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(classelt.symtabentry.createdFromNode.lineNumber,classelt.symtabentry.createdFromNode.colNumber,"SemanticError","Class multiple declaration :"+symTab.m_subtable.m_name);
+                            LexicalResponseManager.getInstance().addErrorMessage(classelt.symtabentry.createdFromNode.lineNumber, classelt.symtabentry.createdFromNode.colNumber, "SemanticError", "Class multiple declaration :" + symTab.m_subtable.m_name);
                         }
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                     }
                 }
             }
@@ -70,82 +71,83 @@ public class SymTabCreationVisitor extends Visitor {
                 if (!isClassDeclFound) {
                     // Report symentic error func decl not found ...
                     fndefelt.generatePosition();
-                    LexicalResponseManager.getInstance().addErrorMessage(fndefelt.lineNumber,fndefelt.colNumber,"SemanticError","Could not resolve symbol :"+fndefelt.getChildren().get(1).getData());
+                    LexicalResponseManager.getInstance().addErrorMessage(fndefelt.lineNumber, fndefelt.colNumber, "SemanticError", "Could not resolve symbol :" + fndefelt.getChildren().get(1).getData());
                 }
             }
         }
 
         // add inherited symbol list in class symtab entry ::
-        for (Node classNode : node.getChildren().get(0).getChildren()){
-            for(Node inheritedNode : classNode.getChildren().get(1).getChildren()){
+        for (Node classNode : node.getChildren().get(0).getChildren()) {
+            for (Node inheritedNode : classNode.getChildren().get(1).getChildren()) {
                 boolean clasSymTabFound = false;
-                for(SymTabEntry symTabEntry : node.symtab.m_symlist){
-                    if(symTabEntry.symbolType== SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable !=null && symTabEntry.m_subtable.m_name.equals(inheritedNode.getData())){
+                for (SymTabEntry symTabEntry : node.symtab.m_symlist) {
+                    if (symTabEntry.symbolType == SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable != null && symTabEntry.m_subtable.m_name.equals(inheritedNode.getData())) {
                         // Circular dependence at first level: Check if already entry exist
-                        if(classNode.symtabentry.inheritedSymTab.contains(symTabEntry.m_subtable)){
+                        if (classNode.symtabentry.inheritedSymTab.contains(symTabEntry.m_subtable)) {
                             classNode.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"SemanticError","Circular class dependencies found for "+inheritedNode.getData() +" In class inheritance :"+classNode.getChildren().get(0).getData());
-                        }else{
+                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "SemanticError", "Circular class dependencies found for " + inheritedNode.getData() + " In class inheritance :" + classNode.getChildren().get(0).getData());
+                        } else {
                             classNode.symtabentry.addInheritedSymTab(symTabEntry);
-                            clasSymTabFound  = true;
+                            clasSymTabFound = true;
                         }
                     }
                 }
-                if(!clasSymTabFound){
+                if (!clasSymTabFound) {
                     classNode.generatePosition();
-                    LexicalResponseManager.getInstance().addErrorMessage(classNode.lineNumber,classNode.colNumber,"SemanticError","Could not resolve symbol "+inheritedNode.getData());
+                    LexicalResponseManager.getInstance().addErrorMessage(classNode.lineNumber, classNode.colNumber, "SemanticError", "Could not resolve symbol " + inheritedNode.getData());
                 }
             }
         }
 
         // check for circular class dependence at multi level
-        for(SymTabEntry symTabEntry : node.symtab.m_symlist) {
-            if(symTabEntry.symbolType== SymTabEntry.SymbolType.CLASS) {
-                boolean isCircular=false;
+        for (SymTabEntry symTabEntry : node.symtab.m_symlist) {
+            if (symTabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
+                boolean isCircular = false;
                 List<SymTabEntry> allInheritedSymTab = new ArrayList<>();
-                for(SymTabEntry symTab : symTabEntry.inheritedSymTab){
+                for (SymTabEntry symTab : symTabEntry.inheritedSymTab) {
                     List<SymTabEntry> symTabEntryList = new ArrayList<>();
                     symTabEntryList.add(symTab);
-                    if(isCircularDependence(symTab,symTabEntryList)){
+                    if (isCircularDependence(symTab, symTabEntryList)) {
                         isCircular = true;
                     }
-                    addUniqueSymTabFromInheritence(allInheritedSymTab,symTabEntryList);
+                    addUniqueSymTabFromInheritence(allInheritedSymTab, symTabEntryList);
                 }
                 symTabEntry.multiLevelInheritedSymTab = allInheritedSymTab;
-                if(isCircular){
+                if (isCircular) {
                     symTabEntry.createdFromNode.generatePosition();
-                    LexicalResponseManager.getInstance().addErrorMessage(symTabEntry.createdFromNode.lineNumber,symTabEntry.createdFromNode.colNumber,"SemanticError","Circular class dependencies found In class inheritance :"+symTabEntry.m_entry);
+                    LexicalResponseManager.getInstance().addErrorMessage(symTabEntry.createdFromNode.lineNumber, symTabEntry.createdFromNode.colNumber, "SemanticError", "Circular class dependencies found In class inheritance :" + symTabEntry.m_entry);
                 }
             }
         }
 
 
-            // for the program function, get its local symbol table from node 2 and create an entry for it in the global symbol table
+        // for the program function, get its local symbol table from node 2 and create an entry for it in the global symbol table
         // first, get the table and change its name
         SymTab table = node.getChildren().get(2).symtab;
         table.m_name = "program";
         node.symtab.addEntry("function:program", table);
         checkShadowedVarDecl(node.symtab);
     }
+
     ;
 
-    public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList,List<SymTabEntry> fromSymTabEntryList){
-        for(SymTabEntry symTabEntry : fromSymTabEntryList){
-            if(!intoSymTabEntryList.contains(symTabEntry)){
+    public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList, List<SymTabEntry> fromSymTabEntryList) {
+        for (SymTabEntry symTabEntry : fromSymTabEntryList) {
+            if (!intoSymTabEntryList.contains(symTabEntry)) {
                 intoSymTabEntryList.add(symTabEntry);
             }
         }
     }
 
-    public void checkShadowedVarDecl(SymTab symTab){
-        for(SymTabEntry tabEntry : symTab.m_symlist) {
-            if(tabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
-                for(SymTabEntry currentClassSymTab : tabEntry.m_subtable.m_symlist) {
+    public void checkShadowedVarDecl(SymTab symTab) {
+        for (SymTabEntry tabEntry : symTab.m_symlist) {
+            if (tabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
+                for (SymTabEntry currentClassSymTab : tabEntry.m_subtable.m_symlist) {
                     for (SymTabEntry inheritedTabEntry : tabEntry.multiLevelInheritedSymTab) {
                         for (SymTabEntry inheritedTable : inheritedTabEntry.m_subtable.m_symlist) {
                             if (inheritedTable.m_entry.equals(currentClassSymTab.m_entry)) {
                                 currentClassSymTab.createdFromNode.generatePosition();
-                                LexicalResponseManager.getInstance().addErrorMessage(currentClassSymTab.createdFromNode.lineNumber, currentClassSymTab.createdFromNode.colNumber, "Semantic Warning", "Shadowed variable:: Class: "+tabEntry.m_subtable.m_name+" : " + currentClassSymTab.m_entry +" Already declared in Class: " + inheritedTabEntry.m_subtable.m_name);
+                                LexicalResponseManager.getInstance().addErrorMessage(currentClassSymTab.createdFromNode.lineNumber, currentClassSymTab.createdFromNode.colNumber, "Semantic Warning", "Shadowed variable:: Class: " + tabEntry.m_subtable.m_name + " : " + currentClassSymTab.m_entry + " Already declared in Class: " + inheritedTabEntry.m_subtable.m_name);
                             }
                         }
                     }
@@ -154,15 +156,15 @@ public class SymTabCreationVisitor extends Visitor {
         }
     }
 
-    public boolean isCircularDependence(SymTabEntry symTabEntry,List<SymTabEntry> classSymListTraversal){
+    public boolean isCircularDependence(SymTabEntry symTabEntry, List<SymTabEntry> classSymListTraversal) {
         boolean isCircularDependence = false;
-        for(SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab){
-            if(classSymListTraversal.contains(inheritedSymTab)){
+        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
+            if (classSymListTraversal.contains(inheritedSymTab)) {
                 return true;
             }
             classSymListTraversal.add(inheritedSymTab);
         }
-        for(SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
+        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
             if (isCircularDependence(inheritedSymTab, classSymListTraversal)) {
                 return true;
             }
@@ -183,14 +185,13 @@ public class SymTabCreationVisitor extends Visitor {
 				node.symtab.addEntry(stat.symtabentry);*/
             if (stat.getNodeCategory().equals("statement") && stat.getChildren().get(0).getNodeCategory().equals("forStat")) {
                 SymTab table = stat.getChildren().get(0).symtab;
-                SymTabEntry symTabEntry =new SymTabEntry("For:", table);
+                SymTabEntry symTabEntry = new SymTabEntry("For:", table);
                 symTabEntry.createdFromNode = node;
                 node.symtab.addEntry(symTabEntry);
             }
         }
     }
 
-    ;
 
     public void visit(FuncDefNode node) {
         System.out.println("visiting FuncDefNode");
@@ -205,13 +206,13 @@ public class SymTabCreationVisitor extends Visitor {
         // function name
         declrecstring += node.getChildren().get(2).getData() + ':';
         // loop over function parameter list
-        String extraData="";
+        String extraData = "";
         for (Node param : node.getChildren().get(3).getChildren()) {
             extraData += param.getChildren().get(0).getData();
-            if(param.getChildren().get(2).getChildren().size()>0) {
-                extraData += ":" + param.getChildren().get(2).getChildren().size() ;
+            if (param.getChildren().get(2).getChildren().size() > 0) {
+                extraData += ":" + param.getChildren().get(2).getChildren().size();
             }
-            extraData +="_";
+            extraData += "_";
             // parameter type
             declrecstring += param.getChildren().get(0).getData() + ':';
             // parameter name
@@ -273,7 +274,7 @@ public class SymTabCreationVisitor extends Visitor {
         // get the id from the second child node and aggregate here
         declrecstring += node.getChildren().get(1).getData() + ':';
 
-        SymTabEntry  symTabEntry = new SymTabEntry(declrecstring);
+        SymTabEntry symTabEntry = new SymTabEntry(declrecstring);
         symTabEntry.extraData = node.getChildren().get(0).getData(); // type
         symTabEntry.symbolName = node.getChildren().get(1).getData(); // var name
         symTabEntry.symbolType = SymTabEntry.SymbolType.VARIABLE;
@@ -286,6 +287,7 @@ public class SymTabCreationVisitor extends Visitor {
 
     public void visit(VarDeclNode node) {
         System.out.println("visiting VarDeclNode");
+        List<Integer> dimList = new ArrayList<>();
         // aggregate information from the subtree
         String declrecstring;
         String type = "";
@@ -299,10 +301,11 @@ public class SymTabCreationVisitor extends Visitor {
         // loop over the list of dimension nodes and aggregate here
         for (Node dim : node.getChildren().get(2).getChildren()) {
             declrecstring += dim.getData() + ':';
+            dimList.add(Integer.parseInt(dim.getData()));
             type += "[" + dim.getData() + "]";
             if (!dim.getType().equals(Terminal.INT.getData())) {
                 dim.generatePosition();
-                LexicalResponseManager.getInstance().addErrorMessage(dim.lineNumber,dim.colNumber,"SemanticError","Incompatible types: Required Int: Found"+dim.getType());
+                LexicalResponseManager.getInstance().addErrorMessage(dim.lineNumber, dim.colNumber, "SemanticError", "Incompatible types: Required Int: Found" + dim.getType());
             }
         }
         // create the symbol table entry for this variable
@@ -313,7 +316,19 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
         node.symtabentry.varDimensionSize = node.getChildren().get(2).getChildren().size();
+        node.symtabentry.dimList = dimList;
+
         node.symtabentry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+        switch (node.getChildren().get(0).getData()) {
+            case "int":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
+                break;
+            case "float":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.FLOAT;
+                break;
+            default:
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.CLASS;
+        }
     }
 
     public void visit(FuncDeclNode node) {
@@ -351,6 +366,7 @@ public class SymTabCreationVisitor extends Visitor {
     }
 
     public void visit(FParamNode node) {
+        List<Integer> dimList = new ArrayList<>();
         System.out.println("visiting FParamNode");
         // aggregate information from the subtree
         String declrecstring;
@@ -361,8 +377,10 @@ public class SymTabCreationVisitor extends Visitor {
         // get the id from the second child node and aggregate here
         declrecstring += node.getChildren().get(1).getData() + ':';
         // loop over the list of dimension nodes and aggregate here
-        for (Node dim : node.getChildren().get(2).getChildren())
+        for (Node dim : node.getChildren().get(2).getChildren()) {
             declrecstring += dim.getData() + ':';
+            dimList.add(Integer.parseInt(dim.getData()));
+        }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
         node.symtabentry = new SymTabEntry(declrecstring, null);
@@ -370,9 +388,11 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
         node.symtabentry.varDimensionSize = node.getChildren().get(2).getChildren().size();
+        node.symtabentry.dimList = dimList;
         node.symtabentry.symbolType = SymTabEntry.SymbolType.PARAMETER;
 
     }
+
 
     public void addAllSymbolInParentTable(SymTab symTab, Node parent, List<Node> childNodeList) {
         for (Node member : childNodeList) {
@@ -381,7 +401,7 @@ public class SymTabCreationVisitor extends Visitor {
                 for (SymTabEntry symTabEntry : parent.symtab.m_symlist) {
                     if (symTabEntry.m_entry.equals(member.symtabentry.m_entry)) {
                         member.generatePosition();
-                        LexicalResponseManager.getInstance().addErrorMessage(member.lineNumber,member.colNumber,"SemanticError","Multiple declaration of :" + member.symtabentry.m_entry);
+                        LexicalResponseManager.getInstance().addErrorMessage(member.lineNumber, member.colNumber, "SemanticError", "Multiple declaration of :" + member.symtabentry.m_entry);
                         System.out.println("Multiple declaration of :" + member.symtabentry.m_entry);
                         isSymAlreadyDeclared = true;
                     }

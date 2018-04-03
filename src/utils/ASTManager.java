@@ -609,6 +609,7 @@ public class ASTManager {
                 semanticStack.push(node);
             } else if (tokenType.equals(Terminal.INT.getData()) || tokenType.equals(Terminal.FLOAT.getData())) {
                 Node typeNode = new TypeNode(tokenType);
+                typeNode.setType(tokenType);
                 typeNode.setNodeCategory("type");
                 typeNode.lineNumber = token.getLineNumber();
                 typeNode.colNumber = token.getColumnNumber();

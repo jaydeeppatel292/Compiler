@@ -5,8 +5,9 @@ public class SymTab {
 	public String m_name = null;
 	public ArrayList<SymTabEntry> m_symlist = null; 
     public static int tablelevel = 0;
-	
-	public SymTab(){
+	public int m_size;
+
+    public SymTab(){
 		m_name = null;
 		m_symlist = new ArrayList<SymTabEntry>();
 	}
@@ -29,7 +30,7 @@ public class SymTab {
 		for (int i = 0; i < m_symlist.size(); i++){
 			for (int j = 0; j < SymTab.tablelevel; j++)
 				stringtoreturn += toindent;
-			stringtoreturn += m_symlist.get(i).m_entry+"\n";
+			stringtoreturn += m_symlist.get(i).m_entry+" offset:"+m_symlist.get(i).m_offset+"\n";
 			if(m_symlist.get(i).multiLevelInheritedSymTab!=null && m_symlist.get(i).multiLevelInheritedSymTab.size()>0) {
 				stringtoreturn+="Inherited Classes:";
 				for (SymTabEntry symTabEntry : m_symlist.get(i).multiLevelInheritedSymTab) {

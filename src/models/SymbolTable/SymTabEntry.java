@@ -7,18 +7,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SymTabEntry {
-	public String m_entry    = null; 
+	private String m_type;
+	public String m_entry    = null;
 	public SymTab m_subtable = null;
 	public SymbolType symbolType;
+	public SymbolDataType symbolDataType;
 	public int varDimensionSize;
+	public List<Integer> dimList = new ArrayList<>();
 	public String symbolName;
 	public String returnType;
 	public String extraData;
 	public List<SymTabEntry> multiLevelInheritedSymTab =new ArrayList<>();
 	public Node createdFromNode=new IdNode("");
+	public int m_size;
+	public int m_offset;
+
 	public SymTabEntry(String p_entry){
 		m_entry = p_entry;
 	}
+
+
+	public SymTabEntry(SymbolType p_kind, String p_type, String p_name){
+		symbolType = p_kind;
+		m_type = p_type;
+		symbolName = p_name;
+	}
+
 	public List<SymTabEntry> inheritedSymTab=new ArrayList<>();
 	public SymTabEntry(String p_entry, SymTab p_subtable){
 		m_entry = p_entry;		
@@ -32,6 +46,14 @@ public class SymTabEntry {
 		FUNCTION,
 		CLASS,
 		PARAMETER,
-		VARIABLE;
+		VARIABLE,
+		TEMPVAR,
+		LITVAL,
+		RETVAL;
+	}
+	public enum SymbolDataType{
+		INT,
+		FLOAT,
+		CLASS;
 	}
 }

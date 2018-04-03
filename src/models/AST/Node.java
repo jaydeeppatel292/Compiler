@@ -25,6 +25,7 @@ public abstract class Node {
     private String subtreeString   = null;
     public SymTab symtab           = null;
     public SymTabEntry symtabentry = null;
+    public String m_moonVarName;
 
     public Node(String data) {
         this.setData(data);
@@ -71,6 +72,20 @@ public abstract class Node {
         }
         generatePosition(node.parent);
     }
+
+    public SymTab findParentSymTab(Node node){
+        if(node==null){
+            return null;
+        }
+        if(node.getParent()==null){
+            return null;
+        }
+        if(node.getParent().symtab!=null){
+            return node.getParent().symtab;
+        }
+        return findParentSymTab(node.getParent());
+    }
+
 
     public String getNodeCategory() {
         return nodeCategory;
