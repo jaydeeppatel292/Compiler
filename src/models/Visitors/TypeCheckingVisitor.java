@@ -45,6 +45,8 @@ public class TypeCheckingVisitor extends Visitor {
         }
     }
 
+
+
     public void visit(ExprNode node) {
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
@@ -88,6 +90,7 @@ public class TypeCheckingVisitor extends Visitor {
         }
     }
 
+
     public void visit(RelExprNode node) {
         System.out.println("Visiting MultOpNode");
         String leftOperandType = node.getChildren().get(0).getType();
@@ -100,6 +103,7 @@ public class TypeCheckingVisitor extends Visitor {
             LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
         }
     }
+
 
     public void visit(AssignStatNode node) {
         System.out.println("Visiting AssignStatNode");
@@ -308,6 +312,8 @@ public class TypeCheckingVisitor extends Visitor {
         }
     }
 
+
+
     public void visit(AParamsNode node) {
         String type = "";
         for (int i = 0; i < node.getChildren().size(); i++) {
@@ -323,10 +329,150 @@ public class TypeCheckingVisitor extends Visitor {
         }
     }
 
+
+
     public void visit(FCallNode node) {
         if (node.getChildren().size() > 1) {
             node.setType("FCALL#" + node.getChildren().get(0).getData() + "#" + node.getChildren().get(1).getType());
             node.setData(node.getChildren().get(0).getData());
         }
     }
+
+
+
+    @Override
+    public void visit(DimListNode node) {
+
+    }
+
+    @Override
+    public void visit(ForStatNode node) {
+
+    }
+
+    @Override
+    public void visit(FParamListNode node) {
+
+    }
+
+    @Override
+    public void visit(FParamNode node) {
+
+    }
+
+    @Override
+    public void visit(FuncDeclNode node) {
+
+    }
+
+    @Override
+    public void visit(FuncDefListNode node) {
+
+    }
+
+    @Override
+    public void visit(FuncDefNode node) {
+
+    }
+
+    @Override
+    public void visit(GetStatNode node) {
+
+    }
+
+    @Override
+    public void visit(IdNode node) {
+
+    }
+
+    @Override
+    public void visit(IfStatNode node) {
+
+    }
+
+    @Override
+    public void visit(InherListNode node) {
+
+    }
+
+    @Override
+    public void visit(MemberListNode node) {
+
+    }
+    @Override
+    public void visit(FactorSignNode node) {
+
+    }
+
+    @Override
+    public void visit(TypeNode node) {
+
+    }
+
+    @Override
+    public void visit(VarDeclNode node) {
+
+    }
+    @Override
+    public void visit(Node node) {
+
+    }
+
+    @Override
+    public void visit(NumNode node) {
+
+    }
+
+    @Override
+    public void visit(OpNode node) {
+
+    }
+
+    @Override
+    public void visit(ParamListNode node) {
+
+    }
+
+    @Override
+    public void visit(ProgNode node) {
+
+    }
+
+    @Override
+    public void visit(PutStatNode node) {
+
+    }
+    @Override
+    public void visit(ReturnStatNode node) {
+
+    }
+
+    @Override
+    public void visit(ScopeSpecNode node) {
+
+    }
+
+    @Override
+    public void visit(StatBlockNode node) {
+
+    }
+    @Override
+    public void visit(ProgramBlockNode node) {
+
+    }
+
+    @Override
+    public void visit(StatementNode node) {
+
+    }
+    @Override
+    public void visit(ClassListNode node) {
+
+    }
+
+    @Override
+    public void visit(ClassNode node) {
+
+    }
+
 }

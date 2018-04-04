@@ -1,1 +1,18 @@
 Format: TokenLineNumber : TokenColumnNumber , ErrorType , TokenValue
+1:7,SemanticError,Circular class dependencies found In class inheritance :B
+2:9,Semantic Warning,Shadowed variable:: Class: B : localvar:int:a1: Already declared in Class: A
+2:9,Semantic Warning,Shadowed variable:: Class: B : localvar:int:a1: Already declared in Class: B
+3:9,Semantic Warning,Shadowed variable:: Class: B : localvar:int:a2: Already declared in Class: A
+3:9,Semantic Warning,Shadowed variable:: Class: B : localvar:int:a2: Already declared in Class: B
+6:7,SemanticError,Circular class dependencies found In class inheritance :A
+7:9,Semantic Warning,Shadowed variable:: Class: A : localvar:int:a1: Already declared in Class: B
+7:9,Semantic Warning,Shadowed variable:: Class: A : localvar:int:a1: Already declared in Class: A
+8:9,Semantic Warning,Shadowed variable:: Class: A : localvar:int:a2: Already declared in Class: B
+8:9,Semantic Warning,Shadowed variable:: Class: A : localvar:int:a2: Already declared in Class: A
+10:7,SemanticError,Circular class dependencies found In class inheritance :Utility
+11:9,Semantic Warning,Shadowed variable:: Class: Utility : localvar:int:var1: Already declared in Class: Utility
+12:9,Semantic Warning,Shadowed variable:: Class: Utility : localvar:int:var2: Already declared in Class: Utility
+13:9,SemanticError,Multiple declaration of :localvar:int:var2:
+14:7,Semantic Warning,Shadowed variable:: Class: Utility : localvar:A:a: Already declared in Class: Utility
+21:9,SemanticError,Multiple declaration of :localvar:int:var3:3:
+23:9,SemanticError,Multiple declaration of :localvar:int:max:

@@ -113,6 +113,46 @@ public class ComputeMemSizeVisitor extends Visitor {
         }
     }
 
+    @Override
+    public void visit(PutStatNode node) {
+
+    }
+
+    @Override
+    public void visit(RelExprNode node) {
+
+    }
+
+    @Override
+    public void visit(ReturnStatNode node) {
+
+    }
+
+    @Override
+    public void visit(ScopeSpecNode node) {
+
+    }
+
+    @Override
+    public void visit(StatBlockNode node) {
+
+    }
+
+    @Override
+    public void visit(StatementNode node) {
+
+    }
+
+    @Override
+    public void visit(TermNode node) {
+
+    }
+
+    @Override
+    public void visit(TypeNode node) {
+
+    }
+
     public void visit(ClassNode p_node) {
         // compute total size and offsets along the way
         // this should be node on all nodes that represent
@@ -121,6 +161,31 @@ public class ComputeMemSizeVisitor extends Visitor {
             entry.m_offset = p_node.symtab.m_size - entry.m_size;
             p_node.symtab.m_size -= entry.m_size;
         }
+    }
+
+    @Override
+    public void visit(DataMemberNode node) {
+
+    }
+
+    @Override
+    public void visit(DimListNode node) {
+
+    }
+
+    @Override
+    public void visit(ExprNode node) {
+
+    }
+
+    @Override
+    public void visit(FactorNode node) {
+
+    }
+
+    @Override
+    public void visit(FactorSignNode node) {
+
     }
 
     public void visit(FuncDefNode p_node) {
@@ -135,6 +200,36 @@ public class ComputeMemSizeVisitor extends Visitor {
             entry.m_offset = p_node.symtab.m_size - entry.m_size;
             p_node.symtab.m_size -= entry.m_size;
         }
+    }
+
+    @Override
+    public void visit(GetStatNode node) {
+
+    }
+
+    @Override
+    public void visit(IdNode node) {
+
+    }
+
+    @Override
+    public void visit(IfStatNode node) {
+
+    }
+
+    @Override
+    public void visit(IndexListNode node) {
+
+    }
+
+    @Override
+    public void visit(InherListNode node) {
+
+    }
+
+    @Override
+    public void visit(MemberListNode node) {
+
     }
 
     public void visit(VarDeclNode p_node) {
@@ -158,12 +253,52 @@ public class ComputeMemSizeVisitor extends Visitor {
 
     }
 
+    @Override
+    public void visit(VarElementNode node) {
+
+    }
+
+    @Override
+    public void visit(VarNode node) {
+
+    }
+
+    @Override
+    public void visit(ProgramBlockNode node) {
+
+    }
+
     public void visit(MultOpNode p_node) {
         p_node.symtabentry.m_size = this.sizeOfEntry(p_node);
     }
 
+    @Override
+    public void visit(Node node) {
+
+    }
+
     public void visit(AddOpNode p_node) {
         p_node.symtabentry.m_size = this.sizeOfEntry(p_node);
+    }
+
+    @Override
+    public void visit(AParamsNode node) {
+
+    }
+
+    @Override
+    public void visit(ArithExprNode node) {
+
+    }
+
+    @Override
+    public void visit(AssignStatNode node) {
+
+    }
+
+    @Override
+    public void visit(ClassListNode node) {
+
     }
 
     // Below are the visit methods for node types for which this visitor does
@@ -174,7 +309,44 @@ public class ComputeMemSizeVisitor extends Visitor {
         p_node.symtabentry.m_size = this.sizeOfEntry(p_node);
     }
 
+    @Override
+    public void visit(OpNode node) {
+
+    }
+
+    @Override
+    public void visit(ParamListNode node) {
+
+    }
+
     public void visit(FCallNode p_node) {
         p_node.symtabentry.m_size = this.sizeOfEntry(p_node);
     }
+
+    @Override
+    public void visit(ForStatNode node) {
+
+    }
+
+    @Override
+    public void visit(FParamListNode node) {
+
+    }
+
+    @Override
+    public void visit(FParamNode node) {
+
+    }
+
+    @Override
+    public void visit(FuncDeclNode node) {
+
+    }
+
+    @Override
+    public void visit(FuncDefListNode node) {
+
+    }
+
+
 }

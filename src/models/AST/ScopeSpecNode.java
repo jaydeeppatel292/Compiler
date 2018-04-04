@@ -24,6 +24,5 @@ public class ScopeSpecNode extends IdNode{
 	 */
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
-		super.accept(visitor);
 	}
 }

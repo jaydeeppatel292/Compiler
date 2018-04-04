@@ -1,9 +1,15 @@
-class A{
+class B:Utility{
     int a1;
     int a2;
 };
-class Utility{
+
+class A: B{
+    int a1;
+    int a2;
+};
+class Utility : A{
     int var1;
+    int var2;
     int var2;
     A a;
 };
@@ -12,6 +18,8 @@ class Utility{
 program {
     Utility utility;
     int var3[3];
+    int var3[3];
+    int max;
     int max;
     float myMax;
     Utility myUtility[3][4];

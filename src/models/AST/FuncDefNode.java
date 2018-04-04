@@ -36,8 +36,6 @@ public class FuncDefNode extends Node {
 	 * the action of the visitor on its children. 
 	 */
 	public void accept(Visitor visitor) {
-		for (Node child : this.getChildren())
-			child.accept(visitor);
 		visitor.visit(this);
 	}
 	

@@ -39,20 +39,19 @@ public class Main {
             System.out.println("Could not able to create AST for given program!");
             return;
         }
-        SymTabCreationVisitor STCVisitor = new SymTabCreationVisitor();
 
-        ASTManager.getInstance().getProgNode().accept(STCVisitor);
+        ASTManager.getInstance().getProgNode().accept(new SymTabCreationVisitor());
 
         System.out.println("==TYPE CHECKING PHASE STARTED======");
 
-        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
+        /*TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
         ASTManager.getInstance().getProgNode().accept(typeCheckingVisitor);
         ASTManager.getInstance().getProgNode().accept(new SymTabTempVarCreationVisitor());
-        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
+        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());*/
 
         System.out.println("==PRINTING TREE======");
 
-        ASTManager.getInstance().getProgNode().print();
+//        ASTManager.getInstance().getProgNode().print();
 
 
         System.out.println("==PRINTING TABLE=====");

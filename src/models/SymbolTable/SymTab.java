@@ -2,6 +2,7 @@ package models.SymbolTable;
 import java.util.ArrayList;
 
 public class SymTab {
+	private SymTab m_uppertable;
 	public String m_name = null;
 	public ArrayList<SymTabEntry> m_symlist = null; 
     public static int tablelevel = 0;
@@ -16,7 +17,15 @@ public class SymTab {
 		m_name = p_name;
 		m_symlist = new ArrayList<SymTabEntry>();
 	}
-	
+
+	public SymTab(int p_level, String p_name, SymTab p_uppertable){
+		tablelevel = p_level;
+		m_name = p_name;
+		m_symlist = new ArrayList<SymTabEntry>();
+		m_uppertable = p_uppertable;
+	}
+
+
 	public void addEntry(SymTabEntry p_entry){
 		m_symlist.add(p_entry);
 	}
