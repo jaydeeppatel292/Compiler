@@ -1,0 +1,119 @@
+===================================================================================
+Node type                 | data  | type      | subtreestring | symtabentry
+===================================================================================
+ProgNode                                                                                             |                   |           |               | 
+  ClassListNode                                                                                      |                   |           |               | 
+    ClassNode                                                                                        |                   |           |               | class:A
+      IdNode                                                                                         | A                 |           |               | 
+      InherListNode                                                                                  |                   |           |               | 
+      MemberListNode                                                                                 |                   |           |               | 
+        VarDeclNode                                                                                  |                   | int       |               | localvar:int:a1:
+          TypeNode                                                                                   | int               | int       |               | 
+          IdNode                                                                                     | a1                |           |               | 
+          DimListNode                                                                                |                   |           |               | 
+        VarDeclNode                                                                                  |                   | int       |               | localvar:int:a2:
+          TypeNode                                                                                   | int               | int       |               | 
+          IdNode                                                                                     | a2                |           |               | 
+          DimListNode                                                                                |                   |           |               | 
+    ClassNode                                                                                        |                   |           |               | class:Utility
+      IdNode                                                                                         | Utility           |           |               | 
+      InherListNode                                                                                  |                   |           |               | 
+      MemberListNode                                                                                 |                   |           |               | 
+        VarDeclNode                                                                                  |                   | int       |               | localvar:int:var1:
+          TypeNode                                                                                   | int               | int       |               | 
+          IdNode                                                                                     | var1              |           |               | 
+          DimListNode                                                                                |                   |           |               | 
+        VarDeclNode                                                                                  |                   | int       |               | localvar:int:var2:
+          TypeNode                                                                                   | int               | int       |               | 
+          IdNode                                                                                     | var2              |           |               | 
+          DimListNode                                                                                |                   |           |               | 
+        VarDeclNode                                                                                  |                   | A         |               | localvar:A:a:
+          IdNode                                                                                     | A                 |           |               | 
+          IdNode                                                                                     | a                 |           |               | 
+          DimListNode                                                                                |                   |           |               | 
+  FuncDefListNode                                                                                    |                   |           |               | 
+  StatBlockNode                                                                                      |                   |           |               | 
+    VarDeclNode                                                                                      |                   | Utility   |               | localvar:Utility:utility:
+      IdNode                                                                                         | Utility           |           |               | 
+      IdNode                                                                                         | utility           |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+    VarDeclNode                                                                                      |                   | int[3]    |               | localvar:int:var3:3:
+      TypeNode                                                                                       | int               | int       |               | 
+      IdNode                                                                                         | var3              |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+        NumNode                                                                                      | 3                 | int       |               | litval:t1 int
+    VarDeclNode                                                                                      |                   | int       |               | localvar:int:max:
+      TypeNode                                                                                       | int               | int       |               | 
+      IdNode                                                                                         | max               |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+    VarDeclNode                                                                                      |                   | float     |               | localvar:float:myMax:
+      TypeNode                                                                                       | float             | float     |               | 
+      IdNode                                                                                         | myMax             |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+    VarDeclNode                                                                                      |                   | Utility[3][4] |               | localvar:Utility:myUtility:3:4:
+      IdNode                                                                                         | Utility           |           |               | 
+      IdNode                                                                                         | myUtility         |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+        NumNode                                                                                      | 3                 | int       |               | litval:t2 int
+        NumNode                                                                                      | 4                 | int       |               | litval:t3 int
+    StatementNode                                                                                    |                   |           |               | 
+      AssignStatNode                                                                                 | =                 | int       |               | 
+        VarNode                                                                                      | max               | int       |               | 
+          VarElementNode                                                                             | max               | DATA#max#0 |               | 
+            DataMemberNode                                                                           | max               | DATA#max#0 |               | 
+              IdNode                                                                                 | max               |           |               | 
+              IndexListNode                                                                          |                   | 0         |               | 
+        ExprNode                                                                                     | +                 | int       |               | 
+          ArithExprNode                                                                              | +                 | int       |               | tempvar:t10 int
+            TermNode                                                                                 | *                 | int       |               | 
+              MultOpNode                                                                             | *                 | int       |               | tempvar:t6 int
+                FactorNode                                                                           | 4                 | int       |               | 
+                  NumNode                                                                            | 4                 | int       |               | litval:t4 int
+                FactorNode                                                                           | 5                 | int       |               | 
+                  NumNode                                                                            | 5                 | int       |               | litval:t5 int
+            TermNode                                                                                 | *                 | int       |               | 
+              MultOpNode                                                                             | *                 | int       |               | tempvar:t9 int
+                FactorNode                                                                           | 5                 | int       |               | 
+                  NumNode                                                                            | 5                 | int       |               | litval:t7 int
+                FactorNode                                                                           | 5                 | int       |               | 
+                  NumNode                                                                            | 5                 | int       |               | litval:t8 int
+    StatementNode                                                                                    |                   |           |               | 
+      AssignStatNode                                                                                 | =                 | float     |               | 
+        VarNode                                                                                      | myMax             | float     |               | 
+          VarElementNode                                                                             | myMax             | DATA#myMax#0 |               | 
+            DataMemberNode                                                                           | myMax             | DATA#myMax#0 |               | 
+              IdNode                                                                                 | myMax             |           |               | 
+              IndexListNode                                                                          |                   | 0         |               | 
+        ExprNode                                                                                     | *                 | float     |               | 
+          ArithExprNode                                                                              | *                 | float     |               | 
+            TermNode                                                                                 | *                 | float     |               | 
+              MultOpNode                                                                             | *                 | float     |               | tempvar:t13 float
+                FactorNode                                                                           | 4.3               | float     |               | 
+                  NumNode                                                                            | 4.3               | float     |               | litval:t11 float
+                FactorNode                                                                           | 5.4               | float     |               | 
+                  NumNode                                                                            | 5.4               | float     |               | litval:t12 float
+    StatementNode                                                                                    |                   |           |               | 
+      AssignStatNode                                                                                 | =                 | int       |               | 
+        VarNode                                                                                      | myUtility_var1    | int       |               | 
+          VarElementNode                                                                             | myUtility         | DATA#myUtility#2 |               | 
+            DataMemberNode                                                                           | myUtility         | DATA#myUtility#2 |               | 
+              IdNode                                                                                 | myUtility         |           |               | 
+              IndexListNode                                                                          |                   | 2         |               | 
+                ArithExprNode                                                                        | 3                 | int       |               | 
+                  TermNode                                                                           | 3                 | int       |               | 
+                    FactorNode                                                                       | 3                 | int       |               | 
+                      NumNode                                                                        | 3                 | int       |               | litval:t14 int
+                ArithExprNode                                                                        | 4                 | int       |               | 
+                  TermNode                                                                           | 4                 | int       |               | 
+                    FactorNode                                                                       | 4                 | int       |               | 
+                      NumNode                                                                        | 4                 | int       |               | litval:t15 int
+          VarElementNode                                                                             | var1              | DATA#var1#0 |               | 
+            DataMemberNode                                                                           | var1              | DATA#var1#0 |               | 
+              IdNode                                                                                 | var1              |           |               | 
+              IndexListNode                                                                          |                   | 0         |               | 
+        ExprNode                                                                                     | 5                 | int       |               | 
+          ArithExprNode                                                                              | 5                 | int       |               | 
+            TermNode                                                                                 | 5                 | int       |               | 
+              FactorNode                                                                             | 5                 | int       |               | 
+                NumNode                                                                              | 5                 | int       |               | litval:t16 int
+===================================================================================

@@ -1,0 +1,45 @@
+===== begin global =====
+
+class:A offset:0
+===== begin A =====
+
+localvar:int:a1: offset:-4
+localvar:int:a2: offset:-8
+===== end A =====
+
+class:Utility offset:0
+===== begin Utility =====
+
+localvar:int:var1: offset:-4
+localvar:int:var2: offset:-8
+localvar:A:a: offset:-16
+===== end Utility =====
+
+function:program offset:0
+===== begin program =====
+
+localvar:Utility:utility: offset:-16
+localvar:int:var3:3: offset:-28
+localvar:int:max: offset:-32
+localvar:float:myMax: offset:-40
+localvar:Utility:myUtility:3:4: offset:-232
+litval:t1 int offset:-236
+litval:t2 int offset:-240
+litval:t3 int offset:-244
+litval:t4 int offset:-248
+litval:t5 int offset:-252
+tempvar:t6 int offset:-256
+litval:t7 int offset:-260
+litval:t8 int offset:-264
+tempvar:t9 int offset:-268
+tempvar:t10 int offset:-268
+litval:t11 float offset:-276
+litval:t12 float offset:-284
+tempvar:t13 float offset:-292
+litval:t14 int offset:-296
+litval:t15 int offset:-300
+litval:t16 int offset:-304
+===== end program =====
+
+===== end global =====
+

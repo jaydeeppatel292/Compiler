@@ -1,0 +1,1 @@
+class id { int id ; int id ; } ; class id { int id ; int id ; id id ; } ; program { id id ; int id [ integer ] ; int id ; float id ; id id [ integer ] [ integer ] ; id = integer * integer + integer * integer ; id = float * float ; id [ integer ] [ integer ] . id = integer ; } ; 
