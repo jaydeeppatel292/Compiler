@@ -26,6 +26,12 @@ import java.util.Vector;
 
 public class SymTabCreationVisitor extends Visitor {
 
+    public Integer m_tempVarNum = 0;
+
+    public String getNewTempVarName() {
+        m_tempVarNum++;
+        return "t" + m_tempVarNum.toString();
+    }
 
     public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList, List<SymTabEntry> fromSymTabEntryList) {
         for (SymTabEntry symTabEntry : fromSymTabEntryList) {
@@ -266,6 +272,7 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.symbolName = node.getChildren().get(1).getData();
         node.symtabentry.returnType = node.getChildren().get(0).getData();
         node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
+        node.symtab.m_uppertable.addEntry(node.symtabentry);
     }
 
 
@@ -510,23 +517,102 @@ public class SymTabCreationVisitor extends Visitor {
     }
 
 
-    public void addAllSymbolInParentTable(SymTab symTab, Node parent, List<Node> childNodeList) {
-        for (Node member : childNodeList) {
-            if (member.symtabentry != null) {
-                boolean isSymAlreadyDeclared = false;
-                for (SymTabEntry symTabEntry : parent.symtab.m_symlist) {
-                    if (symTabEntry.m_entry.equals(member.symtabentry.m_entry)) {
-                        member.generatePosition();
-                        LexicalResponseManager.getInstance().addErrorMessage(member.lineNumber, member.colNumber, "SemanticError", "Multiple declaration of :" + member.symtabentry.m_entry);
-                        System.out.println("Multiple declaration of :" + member.symtabentry.m_entry);
-                        isSymAlreadyDeclared = true;
-                    }
-                }
-                if (!isSymAlreadyDeclared) {
-                    symTab.addEntry(member.symtabentry);
-                }
-            }
+
+    @Override
+    public void visit(IdNode p_node) {
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
         }
+        p_node.m_moonVarName = p_node.getData();
+    }
+
+    @Override
+    public void visit(ArithExprNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        // only term in arithexpr node ///
+        if (p_node.getChildren().size() == 1) {
+            return;
+        }
+        // multop as child ..
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, p_node.getType(), p_node.m_moonVarName, p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).dimList);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+    @Override
+    public void visit(MultOpNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        Vector<Integer> dimlist = new Vector<Integer>();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, vartype, p_node.m_moonVarName, dimlist);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+    @Override
+    public void visit(AddOpNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, p_node.getType(), p_node.m_moonVarName, p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).dimList);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+    @Override
+    public void visit(NumNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.LITVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
+        p_node.symtabentry.m_entry = "litval:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+
+    @Override
+    public void visit(FCallNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.RETVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
+        p_node.symtabentry.m_entry = "retval:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
     }
 
 
@@ -610,15 +696,6 @@ public class SymTabCreationVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(IdNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
 
     @Override
     public void visit(IfStatNode node) {
@@ -661,16 +738,6 @@ public class SymTabCreationVisitor extends Visitor {
     }
 
     @Override
-    public void visit(MultOpNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
-
-    @Override
     public void visit(Node node) {
         for (Node child : node.getChildren()) {
             //make all children use this scopes' symbol table
@@ -680,15 +747,6 @@ public class SymTabCreationVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(NumNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
 
     @Override
     public void visit(OpNode node) {
@@ -710,28 +768,9 @@ public class SymTabCreationVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(AddOpNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
 
     @Override
     public void visit(AParamsNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
-
-    @Override
-    public void visit(ArithExprNode node) {
         for (Node child : node.getChildren()) {
             //make all children use this scopes' symbol table
             child.symtab = node.symtab;
@@ -802,16 +841,6 @@ public class SymTabCreationVisitor extends Visitor {
 
     @Override
     public void visit(FactorSignNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
-
-    @Override
-    public void visit(FCallNode node) {
         for (Node child : node.getChildren()) {
             //make all children use this scopes' symbol table
             child.symtab = node.symtab;

@@ -1,10 +1,5 @@
-import com.sun.corba.se.impl.orb.ParserTable;
 import global.Constants;
-import models.LL1ParseTable;
-import models.Token;
-import models.Visitors.ComputeMemSizeVisitor;
 import models.Visitors.SymTabCreationVisitor;
-import models.Visitors.SymTabTempVarCreationVisitor;
 import models.Visitors.TypeCheckingVisitor;
 import utils.ASTManager;
 import utils.BufferManager;
@@ -44,10 +39,8 @@ public class Main {
 
         System.out.println("==TYPE CHECKING PHASE STARTED======");
 
-        /*TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
-        ASTManager.getInstance().getProgNode().accept(typeCheckingVisitor);
-        ASTManager.getInstance().getProgNode().accept(new SymTabTempVarCreationVisitor());
-        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());*/
+        ASTManager.getInstance().getProgNode().accept(new TypeCheckingVisitor());
+//        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
 
         System.out.println("==PRINTING TREE======");
 

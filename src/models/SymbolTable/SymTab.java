@@ -2,7 +2,7 @@ package models.SymbolTable;
 import java.util.ArrayList;
 
 public class SymTab {
-	private SymTab m_uppertable;
+	public SymTab m_uppertable;
 	public String m_name = null;
 	public ArrayList<SymTabEntry> m_symlist = null; 
     public static int tablelevel = 0;
@@ -29,7 +29,25 @@ public class SymTab {
 	public void addEntry(SymTabEntry p_entry){
 		m_symlist.add(p_entry);
 	}
-	
+
+
+	public SymTabEntry lookupName(String p_tolookup) {
+		SymTabEntry returnvalue = new SymTabEntry();
+		boolean found = false;
+		for( SymTabEntry rec : m_symlist) {
+			if (rec.symbolName.equals(p_tolookup)) {
+				returnvalue = rec;
+				found = true;
+			}
+		}
+		if (!found) {
+			if (m_uppertable != null) {
+				returnvalue = m_uppertable.lookupName(p_tolookup);
+			}
+		}
+		return returnvalue;
+	}
+
 	public String toString(){
 		String stringtoreturn = null;
 		String toindent = "   ";

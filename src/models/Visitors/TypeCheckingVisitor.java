@@ -19,6 +19,11 @@ import utils.LexicalResponseManager;
 public class TypeCheckingVisitor extends Visitor {
 
     public void visit(AddOpNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         System.out.println("Visiting AddOppNode");
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
@@ -27,11 +32,16 @@ public class TypeCheckingVisitor extends Visitor {
         else {
             node.setType("typeerror");
             node.generatePosition();
-            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "TYPE ERROR", "TYPE ERROR DETECTED between " + node.getChildren().get(0).getData() + " and " + node.getChildren().get(1).getData());
         }
     }
 
     public void visit(FactorNode factorNode) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : factorNode.getChildren())
+            child.accept(this);
+
         if (factorNode.getChildren().size() > 0) {
             factorNode.setType(factorNode.getChildren().get(0).getType());
             factorNode.setData(factorNode.getChildren().get(0).getData());
@@ -39,6 +49,11 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
     public void visit(TermNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
             node.setData(node.getChildren().get(0).getData());
@@ -46,8 +61,12 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
 
-
     public void visit(ExprNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
             node.setData(node.getChildren().get(0).getData());
@@ -57,6 +76,11 @@ public class TypeCheckingVisitor extends Visitor {
 
     public void visit(ArithExprNode node) {
         System.out.println("Visiting ArithExprNode");
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
         // only term in arithexpr node ///
         if (node.getChildren().size() == 1) {
@@ -68,61 +92,81 @@ public class TypeCheckingVisitor extends Visitor {
         // multop as child ..
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType .equals( rightOperandType))
+        if (leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
             node.generatePosition();
-            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "TYPE ERROR", "TYPE ERROR DETECTED between " + node.getChildren().get(0).getData() + " and " + node.getChildren().get(1).getData());
         }
     }
 
     public void visit(MultOpNode node) {
         System.out.println("Visiting MultOpNode");
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType .equals( rightOperandType))
+        if (leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
             node.generatePosition();
-            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "TYPE ERROR", "TYPE ERROR DETECTED between " + node.getChildren().get(0).getData() + " and " + node.getChildren().get(1).getData());
         }
     }
 
 
     public void visit(RelExprNode node) {
         System.out.println("Visiting MultOpNode");
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType .equals( rightOperandType))
+        if (leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
             node.generatePosition();
-            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "TYPE ERROR", "TYPE ERROR DETECTED between " + node.getChildren().get(0).getData() + " and " + node.getChildren().get(1).getData());
         }
     }
 
 
     public void visit(AssignStatNode node) {
         System.out.println("Visiting AssignStatNode");
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType .equals( rightOperandType))
+        if (leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");
             node.generatePosition();
-            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber,"TYPE ERROR","TYPE ERROR DETECTED between "+ node.getChildren().get(0).getData()+ " and "+ node.getChildren().get(1).getData());
+            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "TYPE ERROR", "TYPE ERROR DETECTED between " + node.getChildren().get(0).getData() + " and " + node.getChildren().get(1).getData());
         }
     }
 
     public void visit(VarNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         Node currentNode = node;
         SymTabEntry currentSymTable = null;
         String nodeType = null;
-        String nodeData ="";
+        String nodeData = "";
         for (int i = 0; i < node.getChildren().size(); i++) {
             Node child = node.getChildren().get(i);
             String type = child.getType();
@@ -132,8 +176,8 @@ public class TypeCheckingVisitor extends Visitor {
                 case "DATA":
                     typeArray = type.split("#");
                     varName = typeArray[1];
-                    if(i!=0){
-                        nodeData+="_";
+                    if (i != 0) {
+                        nodeData += "_";
                     }
                     nodeData += varName;
                     int dimension = Integer.parseInt(typeArray[2]);
@@ -141,15 +185,15 @@ public class TypeCheckingVisitor extends Visitor {
                     if (varType == null) {
                         node.setType("typeerror");
                         node.generatePosition();
-                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varName);
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Can not resolved symbol:" + varName);
                         return;
                     }
                     if (!varType.extraData.equals("int") && !varType.extraData.equals("float")) {
                         currentSymTable = findSymbolTableForClass(varType.extraData);
-                        if (currentSymTable==null || currentSymTable.m_subtable == null) {
+                        if (currentSymTable == null || currentSymTable.m_subtable == null) {
                             node.setType("typeerror");
                             node.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varType.symbolName);
+                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Can not resolved symbol:" + varType.symbolName);
                             return;
                         }
                     } else {
@@ -160,7 +204,7 @@ public class TypeCheckingVisitor extends Visitor {
                         } else {
                             nodeType = varType.extraData;
                             node.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Invalid dimension size!!");
+                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Invalid dimension size!!");
                         }
                     }
                     break;
@@ -168,9 +212,10 @@ public class TypeCheckingVisitor extends Visitor {
                     typeArray = type.split("#");
                     varName = typeArray[1];
                     String fParams = "";
-                    if(i!=0){
-                        nodeData+="_";
-                    }nodeData += varName;
+                    if (i != 0) {
+                        nodeData += "_";
+                    }
+                    nodeData += varName;
                     if (typeArray.length == 3) {
                         fParams = (typeArray[2]);
                     }
@@ -178,7 +223,7 @@ public class TypeCheckingVisitor extends Visitor {
                         node.setType("typeerror");
                         String errorParams = fParams.replaceAll(":", ":dim:").replaceAll("_", ",");
                         node.generatePosition();
-                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Can not resolved symbol:" + varName + "(" + errorParams + ")");
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Can not resolved symbol:" + varName + "(" + errorParams + ")");
                         return;
                     }
 
@@ -189,7 +234,7 @@ public class TypeCheckingVisitor extends Visitor {
                         node.setType("typeerror");
                         node.generatePosition();
                         String errorParams = fParams.replaceAll(":", ":dim:").replaceAll("_", ",");
-                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "Semantic", "Undefined func:" + varName + "(" + errorParams + ")");
+                        LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Undefined func:" + varName + "(" + errorParams + ")");
                     }
                     break;
             }
@@ -211,7 +256,7 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
     public SymTabEntry getTypeForFuncCall(String type, SymTabEntry currentSymTabEntry) {
-        SymTab symTab =null;
+        SymTab symTab = null;
         if (currentSymTabEntry != null) {
             symTab = currentSymTabEntry.m_subtable;
         }
@@ -232,7 +277,7 @@ public class TypeCheckingVisitor extends Visitor {
             }
         }
 
-        if(currentSymTabEntry!=null && currentSymTabEntry.multiLevelInheritedSymTab!=null) {
+        if (currentSymTabEntry != null && currentSymTabEntry.multiLevelInheritedSymTab != null) {
             for (SymTabEntry inheritedSymTab : currentSymTabEntry.multiLevelInheritedSymTab) {
                 for (SymTabEntry symTabEntry : inheritedSymTab.m_subtable.m_symlist) {
                     if (symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION && symTabEntry.symbolName.equals(varName)) {
@@ -248,7 +293,7 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
     public SymTabEntry getTypeForVarFromSymbolTable(String type, Node currentNode, SymTabEntry currentSymTabEntry) {
-        SymTab symTab =null;
+        SymTab symTab = null;
         if (currentSymTabEntry != null) {
             symTab = currentSymTabEntry.m_subtable;
         }
@@ -297,24 +342,38 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
     public void visit(VarElementNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         node.setType(node.getChildren().get(0).getType());
         node.setData(node.getChildren().get(0).getData());
     }
 
 
     public void visit(IndexListNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         node.setType("" + node.getChildren().size());
         for (Node child : node.getChildren()) {
             if (!child.getType().equals(Terminal.INT.getData())) {
                 node.generatePosition();
-                LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber,node.colNumber, "SemanticError", "Incompatible types: Required Int");
+                LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "SemanticError", "Incompatible types: Required Int");
             }
         }
     }
 
 
-
     public void visit(AParamsNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         String type = "";
         for (int i = 0; i < node.getChildren().size(); i++) {
             type += node.getChildren().get(i).getType() + "_";
@@ -323,6 +382,11 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
     public void visit(DataMemberNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         if (node.getChildren().size() > 1) {
             node.setType("DATA#" + node.getChildren().get(0).getData() + "#" + node.getChildren().get(1).getType());
             node.setData(node.getChildren().get(0).getData());
@@ -330,8 +394,12 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
 
-
     public void visit(FCallNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
         if (node.getChildren().size() > 1) {
             node.setType("FCALL#" + node.getChildren().get(0).getData() + "#" + node.getChildren().get(1).getType());
             node.setData(node.getChildren().get(0).getData());
@@ -339,139 +407,283 @@ public class TypeCheckingVisitor extends Visitor {
     }
 
 
-
     @Override
     public void visit(DimListNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(ForStatNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(FParamListNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(FParamNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(FuncDeclNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(FuncDefListNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(FuncDefNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(GetStatNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(IdNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(IfStatNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(InherListNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(MemberListNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
+
     @Override
     public void visit(FactorSignNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(TypeNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(VarDeclNode node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
+
     @Override
     public void visit(Node node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(NumNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(OpNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(ParamListNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(ProgNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(PutStatNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
+
     @Override
     public void visit(ReturnStatNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(ScopeSpecNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(StatBlockNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
+
     @Override
     public void visit(ProgramBlockNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(StatementNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
+
     @Override
     public void visit(ClassListNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 
     @Override
     public void visit(ClassNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
 
     }
 

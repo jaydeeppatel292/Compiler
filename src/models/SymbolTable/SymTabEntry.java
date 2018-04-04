@@ -46,6 +46,10 @@ public class SymTabEntry {
 		m_subtable = p_subtable;
 	}
 
+	public SymTabEntry() {
+
+	}
+
 	public void addInheritedSymTab(SymTabEntry symTab){
 		inheritedSymTab.add(symTab);
 	}
