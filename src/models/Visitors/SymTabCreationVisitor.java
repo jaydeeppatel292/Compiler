@@ -173,13 +173,10 @@ public class SymTabCreationVisitor extends Visitor {
 
     public void visit(StatBlockNode node) {
         System.out.println("visiting StatNode");
-        node.symtab = new SymTab();
-
         for (Node child : node.getChildren()) {
             child.symtab = node.symtab;
             child.accept(this);
         }
-
 
         //TODO remove below code ...
         /*// add the symbol table entries of all the variables declared in the statement block

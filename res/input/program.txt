@@ -1,49 +1,66 @@
-class InheritedUtility {
- int member1;};
-class Utility : InheritedUtility {
- int var1[4][5][7][8][9][1][0];
- float var2;
- int findMax(int array[100]);
- int findMin(int array[100]);};
-int Utility::findMax(int array[100]){
- int maxValue;
- int idx;
- maxValue = array[100];
- for( int idx = 99; idx > 0; idx = idx - 1 ){
- if(array[idx] > maxValue) then {
- maxValue = array[idx];}
- else{};
- };
- return (maxValue);};
-int Utility::findMin(int array[100]){
- int minValue;
- int idx;
- minValue = array[100];
- for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
- if(array[idx] < maxValue + 1 / 8 or idx) then {
- maxValue = array[idx];}
- else{};
- };
- return (minValue);};
+class InheritedUtility{
+};
+
+// Multiple declaration of class
+class InheritedUtility{
+};
+
+
+
+// Should through error for NotDefinedClass
+
+class Utility:InheritedUtility,NotDefinedClass{
+    int var1;
+    int getMax();
+};
+
+int Utility:: getMax(){
+    int var2;
+    var2 = 5;
+    return (var2);
+};
+int getMin(int a[3],int b){
+    int var2;
+    var2 = 5;
+    return (var2);
+};
+
 float randomize(){
- float value;
- value = 100 * (2 + 3.0 / 7.0006);
- value = 1.05 + ((2.04 * 2.47) - 3.0) + 7.0006 > 1 and not - 1;
+ int value;
+
+ // As I declared Relation operator will return int (0 for false and 1 for true) as we dont have bool type
+ value = 1>2;
  return (value);};
+
+
 program {
- int sample[100];
- int idx;
- int maxValue;
- int minValue;
- Utility utility;
- Utility arrayUtility[2][3][6][7];
- for(int t = 0; t<=100 ; t = t + 1) {
- get(sample[t]);
- sample[t] = (sample[t] * randomize());
- };
- maxValue = utility.findMax(sample);
- minValue = utility.findMin(sample);
- utility.var1[4][1][0][0][0][0][0] = 10;
- arrayUtility[utility.var1[1][2][3][4][5][6][idx+maxValue]][1][1][1].var2 = 2.5;
- put(maxValue);
- put(minValue);}; 
+    Utility utility;
+    int var3[3];
+    int max;
+
+    // multiple declaration of variable
+    int max;
+
+    Utility myUtility[3][4];
+
+    // Success : type checking
+    max = 4*5;
+
+    // Error : type checking
+    max = 4 * 5.4;
+
+    // Error : type checking with function call
+    max = 4 * randomize();
+
+    // Success : type checking with function call
+    max = 4 * getMin(var3,max);
+
+    // Error : type checking for var3[] as getMin needs array type
+    max = 4 * getMin(var3[3],max);
+
+    // Error: The . operator should be used only on variables of a class type. If so, its right operand must be a member of that class
+     max.var1 =5;
+
+    // Correct usage :
+     myUtility[3][4].var1 = 5;
+};
