@@ -9,4 +9,5 @@ public class Constants {
     public static final String OUTPUT_DERIVATION = "res\\output\\derivation.txt";
     public static final String OUTPUT_AST = "res\\output\\AST.txt";
     public static final String OUTPUT_SYMTABLE = "res\\output\\SymTable.txt";
+    public static final String OUTPUT_PROGRAM_M = "res\\output\\MoonCode.m";
 }

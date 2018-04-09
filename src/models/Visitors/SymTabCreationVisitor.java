@@ -247,7 +247,11 @@ public class SymTabCreationVisitor extends Visitor {
         String extraData = "";
         Vector<VarEntry> paramlist = new Vector<VarEntry>();
         for (Node param : node.getChildren().get(2).getChildren()) {
-            extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
+            if(param.getChildren().get(2).getChildren().size()>0) {
+                extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
+            }else{
+                extraData += param.getChildren().get(0).getData() + "_";
+            }
             // parameter type
             declrecstring += param.getChildren().get(0).getData() + ':';
             // parameter name
@@ -493,6 +497,16 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.dimList = dimList;
         node.symtabentry.symbolType = SymTabEntry.SymbolType.PARAMETER;
 
+        switch (node.getChildren().get(0).getData()) {
+            case "int":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
+                break;
+            case "float":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.FLOAT;
+                break;
+            default:
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.CLASS;
+        }
         addSymbolEntryInSymbolTable(node.symtab, node.symtabentry);
     }
 
@@ -546,6 +560,46 @@ public class SymTabCreationVisitor extends Visitor {
         p_node.symtab.addEntry(p_node.symtabentry);
     }
 
+
+    @Override
+    public void visit(RelExprNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        String tempvarname = this.getNewTempVarName();
+        Vector<Integer> dimList = new Vector<Integer>();
+        node.m_moonVarName = tempvarname;
+        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, node.getType(), node.m_moonVarName, dimList);
+        node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + node.getType();
+        node.symtab.addEntry(node.symtabentry);
+    }
+
+    @Override
+    public void visit(VarElementNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        if(node.getChildren().size()>0){
+            if(node.getChildren().get(0) instanceof DataMemberNode){
+                Node dataMember = node.getChildren().get(0);
+                // introduce new tempvar if datamember have any dimlist ...
+                if(dataMember.getChildren().size()>1 && dataMember.getChildren().get(1).getChildren().size()>0) {
+                    String tempvarname = this.getNewTempVarName();
+                    node.m_moonVarName = tempvarname;
+                    node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, "int", node.m_moonVarName, new ArrayList<>());
+                    node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + node.getType();
+                    node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
+                    node.symtab.addEntry(node.symtabentry);
+                }
+            }
+        }
+    }
     @Override
     public void visit(MultOpNode p_node) {
         // propagate accepting the same visitor to all the children
@@ -653,15 +707,6 @@ public class SymTabCreationVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(VarElementNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
 
     @Override
     public void visit(VarNode node) {
@@ -856,15 +901,6 @@ public class SymTabCreationVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(RelExprNode node) {
-        for (Node child : node.getChildren()) {
-            //make all children use this scopes' symbol table
-            child.symtab = node.symtab;
-            child.accept(this);
-        }
-
-    }
 
     @Override
     public void visit(ReturnStatNode node) {

@@ -45,6 +45,7 @@ public class TypeCheckingVisitor extends Visitor {
         if (factorNode.getChildren().size() > 0) {
             factorNode.setType(factorNode.getChildren().get(0).getType());
             factorNode.setData(factorNode.getChildren().get(0).getData());
+            factorNode.m_moonVarName = (factorNode.getChildren().get(0).m_moonVarName);
         }
     }
 
@@ -57,6 +58,7 @@ public class TypeCheckingVisitor extends Visitor {
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
             node.setData(node.getChildren().get(0).getData());
+            node.m_moonVarName = (node.getChildren().get(0).m_moonVarName);
         }
     }
 
@@ -70,6 +72,7 @@ public class TypeCheckingVisitor extends Visitor {
         if (node.getChildren().size() > 0) {
             node.setType(node.getChildren().get(0).getType());
             node.setData(node.getChildren().get(0).getData());
+            node.m_moonVarName = (node.getChildren().get(0).m_moonVarName);
         }
     }
 
@@ -86,6 +89,7 @@ public class TypeCheckingVisitor extends Visitor {
         if (node.getChildren().size() == 1) {
             node.setType(node.getChildren().get(0).getType());
             node.setData(node.getChildren().get(0).getData());
+            node.m_moonVarName = (node.getChildren().get(0).m_moonVarName);
             return;
         }
 

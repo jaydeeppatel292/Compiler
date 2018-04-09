@@ -1,13 +1,1 @@
 Format: TokenLineNumber : TokenColumnNumber , ErrorType , TokenValue
-5:7,SemanticError,Class multiple declaration :InheritedUtility
-12:7,SemanticError,Could not resolve symbol NotDefinedClass
-42:9,SemanticError,Multiple declaration of :localvar:int:max:
-50:13,TYPE ERROR,TYPE ERROR DETECTED between 4 and 5.4
-50:5,TYPE ERROR,TYPE ERROR DETECTED between max and *
-53:13,TYPE ERROR,TYPE ERROR DETECTED between 4 and randomize
-53:5,TYPE ERROR,TYPE ERROR DETECTED between max and *
-59:15,Semantic,Undefined func:getMin(int,int,)
-59:13,TYPE ERROR,TYPE ERROR DETECTED between 4 and getMin
-59:5,TYPE ERROR,TYPE ERROR DETECTED between max and *
-62:6,Semantic,Can not resolved symbol:var1
-62:6,TYPE ERROR,TYPE ERROR DETECTED between  and 5

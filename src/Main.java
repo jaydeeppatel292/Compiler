@@ -1,4 +1,6 @@
 import global.Constants;
+import models.Visitors.CodeGeneration.StackBasedCodeGenerationVisitor;
+import models.Visitors.ComputeMemSizeVisitor;
 import models.Visitors.SymTabCreationVisitor;
 import models.Visitors.TypeCheckingVisitor;
 import utils.ASTManager;
@@ -40,7 +42,8 @@ public class Main {
         System.out.println("==TYPE CHECKING PHASE STARTED======");
 
         ASTManager.getInstance().getProgNode().accept(new TypeCheckingVisitor());
-//        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
+        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
+        ASTManager.getInstance().getProgNode().accept(new StackBasedCodeGenerationVisitor(Constants.OUTPUT_PROGRAM_M));
 
         System.out.println("==PRINTING TREE======");
 

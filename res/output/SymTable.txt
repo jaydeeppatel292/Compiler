@@ -1,73 +1,31 @@
-===== begin global =====
 
-InheritedUtility offset:0
-   ===== begin InheritedUtility =====
-
-   ===== end InheritedUtility =====
-
-Utility offset:0
-Inherited Classes:InheritedUtility,
-   ===== begin Utility =====
-
-   localvar:int:var1: offset:0
-   function:int:getMax: offset:0
-      ===== begin getMax =====
-
-      localvar:int:var2: offset:0
-      litval:t1 int offset:0
-      ===== end getMax =====
-
-   ===== end Utility =====
-
-program offset:0
-   ===== begin program =====
-
-   localvar:Utility:utility: offset:0
-   litval:t6 int offset:0
-   localvar:int:var3:3: offset:0
-   localvar:int:max: offset:0
-   litval:t7 int offset:0
-   litval:t8 int offset:0
-   localvar:Utility:myUtility:3:4: offset:0
-   litval:t9 int offset:0
-   litval:t10 int offset:0
-   tempvar:t11 null offset:0
-   litval:t12 int offset:0
-   litval:t13 float offset:0
-   tempvar:t14 null offset:0
-   litval:t15 int offset:0
-   retval:t16 null offset:0
-   tempvar:t17 null offset:0
-   litval:t18 int offset:0
-   retval:t19 null offset:0
-   tempvar:t20 null offset:0
-   litval:t21 int offset:0
-   litval:t22 int offset:0
-   retval:t23 null offset:0
-   tempvar:t24 null offset:0
-   litval:t25 int offset:0
-   litval:t26 int offset:0
-   litval:t27 int offset:0
-   litval:t28 int offset:0
-   ===== end program =====
-
-function:int:getMin:int:a:3:int:b: offset:0
-   ===== begin getMin =====
-
-   litval:t2 int offset:0
-   localvar:int:a:3: offset:0
-   localvar:int:b: offset:0
-   localvar:int:var2: offset:0
-   litval:t3 int offset:0
-   ===== end getMin =====
-
-function:float:randomize: offset:0
-   ===== begin randomize =====
-
-   localvar:int:value: offset:0
-   litval:t4 int offset:0
-   litval:t5 int offset:0
-   ===== end randomize =====
-
-===== end global =====
-
+=====================================================
+| table: global           scope offset: 0           |
+=====================================================
+| CLASS     | Utility                               |
+|    =====================================================
+|    | table: Utility          scope offset: -4          |
+|    =====================================================
+|    | VARIABLE  | var1      | int       | 4     | -4    |
+|    =====================================================
+| FUNCTION  | program   | void                      |
+|    =====================================================
+|    | table: program          scope offset: -52         |
+|    =====================================================
+|    | VARIABLE  | max       | int       | 4     | -4    |
+|    | VARIABLE  | a         | int       | 4     | -8    |
+|    | LITVAL    | t1        | int       | 4     | -12   |
+|    | LITVAL    | t2        | int       | 4     | -16   |
+|    | TEMPVAR   | t3        | null      | 4     | -20   |
+|    | LITVAL    | t4        | int       | 4     | -24   |
+|    | TEMPVAR   | t5        | null      | 0     | -24   |
+|    | LITVAL    | t6        | int       | 4     | -28   |
+|    | LITVAL    | t7        | int       | 4     | -32   |
+|    | TEMPVAR   | t8        | null      | 4     | -36   |
+|    | LITVAL    | t9        | int       | 4     | -40   |
+|    | TEMPVAR   | t10       | null      | 0     | -40   |
+|    | LITVAL    | t11       | int       | 4     | -44   |
+|    | LITVAL    | t12       | int       | 4     | -48   |
+|    | TEMPVAR   | t13       | null      | 4     | -52   |
+|    =====================================================
+=====================================================

@@ -5,7 +5,7 @@ public class SymTab {
 	public SymTab m_uppertable;
 	public String m_name = null;
 	public ArrayList<SymTabEntry> m_symlist = null; 
-    public static int tablelevel = 0;
+    public int tablelevel = 0;
 	public int m_size;
 
     public SymTab(){
@@ -48,7 +48,23 @@ public class SymTab {
 		return returnvalue;
 	}
 
+
 	public String toString(){
+		String stringtoreturn = new String();
+		String prelinespacing = new String();
+		for (int i = 0; i < this.tablelevel; i++)
+			prelinespacing += "|    ";
+		stringtoreturn += "\n" + prelinespacing + "=====================================================\n";
+		stringtoreturn += prelinespacing + String.format("%-25s" , "| table: " + m_name) + String.format("%-27s" , " scope offset: " + m_size) + "|\n";
+		stringtoreturn += prelinespacing        + "=====================================================\n";
+		for (int i = 0; i < m_symlist.size(); i++){
+			stringtoreturn +=  prelinespacing + m_symlist.get(i).toString() + '\n';
+		}
+		stringtoreturn += prelinespacing        + "=====================================================";
+		return stringtoreturn;
+	}
+
+	/*public String toString(){
 		String stringtoreturn = null;
 		String toindent = "   ";
 		for (int i = 0; i < SymTab.tablelevel; i++)
@@ -78,7 +94,7 @@ public class SymTab {
 		stringtoreturn += "===== end " + m_name + " =====\n";
 		SymTab.tablelevel--;
 		return stringtoreturn;
-	}
+	}*/
 	
 	public void addEntry(String string, SymTab symtab) {
 		m_symlist.add(new SymTabEntry(string, symtab));
