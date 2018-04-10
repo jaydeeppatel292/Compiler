@@ -3,14 +3,14 @@ class Utility{
 };
 
 int getMin(int a,int b){
-    put (a);
-
-};
-
-int getMax(int a,int b){
-    Utility a1[3];
-    put (b);
-    a = getMin(a,b);
+    if(a>1) then {
+       put(a);
+       a= a-1;
+       b = getMin(a,b);
+    }
+    else {
+        put (a);
+    };
 };
 
 program {
@@ -20,7 +20,7 @@ program {
     max = 5;
     a = 10;
 
-    a = getMax(max,a);
+    a = getMin(max,a);
     for(int i=5;i<=25;i=i+4){
         put(i);
     };

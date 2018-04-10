@@ -284,8 +284,14 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
 
         String localregister4 = this.m_registerPool.pop();
 
-        // add operands
-        m_moonExecCode += m_mooncodeindent + "add " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+
+        if(p_node.getData().equals(Terminal.ADD.getData())) {
+            // add operands
+            m_moonExecCode += m_mooncodeindent + "add " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        }else if(p_node.getData().equals(Terminal.MINUS.getData())){
+            // add operands
+            m_moonExecCode += m_mooncodeindent + "sub " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        }
         // assign the result into a temporary variable (assumed to have been previously created by the symbol table generator)
         m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister4 + "\n";
         // deallocate the registers
