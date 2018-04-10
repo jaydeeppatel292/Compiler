@@ -27,10 +27,10 @@
     <favorites_list name="Compiler" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5687204">
+    <splitter split-orientation="horizontal" split-proportion="0.6184834">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
+          <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/input/program.txt">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="116">
@@ -43,18 +43,18 @@
           <file leaf-file-name="MoonCode.m" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="362">
-                  <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+                <state relative-caret-position="404">
+                  <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="StackBasedCodeGenerationVisitor.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="StackBasedCodeGenerationVisitor.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="286" column="0" lean-forward="true" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
+                <state relative-caret-position="491">
+                  <caret line="334" column="0" lean-forward="true" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#601#609#0" expanded="true" />
@@ -142,7 +142,7 @@
           <file leaf-file-name="SymTable.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-218">
+                <state relative-caret-position="0">
                   <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
@@ -164,8 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>data</find>
-      <find>fcall</find>
       <find>#</find>
       <find>datamember</find>
       <find>termnode</find>
@@ -193,6 +191,8 @@
       <find>sw</find>
       <find>r5</find>
       <find>arithexpr</find>
+      <find>arithex</find>
+      <find>and</find>
       <find>sub</find>
     </findStrings>
     <replaceStrings>
@@ -497,7 +497,7 @@
       <workItem from="1522439177104" duration="3647000" />
       <workItem from="1522559968040" duration="49154000" />
       <workItem from="1523052143683" duration="20428000" />
-      <workItem from="1523157620995" duration="54437000" />
+      <workItem from="1523157620995" duration="55551000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -709,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523391085972</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="implemented recursive function call ..&#10;Added subtraction arithmetic expressions ..">
+      <created>1523393022300</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1523393022300</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -724,7 +731,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="503668000" />
+    <option name="totallyTimeSpent" value="504782000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -748,7 +755,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32546374" sideWeight="0.5030303" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25707814" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14496036" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.82559454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.4969697" order="5" side_tool="false" content_ui="tabs" />
@@ -851,7 +858,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Can able to write tokens, error, atocc format to file" />
     <MESSAGE value="added test cases ..." />
     <MESSAGE value="atocc format" />
     <MESSAGE value="updated atocc format" />
@@ -876,7 +882,8 @@
     <MESSAGE value="Code generation working for assign statement, if statment &#10;Also able to get offset of multidimentional var" />
     <MESSAGE value="Generated code for For Loops" />
     <MESSAGE value="Implemented function calls .." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented function calls .." />
+    <MESSAGE value="implemented recursive function call ..&#10;Added subtraction arithmetic expressions .." />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented recursive function call ..&#10;Added subtraction arithmetic expressions .." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -901,13 +908,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>600</line>
+          <line>616</line>
           <properties />
           <option name="timeStamp" value="371" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>594</line>
+          <line>610</line>
           <properties />
           <option name="timeStamp" value="372" />
         </line-breakpoint>
@@ -931,7 +938,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>525</line>
+          <line>541</line>
           <properties />
           <option name="timeStamp" value="418" />
         </line-breakpoint>
@@ -1346,7 +1353,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-218">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1360,10 +1367,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="334" column="0" lean-forward="true" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#601#609#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+        <state relative-caret-position="404">
+          <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1373,17 +1391,6 @@
         <state relative-caret-position="116">
           <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="286" column="0" lean-forward="true" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#601#609#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

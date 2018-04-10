@@ -3,7 +3,7 @@ class Utility{
 };
 
 int getMin(int a,int b){
-    if(a>1) then {
+    if(a>2) then {
        put(a);
        a= a-1;
        b = getMin(a,b);
@@ -21,7 +21,7 @@ program {
     a = 10;
 
     a = getMin(max,a);
-    for(int i=5;i<=25;i=i+4){
-        put(i);
-    };
+    put(a);
+    a = 25/5;
+    put(a);
 };

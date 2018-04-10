@@ -286,11 +286,14 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
 
 
         if(p_node.getData().equals(Terminal.ADD.getData())) {
-            // add operands
+            // ADD operands
             m_moonExecCode += m_mooncodeindent + "add " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
         }else if(p_node.getData().equals(Terminal.MINUS.getData())){
-            // add operands
+            // SUB operands
             m_moonExecCode += m_mooncodeindent + "sub " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        } else if(p_node.getData().equals(Terminal.OR.getData())) {
+            // OR operands
+            m_moonExecCode += m_mooncodeindent + "or " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
         }
         // assign the result into a temporary variable (assumed to have been previously created by the symbol table generator)
         m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister4 + "\n";
@@ -316,8 +319,21 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         // load the values of the operands into registers
         m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + "," + p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).m_offset + "(r14)\n";
         m_moonExecCode += m_mooncodeindent + "lw " + localregister3 + "," + p_node.symtab.lookupName(p_node.getChildren().get(1).m_moonVarName).m_offset + "(r14)\n";
-        // multiply operands
-        m_moonExecCode += m_mooncodeindent + "mul " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+
+        if(p_node.getData().equals(Terminal.MUL.getData())) {
+            // multiply operands
+            m_moonExecCode += m_mooncodeindent + "mul " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        }
+        else if(p_node.getData().equals(Terminal.DIV.getData())) {
+            // DIV operands
+            m_moonExecCode += m_mooncodeindent + "div " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        }
+        else if(p_node.getData().equals(Terminal.AND.getData())) {
+            // AND operands
+            m_moonExecCode += m_mooncodeindent + "and " + localregister4 + "," + localregister2 + "," + localregister3 + "\n";
+        }
+
+
         // assign the result into a temporary variable (assumed to have been previously created by the symbol table generator)
         m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister4 + "\n";
         // deallocate the registers for the two children, and the current node
