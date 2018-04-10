@@ -1,1 +1,1 @@
-class id { int id ; } ; program { int id ; int id ; for ( int id = integer ; id lt integer ; id = id + integer ) { put ( id ) ; } ; } ; 
+class id { int id ; } ; int id ( int id , int id ) { put ( id ) ; } ; int id ( int id , int id ) { id id [ integer ] ; put ( id ) ; id = id ( id , id ) ; } ; program { int id ; int id ; id = integer ; id = integer ; id = id ( id , id ) ; for ( int id = integer ; id leq integer ; id = id + integer ) { put ( id ) ; } ; } ; 

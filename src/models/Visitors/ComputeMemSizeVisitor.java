@@ -204,7 +204,7 @@ public class ComputeMemSizeVisitor extends Visitor {
             child.accept(this);
 
         SymTab symTab = node.symtab;
-        while (!symTab.m_name.equals("program")){
+        while (symTab.m_name.equals("For")){
             symTab = symTab.m_uppertable;
         }
 

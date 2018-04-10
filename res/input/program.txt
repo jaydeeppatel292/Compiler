@@ -2,11 +2,26 @@ class Utility{
     int var1;
 };
 
+int getMin(int a,int b){
+    put (a);
+
+};
+
+int getMax(int a,int b){
+    Utility a1[3];
+    put (b);
+    a = getMin(a,b);
+};
+
 program {
     int max;
     int a;
 
-    for(int i=0;i<5;i=i+1){
+    max = 5;
+    a = 10;
+
+    a = getMax(max,a);
+    for(int i=5;i<=25;i=i+4){
         put(i);
     };
 };
