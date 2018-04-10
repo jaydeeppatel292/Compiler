@@ -60,6 +60,7 @@ public class SymTabEntry {
 		VARIABLE,
 		TEMPVAR,
 		LITVAL,
+		FOR,
 		RETVAL;
 	}
 	public enum SymbolDataType{

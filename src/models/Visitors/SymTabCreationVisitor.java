@@ -247,9 +247,9 @@ public class SymTabCreationVisitor extends Visitor {
         String extraData = "";
         Vector<VarEntry> paramlist = new Vector<VarEntry>();
         for (Node param : node.getChildren().get(2).getChildren()) {
-            if(param.getChildren().get(2).getChildren().size()>0) {
+            if (param.getChildren().get(2).getChildren().size() > 0) {
                 extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
-            }else{
+            } else {
                 extraData += param.getChildren().get(0).getData() + "_";
             }
             // parameter type
@@ -393,15 +393,25 @@ public class SymTabCreationVisitor extends Visitor {
         // get the id from the second child node and aggregate here
         declrecstring += node.getChildren().get(1).getData() + ':';
 
-        SymTab localtable = new SymTab(1, "For", node.symtab);
-        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, new ArrayList<>());
+        SymTab localtable = new SymTab(2, "For", node.symtab);
+        node.symtabentry = new ForEntry("", "For", localtable);
+
+//        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, new ArrayList<>());
         node.symtabentry.m_entry = declrecstring;
-        node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
-        node.symtabentry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+        node.symtabentry.extraData = "For"; // type
+        node.symtabentry.symbolType = SymTabEntry.SymbolType.FOR;
         node.symtabentry.createdFromNode = node;
         node.symtab.addEntry(node.symtabentry);
         node.symtab = localtable;
 
+
+        SymTabEntry symTabEntry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, new ArrayList<>());
+        symTabEntry.extraData = node.getChildren().get(0).getData(); // type
+        symTabEntry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+        symTabEntry.createdFromNode = node;
+        node.symtab.addEntry(symTabEntry);
+        node.getChildren().get(1).symtabentry = symTabEntry;
+        node.getChildren().get(1).m_moonVarName = node.getChildren().get(1).getData();
         for (Node child : node.getChildren()) {
             child.symtab = node.symtab;
             child.accept(this);
@@ -528,7 +538,6 @@ public class SymTabCreationVisitor extends Visitor {
     }
 
 
-
     @Override
     public void visit(IdNode p_node) {
         for (Node child : p_node.getChildren()) {
@@ -585,11 +594,11 @@ public class SymTabCreationVisitor extends Visitor {
             child.accept(this);
         }
 
-        if(node.getChildren().size()>0){
-            if(node.getChildren().get(0) instanceof DataMemberNode){
+        if (node.getChildren().size() > 0) {
+            if (node.getChildren().get(0) instanceof DataMemberNode) {
                 Node dataMember = node.getChildren().get(0);
                 // introduce new tempvar if datamember have any dimlist ...
-                if(dataMember.getChildren().size()>1 && dataMember.getChildren().get(1).getChildren().size()>0) {
+                if (dataMember.getChildren().size() > 1 && dataMember.getChildren().get(1).getChildren().size() > 0) {
                     String tempvarname = this.getNewTempVarName();
                     node.m_moonVarName = tempvarname;
                     node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, "int", node.m_moonVarName, new ArrayList<>());
@@ -600,6 +609,7 @@ public class SymTabCreationVisitor extends Visitor {
             }
         }
     }
+
     @Override
     public void visit(MultOpNode p_node) {
         // propagate accepting the same visitor to all the children

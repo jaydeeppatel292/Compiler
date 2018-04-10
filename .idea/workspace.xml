@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f04583c-3596-43c5-9fa7-baf658a2177e" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/res/input/program1.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/models/SymbolTable/ForEntry.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment/Main.class" afterPath="$PROJECT_DIR$/out/production/Assignment/Main.class" />
       <change beforePath="$PROJECT_DIR$/res/input/program.txt" afterPath="$PROJECT_DIR$/res/input/program.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/AST.txt" afterPath="$PROJECT_DIR$/res/output/AST.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/AtoCC.txt" afterPath="$PROJECT_DIR$/res/output/AtoCC.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/SymTable.txt" afterPath="$PROJECT_DIR$/res/output/SymTable.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/derivation.txt" afterPath="$PROJECT_DIR$/res/output/derivation.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/error.txt" afterPath="$PROJECT_DIR$/res/output/error.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/token.txt" afterPath="$PROJECT_DIR$/res/output/token.txt" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/global/Constants.java" afterPath="$PROJECT_DIR$/src/global/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" afterPath="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" afterPath="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,14 +31,14 @@
     <favorites_list name="Compiler" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8572806">
+    <splitter split-orientation="horizontal" split-proportion="0.87447697">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/res/input/program.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="147">
-                  <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+                <state relative-caret-position="304">
+                  <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -52,8 +47,8 @@
           <file leaf-file-name="MoonCode.m" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="168">
-                  <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+                <state relative-caret-position="371">
+                  <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -62,8 +57,8 @@
           <file leaf-file-name="StackBasedCodeGenerationVisitor.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="251">
-                  <caret line="357" column="5" lean-forward="true" selection-start-line="357" selection-start-column="5" selection-end-line="357" selection-end-column="5" />
+                <state relative-caret-position="406">
+                  <caret line="369" column="49" lean-forward="true" selection-start-line="369" selection-start-column="49" selection-end-line="369" selection-end-column="49" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#601#609#0" expanded="true" />
@@ -72,12 +67,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ArithExprNode.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/models/AST/ArithExprNode.java">
+          <file leaf-file-name="TypeCheckingVisitor.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="84">
-                  <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-                  <folding />
+                <state relative-caret-position="3529">
+                  <caret line="200" column="35" lean-forward="true" selection-start-line="200" selection-start-column="35" selection-end-line="200" selection-end-column="35" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -85,8 +82,48 @@
           <file leaf-file-name="SymTabCreationVisitor.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="294">
-                  <caret line="577" column="5" lean-forward="true" selection-start-line="577" selection-start-column="5" selection-end-line="577" selection-end-column="5" />
+                <state relative-caret-position="124">
+                  <caret line="412" column="0" lean-forward="false" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="VarEntry.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/VarEntry.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="84">
+                  <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ComputeMemSizeVisitor.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="187">
+                  <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SymTabEntry.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="399">
+                  <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FuncEntry.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/FuncEntry.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
@@ -95,7 +132,7 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+        <leaf>
           <file leaf-file-name="SymTable.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
               <provider selected="true" editor-type-id="text-editor">
@@ -121,13 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>symbolDataType</find>
-      <find>m_symtab</find>
-      <find>FParamNode</find>
-      <find>factornode</find>
-      <find>varelemet</find>
-      <find>indexlkst</find>
-      <find>datamem</find>
       <find>ret</find>
       <find>diml</find>
       <find>retv</find>
@@ -145,12 +175,19 @@
       <find>sw r2(r14),r3</find>
       <find>r2</find>
       <find>relexpr</find>
-      <find>arithexpr</find>
-      <find>relexp</find>
       <find>mult</find>
       <find>multop</find>
       <find>adding</find>
       <find>ifstat</find>
+      <find>buf</find>
+      <find>localregister2</find>
+      <find>typenode</find>
+      <find>idnode</find>
+      <find>forstat</find>
+      <find>forstatnode</find>
+      <find>arith</find>
+      <find>arithexpr</find>
+      <find>relexp</find>
     </findStrings>
     <replaceStrings>
       <replace>}</replace>
@@ -178,7 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/models/AST/ClassNode.java" />
         <option value="$PROJECT_DIR$/src/models/AST/DataMemberNode.java" />
         <option value="$PROJECT_DIR$/src/models/AST/DimListNode.java" />
         <option value="$PROJECT_DIR$/src/models/AST/ExprNode.java" />
@@ -218,17 +254,18 @@
         <option value="$PROJECT_DIR$/src/models/SymbolTable/ClassEntry.java" />
         <option value="$PROJECT_DIR$/src/models/SymbolTable/VarEntry.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/SymTabTempVarCreationVisitor.java" />
-        <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
         <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/TagsBasedCodeGenerationVisitor.java" />
         <option value="$PROJECT_DIR$/src/global/Constants.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
-        <option value="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
         <option value="$PROJECT_DIR$/res/output/MoonCode.m" />
+        <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
+        <option value="$PROJECT_DIR$/src/models/SymbolTable/ForEntry.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
-        <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
+        <option value="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
         <option value="$PROJECT_DIR$/res/input/program.txt" />
+        <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
       </list>
     </option>
   </component>
@@ -303,6 +340,13 @@
               <item name="Compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="SymbolTable" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="Visitors" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -325,11 +369,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="models.SymbolTable" />
       <recent name="models.Visitors" />
       <recent name="models.AST" />
       <recent name="utils" />
       <recent name="models" />
-      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Project\Compiler\res\input" />
@@ -447,7 +491,7 @@
       <workItem from="1522439177104" duration="3647000" />
       <workItem from="1522559968040" duration="49154000" />
       <workItem from="1523052143683" duration="20428000" />
-      <workItem from="1523157620995" duration="32218000" />
+      <workItem from="1523157620995" duration="45216000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -638,7 +682,14 @@
       <option name="project" value="LOCAL" />
       <updated>1522878451701</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Code generation working for assign statement, if statment &#10;Also able to get offset of multidimentional var">
+      <created>1523247836461</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1523247836461</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -653,7 +704,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="481449000" />
+    <option name="totallyTimeSpent" value="494447000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -677,20 +728,20 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32546374" sideWeight="0.5030303" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17667045" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25707814" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.82559454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.4969697" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22395274" sideWeight="0.4941691" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22986037" sideWeight="0.4941691" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22310306" sideWeight="0.4969697" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21291053" sideWeight="0.4969697" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1557465" sideWeight="0.5058309" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -803,7 +854,8 @@
     <MESSAGE value="New Branch for new AST visitor .. &#10;For code generation .." />
     <MESSAGE value="Implemented new SymTabCreationVisitor" />
     <MESSAGE value="Fixed minor bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor bugs" />
+    <MESSAGE value="Code generation working for assign statement, if statment &#10;Also able to get offset of multidimentional var" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code generation working for assign statement, if statment &#10;Also able to get offset of multidimentional var" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -828,45 +880,65 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>509</line>
+          <line>585</line>
           <properties />
           <option name="timeStamp" value="371" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>504</line>
+          <line>580</line>
           <properties />
           <option name="timeStamp" value="372" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/SymbolTable/ForEntry.java</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="402" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java</url>
+          <line>239</line>
+          <properties />
+          <option name="timeStamp" value="411" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
+          <line>249</line>
+          <properties />
+          <option name="timeStamp" value="413" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
+          <line>321</line>
+          <properties />
+          <option name="timeStamp" value="416" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="400" />
+      <option name="time" value="417" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression=" node.symtab.m_symlist" />
-        <watch expression="node.getChildren().get(0)" />
-        <watch expression="p_node.symtabentry.symbolType" language="JAVA" />
-        <watch expression="symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION &amp;&amp; symTabEntry.symbolName.equals(varName)" />
-        <watch expression="(symTabEntry.extraData != null &amp;&amp; fParams.equals(symTabEntry.extraData)) " />
+        <watch expression=" node.getChildren().get(1).symtabentry" />
+        <watch expression="node.getChildren().get(1)" />
+        <watch expression="node.getChildren().get(1).getData()" />
         <watch expression="p_node.getType()" />
-        <watch expression="p_node.getData()" />
-        <watch expression="p_node.getChildren().get(0)" />
-        <watch expression="p_node.getChildren().get(0)" language="JAVA" />
-        <watch expression="p_node.getChildren().get(0)" language="JAVA" />
-        <watch expression="p_node.getChildren().get(0)" />
-        <watch expression="p_node.getChildren().get(0)" />
-        <watch expression="node.getChildren().size()" />
-        <watch expression="p_node.getChildren().get(0).m_moonVarName" />
-        <watch expression="&quot;subi &quot; + localregisterFinal + &quot;,&quot; + varElementOffset + &quot;(r14)\n&quot;" language="JAVA" />
-        <watch expression=" node.symtab.lookupName(node.getData()).m_offset" />
+        <watch expression="p_node.getType()" />
+        <watch expression="p_node.getType().equals(Terminal.INT.getData()" />
+        <watch expression="p_node.getChildren().get(1)" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>m_subtable</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>&quot;subi &quot; + localregisterFinal + &quot;,&quot; + varElementOffset + &quot;(r14)\n&quot;</expression-string>
         <language-id>JAVA</language-id>
@@ -912,28 +984,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>LL1ParseTable.Table[43][29]</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/AST/FuncDeclNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/AST/FuncDefListNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/AST/GetStatNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
@@ -1114,22 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/FuncEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/ClassEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1158,6 +1195,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,22 +1207,6 @@
             <element signature="e#463#464#0" expanded="false" />
             <element signature="e#489#490#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="61" column="50" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/VarEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,16 +1226,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="93" column="9" lean-forward="false" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1227,16 +1239,67 @@
         <state relative-caret-position="84">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="false" />
+            <element signature="e#686#687#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/AST/ArithExprNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/AST/ForStatNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/FuncEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTab.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state relative-caret-position="1218">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/ForEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#163#164#0" expanded="true" />
+            <element signature="e#216#217#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/VarEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1249,26 +1312,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/AST/ArithExprNode.java">
+    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="304">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="577" column="5" lean-forward="true" selection-start-line="577" selection-start-column="5" selection-end-line="577" selection-end-column="5" />
+        <state relative-caret-position="124">
+          <caret line="412" column="0" lean-forward="false" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="210" column="0" lean-forward="false" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3529">
+          <caret line="200" column="35" lean-forward="true" selection-start-line="200" selection-start-column="35" selection-end-line="200" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="357" column="5" lean-forward="true" selection-start-line="357" selection-start-column="5" selection-end-line="357" selection-end-column="5" />
+        <state relative-caret-position="406">
+          <caret line="369" column="49" lean-forward="true" selection-start-line="369" selection-start-column="49" selection-end-line="369" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#601#609#0" expanded="true" />
@@ -1276,18 +1357,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        <state relative-caret-position="371">
+          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
           <folding />
         </state>
       </provider>

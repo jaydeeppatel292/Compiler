@@ -59,7 +59,7 @@ public class ComputeMemSizeVisitor extends Visitor {
     public int sizeOfEntry(Node p_node) {
         int size = 0;
         try {
-            if ( p_node.symtabentry.symbolDataType == INT || p_node.getType().equals(Terminal.INT.getData()))
+            if ((p_node.getType()!=null && p_node.getType().equals(Terminal.INT.getData())) || (p_node.symtabentry!=null &&p_node.symtabentry.symbolDataType == INT) || p_node.symtabentry.m_type.equals(Terminal.INT.getData()))
                 size = 4;
             else if (p_node.symtabentry.symbolDataType == FLOAT || p_node.getType().equals(Terminal.FLOAT.getData()))
                 size = 8;
@@ -196,6 +196,23 @@ public class ComputeMemSizeVisitor extends Visitor {
         }
     }
 
+    @Override
+    public void visit(ForStatNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
+        SymTab symTab = node.symtab;
+        while (!symTab.m_name.equals("program")){
+            symTab = symTab.m_uppertable;
+        }
+
+        for (SymTabEntry entry : node.symtab.m_symlist) {
+            entry.m_offset = symTab.m_size - entry.m_size;
+            symTab.m_size -= entry.m_size;
+        }
+    }
     public void visit(FParamNode p_node) {
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
@@ -221,6 +238,29 @@ public class ComputeMemSizeVisitor extends Visitor {
             child.accept(this);
 
         p_node.symtabentry.m_size = this.sizeOfEntry(p_node);
+    }
+
+    @Override
+    public void visit(TypeNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
+    }
+
+
+    @Override
+    public void visit(ArithExprNode node) {
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : node.getChildren())
+            child.accept(this);
+
+        if(node.symtabentry!=null) {
+            node.symtabentry.m_size = this.sizeOfEntry(node);
+        }
+
     }
 
     public void visit(FCallNode p_node) {
@@ -262,6 +302,9 @@ public class ComputeMemSizeVisitor extends Visitor {
         for (Node child : node.getChildren())
             child.accept(this);
 
+        if(node.symtabentry!=null) {
+            node.symtabentry.m_size = this.sizeOfEntry(node);
+        }
 
     }
 
@@ -307,16 +350,6 @@ public class ComputeMemSizeVisitor extends Visitor {
 
     @Override
     public void visit(TermNode node) {
-// propagate accepting the same visitor to all the children
-        // this effectively achieves Depth-First AST Traversal
-        for (Node child : node.getChildren())
-            child.accept(this);
-
-
-    }
-
-    @Override
-    public void visit(TypeNode node) {
 // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
         for (Node child : node.getChildren())
@@ -395,6 +428,9 @@ public class ComputeMemSizeVisitor extends Visitor {
             child.accept(this);
 
 
+        if(node.symtabentry!=null){
+            node.symtabentry.m_size = this.sizeOfEntry(node);
+        }
     }
 
     @Override
@@ -481,15 +517,6 @@ public class ComputeMemSizeVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(ArithExprNode node) {
-// propagate accepting the same visitor to all the children
-        // this effectively achieves Depth-First AST Traversal
-        for (Node child : node.getChildren())
-            child.accept(this);
-
-
-    }
 
     @Override
     public void visit(AssignStatNode node) {
@@ -533,15 +560,7 @@ public class ComputeMemSizeVisitor extends Visitor {
 
     }
 
-    @Override
-    public void visit(ForStatNode node) {
-// propagate accepting the same visitor to all the children
-        // this effectively achieves Depth-First AST Traversal
-        for (Node child : node.getChildren())
-            child.accept(this);
 
-
-    }
 
     @Override
     public void visit(FParamListNode node) {

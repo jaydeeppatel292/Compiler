@@ -10,22 +10,20 @@
 |    =====================================================
 | FUNCTION  | program   | void                      |
 |    =====================================================
-|    | table: program          scope offset: -52         |
+|    | table: program          scope offset: -32         |
 |    =====================================================
-|    | VARIABLE  | max       | int       | 4     | -4    |
-|    | VARIABLE  | a         | int       | 4     | -8    |
-|    | LITVAL    | t1        | int       | 4     | -12   |
-|    | LITVAL    | t2        | int       | 4     | -16   |
-|    | TEMPVAR   | t3        | null      | 4     | -20   |
-|    | LITVAL    | t4        | int       | 4     | -24   |
-|    | TEMPVAR   | t5        | null      | 0     | -24   |
-|    | LITVAL    | t6        | int       | 4     | -28   |
-|    | LITVAL    | t7        | int       | 4     | -32   |
-|    | TEMPVAR   | t8        | null      | 4     | -36   |
-|    | LITVAL    | t9        | int       | 4     | -40   |
-|    | TEMPVAR   | t10       | null      | 0     | -40   |
-|    | LITVAL    | t11       | int       | 4     | -44   |
-|    | LITVAL    | t12       | int       | 4     | -48   |
-|    | TEMPVAR   | t13       | null      | 4     | -52   |
+|    | VARIABLE  | max       | int       | 4     | -28   |
+|    | VARIABLE  | a         | int       | 4     | -32   |
+|    | FOR       | For       |
+|    |    =====================================================
+|    |    | table: For              scope offset: 0           |
+|    |    =====================================================
+|    |    | VARIABLE  | i         | int       | 4     | -4    |
+|    |    | LITVAL    | t1        | int       | 4     | -8    |
+|    |    | LITVAL    | t2        | int       | 4     | -12   |
+|    |    | TEMPVAR   | t3        | null      | 4     | -16   |
+|    |    | LITVAL    | t4        | int       | 4     | -20   |
+|    |    | TEMPVAR   | t5        | null      | 4     | -24   |
+|    |    =====================================================
 |    =====================================================
 =====================================================

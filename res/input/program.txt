@@ -5,12 +5,8 @@ class Utility{
 program {
     int max;
     int a;
-    if(5*3>10) then {
-        max= 10*5+45;
-        put(max);
-    }
-    else {
-        max= 10*5;
-        put(max);
+
+    for(int i=0;i<5;i=i+1){
+        put(i);
     };
 };
