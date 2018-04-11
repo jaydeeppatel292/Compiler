@@ -672,6 +672,8 @@ public class SymTabCreationVisitor extends Visitor {
         p_node.m_moonVarName = tempvarname;
         String vartype = p_node.getType();
         p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.RETVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
+        // TODO DYNAMIC GENERATE IN TYPE CHECKING
+        p_node.symtabentry.m_type = Terminal.INT.getData();
         p_node.symtabentry.m_entry = "retval:" + tempvarname + " " + p_node.getType();
         p_node.symtab.addEntry(p_node.symtabentry);
     }

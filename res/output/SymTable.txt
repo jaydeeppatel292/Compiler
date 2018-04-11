@@ -10,27 +10,25 @@
 |    =====================================================
 | FUNCTION  | program   | void                      |
 |    =====================================================
-|    | table: program          scope offset: -28         |
+|    | table: program          scope offset: -16         |
 |    =====================================================
 |    | VARIABLE  | max       | int       | 4     | -4    |
 |    | VARIABLE  | a         | int       | 4     | -8    |
-|    | LITVAL    | t6        | int       | 4     | -12   |
-|    | LITVAL    | t7        | int       | 4     | -16   |
-|    | RETVAL    | t8        | null      | 0     | -16   |
-|    | LITVAL    | t9        | int       | 4     | -20   |
-|    | LITVAL    | t10       | int       | 4     | -24   |
-|    | TEMPVAR   | t11       | null      | 4     | -28   |
+|    | LITVAL    | t8        | int       | 4     | -12   |
+|    | RETVAL    | t9        | int       | 4     | -16   |
 |    =====================================================
-| FUNCTION  | getMin    | int                       |
+| FUNCTION  | factorial | int                       |
 |    =====================================================
-|    | table: getMin           scope offset: -28         |
+|    | table: factorial        scope offset: -40         |
 |    =====================================================
 |    | PARAMETER | a         | int       | 4     | -8    |
-|    | PARAMETER | b         | int       | 4     | -12   |
+|    | VARIABLE  | b         | int       | 4     | -12   |
 |    | LITVAL    | t1        | int       | 4     | -16   |
 |    | TEMPVAR   | t2        | null      | 4     | -20   |
 |    | LITVAL    | t3        | int       | 4     | -24   |
 |    | TEMPVAR   | t4        | null      | 4     | -28   |
-|    | RETVAL    | t5        | null      | 0     | -28   |
+|    | RETVAL    | t5        | int       | 4     | -32   |
+|    | TEMPVAR   | t6        | null      | 4     | -36   |
+|    | LITVAL    | t7        | int       | 4     | -40   |
 |    =====================================================
 =====================================================
