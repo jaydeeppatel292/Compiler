@@ -234,6 +234,10 @@ public class TypeCheckingVisitor extends Visitor {
                     SymTabEntry funcType = getTypeForFuncCall(type, currentSymTable);
                     if (funcType != null) {
                         nodeType = funcType.returnType;
+                        // Set RETVAL symtab entry type
+                        if(child.getChildren().size()>0 && child.getChildren().get(0) instanceof FCallNode){
+                            child.getChildren().get(0).symtabentry.m_type = funcType.m_type;
+                        }
                     } else {
                         node.setType("typeerror");
                         node.generatePosition();

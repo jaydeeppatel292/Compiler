@@ -517,7 +517,8 @@ public class SymTabCreationVisitor extends Visitor {
             default:
                 node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.CLASS;
         }
-        addSymbolEntryInSymbolTable(node.symtab, node.symtabentry);
+
+        addFparamEntryInSymbolTable(node.symtab, node.symtabentry);
     }
 
 
@@ -535,6 +536,41 @@ public class SymTabCreationVisitor extends Visitor {
         if (!isSymAlreadyDeclared) {
             symTab.addEntry(needToAddSymTabEntry);
         }
+    }
+    public void addFparamEntryInSymbolTable(SymTab symTab, SymTabEntry needToAddSymTabEntry) {
+        Node createdFromNode = needToAddSymTabEntry.createdFromNode;
+        boolean isSymAlreadyDeclared = false;
+        int fparamsCount=0;
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
+            if(symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER){
+                fparamsCount++;
+            }
+            if (symTabEntry.m_entry.equals(needToAddSymTabEntry.m_entry)) {
+                createdFromNode.generatePosition();
+                LexicalResponseManager.getInstance().addErrorMessage(createdFromNode.lineNumber, createdFromNode.colNumber, "SemanticError", "Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                System.out.println("Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                isSymAlreadyDeclared = true;
+            }
+        }
+        if (!isSymAlreadyDeclared) {
+            symTab.addEntry(fparamsCount,needToAddSymTabEntry);
+        }
+    }
+
+    public boolean isSymbolAlreadyExist(SymTab symTab, SymTabEntry needToAddSymTabEntry,boolean needToThrowError){
+        Node createdFromNode = needToAddSymTabEntry.createdFromNode;
+        boolean isSymAlreadyDeclared = false;
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
+            if (symTabEntry.m_entry.equals(needToAddSymTabEntry.m_entry)) {
+                if(needToThrowError) {
+                    createdFromNode.generatePosition();
+                    LexicalResponseManager.getInstance().addErrorMessage(createdFromNode.lineNumber, createdFromNode.colNumber, "SemanticError", "Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                    System.out.println("Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -672,8 +708,6 @@ public class SymTabCreationVisitor extends Visitor {
         p_node.m_moonVarName = tempvarname;
         String vartype = p_node.getType();
         p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.RETVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
-        // TODO DYNAMIC GENERATE IN TYPE CHECKING
-        p_node.symtabentry.m_type = Terminal.INT.getData();
         p_node.symtabentry.m_entry = "retval:" + tempvarname + " " + p_node.getType();
         p_node.symtab.addEntry(p_node.symtabentry);
     }

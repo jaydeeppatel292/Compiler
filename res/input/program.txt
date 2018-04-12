@@ -3,19 +3,18 @@ class Utility{
 };
 
 int factorial(int a){
-    int b;
-    if(a>1) then {
-       return(a * factorial(a-1));
-    }
-    else {
-        return (1);
+    if(a==1) then {
+        return(1);
+    }else{
+        return ( a * factorial(a-1));
     };
 };
 
 program {
-    int max;
-    int a;
-    a = 5;
-    a = factorial(a);
-    put(a);
+   int a;
+   a=5;
+   a = a+1;
+   put(a);
+   a = factorial(a);
+   put(a);
 };
