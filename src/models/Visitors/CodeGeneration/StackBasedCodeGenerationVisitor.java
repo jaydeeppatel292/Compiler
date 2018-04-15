@@ -6,6 +6,7 @@ import models.SymbolTable.SymTab;
 import models.SymbolTable.SymTabEntry;
 import models.Terminal;
 import models.Visitors.Visitor;
+import utils.ASTManager;
 
 import javax.xml.crypto.Data;
 import java.io.File;
@@ -659,7 +660,9 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         }
         SymTabEntry tableentryofcalled = p_node.symtab.lookupFunction(p_node.getData(), paramsDec);
         if (tableentryofcalled.m_subtable == null || !(tableentryofcalled instanceof FuncEntry)) {
-            return;
+            tableentryofcalled = generateCodeForObjectReference(p_node,paramsDec);
+            if(tableentryofcalled==null || tableentryofcalled.m_subtable ==null)
+                return;
         }
         FuncEntry tableentryofcalledfunction =(FuncEntry) tableentryofcalled;
 
@@ -684,13 +687,14 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
                     SymTabEntry symTabEntry = varNode.symtab.lookupName(varNode.getData());
                     String localregisterVarNode = getRegisterOfVar(varNode);
                     if (symTabEntry.m_entry != null && tableentryofcalledfunction.m_params != null && tableentryofcalledfunction.m_params.size() > indexofparam && tableentryofcalledfunction.m_params.get(indexofparam).m_size > 4) {
-                        int startingOffset = symTabEntry.m_offset + tableentryofcalledfunction.m_params.get(indexofparam).m_size - 4;
+                        int startingOffset = 0;
+                        int endOffset = tableentryofcalledfunction.m_params.get(indexofparam).m_size - 4;
                         int offsetofparam = p_node.symtab.m_size + tableentryofcalledfunction.m_subtable.m_symlist.get(indexofparam).m_offset;
                         m_moonExecCode += m_mooncodeindent + "% Copying data from params to function called stack \n";
-                        while (startingOffset > symTabEntry.m_offset) {
+                        while (startingOffset <= endOffset) {
                             m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + ", " + startingOffset + "(" + localregisterVarNode + ")\n";
                             m_moonExecCode += m_mooncodeindent + "sw " + offsetofparam + "(r14)," + localregister1 + "\n";
-                            startingOffset -= 4;
+                            startingOffset += 4;
                             offsetofparam += 4;
                         }
                     } else {
@@ -716,6 +720,37 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + "," + (p_node.symtab.m_size) + "(r14)\n";
         m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister1 + "\n";
         this.m_registerPool.push(localregister1);
+    }
+
+
+    private SymTabEntry generateCodeForObjectReference(Node fCallNode,String paramsDec){
+        VarNode varNode =getVarNodeFromFcallNode(fCallNode);
+        SymTab symTab = varNode.symtab;
+        if(varNode!=null){
+            for (int i = 0; i < varNode.getChildren().size(); i++) {
+                Node child = varNode.getChildren().get(i);
+                SymTabEntry symTabEntry = symTab.lookupName(child.getData());
+                if(symTabEntry.symbolDataType == SymTabEntry.SymbolDataType.CLASS){
+                    symTab  = ASTManager.getInstance().getProgNode().symtab.lookupName(symTabEntry.m_type).m_subtable;
+                    if(symTab==null){
+                        return null;
+                    }
+                }else if(symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION){
+                    return symTabEntry;
+                }
+            }
+        }
+        return null;
+    }
+
+    private VarNode getVarNodeFromFcallNode(Node node) {
+        while(!(node instanceof VarNode)){
+            if(node.getParent()==null){
+                return null;
+            }
+            node = node.getParent();
+        }
+        return (VarNode) node;
     }
 
 

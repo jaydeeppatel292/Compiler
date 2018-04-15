@@ -152,7 +152,7 @@ public class TypeCheckingVisitor extends Visitor {
 
         String leftOperandType = node.getChildren().get(0).getType();
         String rightOperandType = node.getChildren().get(1).getType();
-        if (leftOperandType.equals(rightOperandType))
+        if (leftOperandType!=null && leftOperandType.equals(rightOperandType))
             node.setType(leftOperandType);
         else {
             node.setType("typeerror");

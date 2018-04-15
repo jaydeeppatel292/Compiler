@@ -51,6 +51,9 @@ public class ComputeMemSizeVisitor extends Visitor {
                 size += getSizeOfClassObject(classSymTabEntry.extraData);
             }
         }
+        for(SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab){
+            size += getSizeOfClassObject(inheritedSymTab.symbolName);
+        }
         symTabEntry.m_subtable.m_size = size;
         return size;
     }

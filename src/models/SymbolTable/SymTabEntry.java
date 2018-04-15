@@ -53,6 +53,27 @@ public class SymTabEntry {
 	public void addInheritedSymTab(SymTabEntry symTab){
 		inheritedSymTab.add(symTab);
 	}
+
+	public SymTabEntry lookupClass(SymTabEntry symTabEntry,String p_className){
+
+		if(symTabEntry.m_subtable!=null)
+		{
+//			for(SymTabEntry)
+		}
+
+		return lookupInheritedClass(symTabEntry,p_className);
+	};
+	public SymTabEntry lookupInheritedClass(SymTabEntry symTabEntry,String p_tolookup) {
+		for (SymTabEntry rec : inheritedSymTab) {
+			if (rec.symbolName.equals(p_tolookup)) {
+				return rec;
+			}
+			return lookupInheritedClass(rec, p_tolookup);
+		}
+		return null;
+	}
+
+
 	public enum SymbolType{
 		FUNCTION,
 		CLASS,

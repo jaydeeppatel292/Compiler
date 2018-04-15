@@ -9,9 +9,9 @@
       <change beforePath="$PROJECT_DIR$/res/output/SymTable.txt" afterPath="$PROJECT_DIR$/res/output/SymTable.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/derivation.txt" afterPath="$PROJECT_DIR$/res/output/derivation.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/token.txt" afterPath="$PROJECT_DIR$/res/output/token.txt" />
-      <change beforePath="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" afterPath="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" afterPath="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
       <change beforePath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,26 +30,26 @@
     <favorites_list name="Compiler" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8040455">
+    <splitter split-orientation="horizontal" split-proportion="0.70456004">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.53196526">
+        <splitter split-orientation="horizontal" split-proportion="0.5729927">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-              <file leaf-file-name="MoonCode.m" pinned="false" current-in-tab="true">
+              <file leaf-file-name="MoonCode.m" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="252">
-                      <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+                    <state relative-caret-position="240">
+                      <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="StackBasedCodeGenerationVisitor.java" pinned="false" current-in-tab="false">
+              <file leaf-file-name="StackBasedCodeGenerationVisitor.java" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="391">
-                      <caret line="454" column="55" lean-forward="false" selection-start-line="454" selection-start-column="55" selection-end-line="454" selection-end-column="55" />
+                    <state relative-caret-position="339">
+                      <caret line="739" column="17" lean-forward="true" selection-start-line="739" selection-start-column="17" selection-end-line="739" selection-end-column="17" />
                       <folding>
                         <element signature="imports" expanded="true" />
                       </folding>
@@ -57,11 +57,21 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="ComputeMemSizeVisitor.java" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
+              <file leaf-file-name="SymTab.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTab.java">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="2919">
-                      <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+                    <state relative-caret-position="168">
+                      <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="SymTabEntry.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="187">
+                      <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
                       <folding />
                     </state>
                   </provider>
@@ -74,8 +84,8 @@
               <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/res/input/program.txt">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="336">
-                      <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+                    <state relative-caret-position="110">
+                      <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -90,8 +100,8 @@
           <file leaf-file-name="SymTable.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="189">
+                  <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
@@ -112,9 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>idnode</find>
-      <find>forstat</find>
-      <find>relexp</find>
       <find>sw</find>
       <find>arithexpr</find>
       <find>arithex</find>
@@ -127,7 +134,6 @@
       <find>retval</find>
       <find>ent</find>
       <find>-0</find>
-      <find>fcall</find>
       <find>multop</find>
       <find>r5</find>
       <find>r6</find>
@@ -142,6 +148,10 @@
       <find>assignstat</find>
       <find>16</find>
       <find>fparam</find>
+      <find>varnode</find>
+      <find>fcall</find>
+      <find>varelementnode</find>
+      <find>b :=</find>
     </findStrings>
     <replaceStrings>
       <replace>}</replace>
@@ -210,15 +220,15 @@
         <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/TagsBasedCodeGenerationVisitor.java" />
         <option value="$PROJECT_DIR$/src/global/Constants.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
         <option value="$PROJECT_DIR$/src/models/SymbolTable/ForEntry.java" />
-        <option value="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
         <option value="$PROJECT_DIR$/res/input/program2.txt" />
-        <option value="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
         <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTab.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java" />
         <option value="$PROJECT_DIR$/res/output/MoonCode.m" />
+        <option value="$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java" />
+        <option value="$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
+        <option value="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
         <option value="$PROJECT_DIR$/res/input/program.txt" />
       </list>
     </option>
@@ -230,9 +240,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="516" />
+    <option name="y" value="38" />
     <option name="width" value="976" />
-    <option name="height" value="1038" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -453,7 +464,7 @@
       <workItem from="1522559968040" duration="49154000" />
       <workItem from="1523052143683" duration="20428000" />
       <workItem from="1523157620995" duration="86843000" />
-      <workItem from="1523505145423" duration="795000" />
+      <workItem from="1523505145423" duration="17006000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -686,7 +697,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523466155254</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Fixed bug : a =a +1">
+      <created>1523509824930</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1523509824930</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -701,7 +719,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="536869000" />
+    <option name="totallyTimeSpent" value="553080000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -725,19 +743,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32546374" sideWeight="0.5030303" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1585504" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22989808" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.82559454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.4969697" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15252417" sideWeight="0.4941691" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16380237" sideWeight="0.4941691" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31030577" sideWeight="0.4969697" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5186863" sideWeight="0.4969697" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1557465" sideWeight="0.5058309" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -795,7 +813,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated atocc format" />
     <MESSAGE value="added auto create folders" />
     <MESSAGE value="generated syntax directed translation with skip error functionality .." />
     <MESSAGE value="working on AST generation" />
@@ -820,7 +837,8 @@
     <MESSAGE value="implemented recursive function call ..&#10;Added subtraction arithmetic expressions .." />
     <MESSAGE value="Added And,Or logical operator&#10;Added div,sub arithmetic operator" />
     <MESSAGE value="Completed recursion with return ..&#10;Added mulop with variable also .." />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed recursion with return ..&#10;Added mulop with variable also .." />
+    <MESSAGE value="Fixed bug : a =a +1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug : a =a +1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -851,57 +869,53 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>578</line>
+          <line>579</line>
           <properties />
           <option name="timeStamp" value="418" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>171</line>
+          <line>172</line>
           <properties />
           <option name="timeStamp" value="454" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
-          <line>454</line>
+          <line>729</line>
           <properties />
-          <option name="timeStamp" value="457" />
+          <option name="timeStamp" value="463" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="465" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java</url>
+          <line>728</line>
+          <properties />
+          <option name="timeStamp" value="467" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="458" />
+      <option name="time" value="468" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression=" node.getChildren().get(1).symtabentry" />
-        <watch expression="node.getChildren().get(1)" />
-        <watch expression="node.getChildren().get(1).getData()" />
-        <watch expression="p_node.getType()" />
-        <watch expression="p_node.getType()" />
-        <watch expression="p_node.getType().equals(Terminal.INT.getData()" />
-        <watch expression="p_node.getChildren().get(1)" />
-        <watch expression="p_node.symtab.lookupName(p_node.getChildren().get(1).m_moonVarName).m_offset" />
-        <watch expression=" child.getChildren().get(0).symtabentry.m_type" />
-        <watch expression="child.getChildren().get(0).symtabentry" />
-        <watch expression="p_node.getType().split(&quot;#&quot;)" />
-        <watch expression="varNode.symtab.lookupName(varNode.getData())" />
-        <watch expression="offsetofparam" />
-        <watch expression="p_node.symtab.m_size + tableentryofcalledfunction.m_subtable.m_symlist.get(indexofparam).m_offset" />
-        <watch expression="tableentryofcalledfunction.m_subtable.m_symlist.get(indexofparam)" />
-        <watch expression="startingOffset&lt;symTabEntry.m_offset" />
-        <watch expression="p_node.symtab.m_size + tableentryofcalledfunction.m_subtable.m_symlist.get(indexofparam).m_offset" />
-        <watch expression="tableentryofcalledfunction" />
-        <watch expression="tableentryofcalledfunction.m_params.get(indexofparam).m_size" />
-        <watch expression="p_node.getChildren().get(1).m_moonVarName" />
-        <watch expression="p_node.getChildren().get(1).m_moonVarName" />
-        <watch expression="p_node.symtab.lookupName(p_node.getChildren().get(1).m_moonVarName)" language="JAVA" />
+        <watch expression="((VarNode) varNode).symtab.lookupName(&quot;myA&quot;)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>((VarNode) varNode).symtab.lookupName(&quot;myA&quot;)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>p_node.symtab.lookupName(p_node.getChildren().get(1).m_moonVarName)</expression-string>
         <language-id>JAVA</language-id>
@@ -944,11 +958,6 @@
       </expression>
       <expression>
         <expression-string>fndefelt.symtabentry.m_entry.equals(symTabEntry.m_entry)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>lexeme</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1116,6 +1125,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="5" column="10" lean-forward="false" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,6 +1156,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1194,6 +1205,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1218,24 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="238" column="0" lean-forward="false" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-672">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/input/program2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -1250,72 +1244,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
-          <folding>
-            <element signature="e#736#737#0" expanded="false" />
-            <element signature="e#774#775#0" expanded="false" />
-            <element signature="e#833#834#0" expanded="false" />
-            <element signature="e#877#878#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/AST.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2378">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTab.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="168">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Visitors/SymTabCreationVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="542" column="0" lean-forward="false" selection-start-line="541" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2919">
-          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="551" column="38" lean-forward="false" selection-start-line="551" selection-start-column="38" selection-end-line="551" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/models/SymbolTable/SymTabEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="454" column="55" lean-forward="false" selection-start-line="454" selection-start-column="55" selection-end-line="454" selection-end-column="55" />
+        <state relative-caret-position="187">
+          <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/TypeCheckingVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="180" column="48" lean-forward="true" selection-start-line="180" selection-start-column="48" selection-end-line="180" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
+    <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="240">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
+    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="110">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/output/SymTable.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="57" column="20" lean-forward="true" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="739" column="17" lean-forward="true" selection-start-line="739" selection-start-column="17" selection-end-line="739" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,20 +1,26 @@
-class Utility{
+class InheritedUtility{
+    int a1;
+    int a2;
+    int a3;
+};
+class Utility:InheritedUtility,MyA{
     int var1;
+    MyA a;
+};
+class MyA{
+    int a;
+    int myFunc(int a);
+
 };
 
-int factorial(int a){
-    if(a==1) then {
-        return(1);
-    }else{
-        return ( a * factorial(a-1));
-    };
+int MyA:: myFunc(int a){
+    return (a*5);
 };
 
 program {
    int a;
+   Utility utility;
    a=5;
-   a = a+1;
-   put(a);
-   a = factorial(a);
+   a = utility.a.myFunc(a);
    put(a);
 };
