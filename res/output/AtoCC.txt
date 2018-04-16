@@ -1,1 +1,1 @@
-class id { int id ; int id ; int id ; } ; class id : id , id { int id ; id id ; } ; class id { int id ; int id ( int id ) ; } ; int id sr id ( int id ) { return ( id * integer ) ; } ; program { int id ; id id ; id = integer ; id = id . id . id ( id ) ; put ( id ) ; } ; 
+class id { int id ; int id ; } ; int id ( int id ) { if ( id eq integer ) then { return ( integer ) ; } else { return ( id * id ( id - integer ) ) ; } ; } ; program { int id ; int id ; id = integer ; id = id ( id ) ; put ( id ) ; } ; 

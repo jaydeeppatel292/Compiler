@@ -132,7 +132,22 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
                         isDataMember = true;
                     }
                 } else {
-                    m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ",r14," + varElementOffset + "\n";
+                    if(node.getChildren().size()>1){
+                        int relativeOffset = varElementOffset+getSizeOfVarElement(varElementNode,searchSymTab);
+                        m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ","+localregisterFinal+"," + relativeOffset + "\n";
+                    }else {
+                        m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ",r14," + varElementOffset + "\n";
+                    }
+                    if(searchSymTab==null){
+                        searchSymTab = varElementNode.symtab;
+                    }
+                    SymTabEntry varElementSymTab = searchSymTab.lookupName(varElementNode.getData());
+                    if(varElementSymTab!=null && varElementSymTab.symbolDataType== SymTabEntry.SymbolDataType.CLASS && varElementSymTab.m_type!=null && !varElementSymTab.m_type.isEmpty()){
+                        SymTab classSymTab  = ASTManager.getInstance().getProgNode().symtab.lookupName(varElementSymTab.m_type).m_subtable;
+                        if(classSymTab!=null){
+                            searchSymTab = classSymTab;
+                        }
+                    }
                     if (node.getChildren().size() > 1) {
                         isDataMember = true;
                     } else {
@@ -149,6 +164,21 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         return localregisterFinal;
     }
 
+    private int getSizeOfVarElement(VarElementNode varElementNode, SymTab searchSymTab){
+        if (searchSymTab == null) {
+            searchSymTab = varElementNode.symtab;
+        }
+        if (varElementNode.getChildren().get(0) instanceof DataMemberNode) {
+            DataMemberNode dataMemberNode = (DataMemberNode) varElementNode.getChildren().get(0);
+            Node idNode = dataMemberNode.getChildren().get(0);
+            SymTabEntry symTabEntry = searchSymTab.lookupName(idNode.m_moonVarName);
+            if(symTabEntry.symbolDataType == SymTabEntry.SymbolDataType.CLASS)
+                return symTabEntry.m_size;
+            else
+                return 0;
+        }
+        return 0;
+    }
 
     public int getOffsetOfVarElement(VarElementNode varElementNode, SymTab searchSymTab) {
         if (searchSymTab == null) {
@@ -723,6 +753,7 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
     }
 
 
+    // TODO paramsDEC need to check with symtabentry ...
     private SymTabEntry generateCodeForObjectReference(Node fCallNode,String paramsDec){
         VarNode varNode =getVarNodeFromFcallNode(fCallNode);
         SymTab symTab = varNode.symtab;
@@ -736,7 +767,9 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
                         return null;
                     }
                 }else if(symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION){
-                    return symTabEntry;
+                    // TODO test if working or not ..
+                    return symTab.lookupFunction(child.getData(),paramsDec);
+//                    return symTabEntry;
                 }
             }
         }

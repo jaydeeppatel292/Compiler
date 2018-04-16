@@ -1,26 +1,25 @@
-class InheritedUtility{
-    int a1;
-    int a2;
-    int a3;
-};
-class Utility:InheritedUtility,MyA{
-    int var1;
-    MyA a;
-};
-class MyA{
+// Code generation : Recursion program of Factorial
+
+class Utility{
     int a;
-    int myFunc(int a);
-
+    int b;
 };
 
-int MyA:: myFunc(int a){
-    return (a*5);
+int factorial(int n){
+    if(n == 1) then {
+       return (1);
+    }else{
+       return (n*factorial(n-1));
+    };
 };
+
 
 program {
-   int a;
-   Utility utility;
-   a=5;
-   a = utility.a.myFunc(a);
-   put(a);
+   int n;
+   int ans;
+   n= 5;
+   // Call recursive function ...
+   ans = factorial(n);
+   put(ans);
+
 };

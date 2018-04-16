@@ -77,7 +77,7 @@ public class SymTab {
         for (int i = 0; i < this.tablelevel; i++)
             prelinespacing += "|    ";
         stringtoreturn += "\n" + prelinespacing + "=====================================================\n";
-        stringtoreturn += prelinespacing + String.format("%-25s", "| table: " + m_name) + String.format("%-27s", " scope offset: " + m_size) + "|\n";
+        stringtoreturn += prelinespacing + String.format("%-25s", "| table: " + m_name) + String.format("%-27s", " scope offset: " + Math.abs(m_size)) + "|\n";
         stringtoreturn += prelinespacing + "=====================================================\n";
         for (int i = 0; i < m_symlist.size(); i++) {
             stringtoreturn += prelinespacing + m_symlist.get(i).toString() + '\n';
@@ -108,7 +108,7 @@ public class SymTab {
 //				System.out.print(SymTab.tablelevel);
 				for (int k = 0; k < SymTab.tablelevel; k++)
 					stringtoreturn += toindent;
-				stringtoreturn += m_symlist.get(i).m_subtable.toString() + '\n'; 
+				stringtoreturn += m_symlist.get(i).m_subtable.toString() + '\n';
 			}
 		}
 		for (int i = 0; i < SymTab.tablelevel; i++)

@@ -51,7 +51,7 @@ public class ComputeMemSizeVisitor extends Visitor {
                 size += getSizeOfClassObject(classSymTabEntry.extraData);
             }
         }
-        for(SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab){
+        for(SymTabEntry inheritedSymTab : symTabEntry.multiLevelInheritedSymTab){
             size += getSizeOfClassObject(inheritedSymTab.symbolName);
         }
         symTabEntry.m_subtable.m_size = size;
@@ -145,6 +145,9 @@ public class ComputeMemSizeVisitor extends Visitor {
         // compute total size and offsets along the way
         // this should be node on all nodes that represent
         // a scope and contain their own table
+
+        p_node.symtab.m_size = 0;
+
         for (SymTabEntry entry : p_node.symtab.m_symlist) {
             entry.m_offset = p_node.symtab.m_size - entry.m_size;
             p_node.symtab.m_size -= entry.m_size;
