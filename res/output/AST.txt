@@ -38,10 +38,10 @@ ProgNode                                                                        
                           DataMemberNode                                                             | n                 | DATA#n#0  |               | 
                             IdNode                                                                   | n                 |           |               | 
                             IndexListNode                                                            |                   | 0         |               | 
-                ArithExprNode                                                                        | 1                 | int       |               | 
-                  TermNode                                                                           | 1                 | int       |               | 
-                    FactorNode                                                                       | 1                 | int       |               | 
-                      NumNode                                                                        | 1                 | int       |               | litval:t1 int
+                ArithExprNode                                                                        | 0                 | int       |               | 
+                  TermNode                                                                           | 0                 | int       |               | 
+                    FactorNode                                                                       | 0                 | int       |               | 
+                      NumNode                                                                        | 0                 | int       |               | litval:t1 int
             StatBlockNode                                                                            |                   |           |               | 
               StatementNode                                                                          |                   |           |               | 
                 ReturnStatNode                                                                       |                   |           |               | 
@@ -91,17 +91,23 @@ ProgNode                                                                        
       IdNode                                                                                         | ans               |           |               | 
       DimListNode                                                                                    |                   |           |               | 
     StatementNode                                                                                    |                   |           |               | 
-      AssignStatNode                                                                                 | =                 | int       |               | 
+      GetStatNode                                                                                    |                   |           |               | 
         VarNode                                                                                      | n                 | int       |               | 
           VarElementNode                                                                             | n                 | DATA#n#0  |               | 
             DataMemberNode                                                                           | n                 | DATA#n#0  |               | 
               IdNode                                                                                 | n                 |           |               | 
               IndexListNode                                                                          |                   | 0         |               | 
-        ExprNode                                                                                     | 5                 | int       |               | 
-          ArithExprNode                                                                              | 5                 | int       |               | 
-            TermNode                                                                                 | 5                 | int       |               | 
-              FactorNode                                                                             | 5                 | int       |               | 
-                NumNode                                                                              | 5                 | int       |               | litval:t8 int
+    StatementNode                                                                                    |                   |           |               | 
+      PutStatNode                                                                                    |                   |           |               | 
+        ExprNode                                                                                     | n                 | int       |               | 
+          ArithExprNode                                                                              | n                 | int       |               | 
+            TermNode                                                                                 | n                 | int       |               | 
+              FactorNode                                                                             | n                 | int       |               | 
+                VarNode                                                                              | n                 | int       |               | 
+                  VarElementNode                                                                     | n                 | DATA#n#0  |               | 
+                    DataMemberNode                                                                   | n                 | DATA#n#0  |               | 
+                      IdNode                                                                         | n                 |           |               | 
+                      IndexListNode                                                                  |                   | 0         |               | 
     StatementNode                                                                                    |                   |           |               | 
       AssignStatNode                                                                                 | =                 | int       |               | 
         VarNode                                                                                      | ans               | int       |               | 
@@ -115,7 +121,7 @@ ProgNode                                                                        
               FactorNode                                                                             | factorial         | int       |               | 
                 VarNode                                                                              | factorial         | int       |               | 
                   VarElementNode                                                                     | factorial         | FCALL#factorial#int_ |               | 
-                    FCallNode                                                                        | factorial         | FCALL#factorial#int_ |               | retval:t9 null
+                    FCallNode                                                                        | factorial         | FCALL#factorial#int_ |               | retval:t8 null
                       IdNode                                                                         | factorial         |           |               | 
                       AParamsNode                                                                    |                   | int_      |               | 
                         ExprNode                                                                     | n                 | int       |               | 

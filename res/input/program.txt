@@ -6,7 +6,7 @@ class Utility{
 };
 
 int factorial(int n){
-    if(n == 1) then {
+    if(n == 0) then {
        return (1);
     }else{
        return (n*factorial(n-1));
@@ -17,7 +17,7 @@ int factorial(int n){
 program {
    int n;
    int ans;
-   n= 5;
+   get(n);
    // Call recursive function ...
    ans = factorial(n);
    put(ans);

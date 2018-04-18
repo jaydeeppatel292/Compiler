@@ -514,6 +514,7 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonDataCode += m_mooncodeindent + "% buffer space used for console output\n";
         // buffer used by the lib.m subroutines
         m_moonDataCode += String.format("%-10s", "buf") + "res 20\n";
+        m_moonDataCode += String.format("%-10s", "m2") + "db  13, 10, 0\n";
         // halting point of the entire program
         m_moonExecCode += m_mooncodeindent + "hlt\n";
     }
@@ -567,13 +568,58 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonExecCode += m_mooncodeindent + "sw -8(r14),r13\n";
         m_moonExecCode += m_mooncodeindent + "% output to console\n";
         m_moonExecCode += m_mooncodeindent + "jl r15, putstr\n";
+
+        // Add new line
+        m_moonExecCode += m_mooncodeindent + "addi " + localregister2 + ",r0, m2\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14),"+localregister2+"\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15,putstr\n";
+
         // make the stack frame pointer point back to the current function's stack frame
+
         m_moonExecCode += m_mooncodeindent + "subi r14,r14," + p_node.symtab.m_size + "\n";
+
+
         //deallocate local register
         this.m_registerPool.push(localregister1);
         this.m_registerPool.push(localregister2);
     }
 
+    @Override
+    public void visit(GetStatNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        // First, propagate accepting the same visitor to all the children
+        // This effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren())
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        // create a local variable and allocate a register to this subcomputation
+
+        String localregister2 = this.m_registerPool.pop();
+        String localregister1 = this.m_registerPool.pop();
+
+        //generate code
+        m_moonExecCode += m_mooncodeindent + "% processing: get(" + p_node.getChildren().get(0).m_moonVarName + ")\n";
+        m_moonExecCode += m_mooncodeindent + "% get value from user\n";
+        m_moonExecCode += m_mooncodeindent + "addi r14,r14," + p_node.symtab.m_size + "\n";
+        m_moonExecCode += m_mooncodeindent + "addi " + localregister2 + ",r0, buf\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14)," + localregister2 + "\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, getstr\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, strint\n";
+        m_moonExecCode += m_mooncodeindent + "subi r14,r14," + p_node.symtab.m_size + "\n";
+
+        if(p_node.getChildren().size()>0) {
+            VarNode varNode = (VarNode) p_node.getChildren().get(0);
+            if (varNode != null) {
+                String localregisterTemp = getRegisterOfVar(varNode);
+                m_moonExecCode += m_mooncodeindent + "sw -0(" + localregisterTemp + "),r13\n";
+                this.m_registerPool.push(localregisterTemp);
+            }
+        }
+        //deallocate local register
+        this.m_registerPool.push(localregister1);
+        this.m_registerPool.push(localregister2);
+    }
 
     @Override
     public void visit(IfStatNode node) {
@@ -879,15 +925,6 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
 
     @Override
     public void visit(AParamsNode node) {
-        // propagate accepting the same visitor to all the children
-        // this effectively achieves Depth-First AST Traversal
-        for (Node child : node.getChildren())
-            child.accept(this);
-
-    }
-
-    @Override
-    public void visit(GetStatNode node) {
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
         for (Node child : node.getChildren())
