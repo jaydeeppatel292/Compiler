@@ -4,15 +4,7 @@
     <list default="true" id="9f04583c-3596-43c5-9fa7-baf658a2177e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/res/input/program.txt" afterPath="$PROJECT_DIR$/res/input/program.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/AST.txt" afterPath="$PROJECT_DIR$/res/output/AST.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/AtoCC.txt" afterPath="$PROJECT_DIR$/res/output/AtoCC.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/SymTable.txt" afterPath="$PROJECT_DIR$/res/output/SymTable.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/derivation.txt" afterPath="$PROJECT_DIR$/res/output/derivation.txt" />
       <change beforePath="$PROJECT_DIR$/res/output/error.txt" afterPath="$PROJECT_DIR$/res/output/error.txt" />
-      <change beforePath="$PROJECT_DIR$/res/output/token.txt" afterPath="$PROJECT_DIR$/res/output/token.txt" />
-      <change beforePath="$PROJECT_DIR$/src/TokenGenerator.java" afterPath="$PROJECT_DIR$/src/TokenGenerator.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" afterPath="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
       <change beforePath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" afterPath="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,7 +23,7 @@
     <favorites_list name="Compiler" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.72694826">
+    <splitter split-orientation="horizontal" split-proportion="0.6824234">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="MoonCode.m" pinned="false" current-in-tab="false">
@@ -47,58 +39,18 @@
           <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/res/input/program.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+                <state relative-caret-position="357">
+                  <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="token.txt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/res/output/token.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="test.txt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/res/assets/test.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="147">
-                  <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="TokenGenerator.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="27">
-                  <caret line="81" column="16" lean-forward="false" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Parser.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="273">
-                  <caret line="229" column="57" lean-forward="true" selection-start-line="229" selection-start-column="57" selection-end-line="229" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LexicalResponseManager.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="LexicalResponseManager.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="168">
-                  <caret line="151" column="36" lean-forward="false" selection-start-line="151" selection-start-column="36" selection-end-line="151" selection-end-column="36" />
+                <state relative-caret-position="294">
+                  <caret line="157" column="0" lean-forward="true" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -183,8 +135,8 @@
       <find>processing: dimension of</find>
       <find>funcdef</find>
       <find>getRegisterOfVar</find>
-      <find>error</find>
       <find>r2</find>
+      <find>error</find>
     </findStrings>
     <replaceStrings>
       <replace>}</replace>
@@ -260,9 +212,9 @@
         <option value="$PROJECT_DIR$/res/output/MoonCode.m" />
         <option value="$PROJECT_DIR$/src/models/Visitors/ComputeMemSizeVisitor.java" />
         <option value="$PROJECT_DIR$/src/models/Visitors/CodeGeneration/StackBasedCodeGenerationVisitor.java" />
-        <option value="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
-        <option value="$PROJECT_DIR$/res/input/program.txt" />
         <option value="$PROJECT_DIR$/src/TokenGenerator.java" />
+        <option value="$PROJECT_DIR$/res/input/program.txt" />
+        <option value="$PROJECT_DIR$/src/utils/LexicalResponseManager.java" />
       </list>
     </option>
   </component>
@@ -493,7 +445,7 @@
       <workItem from="1522559968040" duration="49154000" />
       <workItem from="1523052143683" duration="20428000" />
       <workItem from="1523157620995" duration="86843000" />
-      <workItem from="1523505145423" duration="69623000" />
+      <workItem from="1523505145423" duration="70205000" />
     </task>
     <task id="LOCAL-00001" summary="added lexeme found column number">
       <created>1517253309968</created>
@@ -761,7 +713,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524112430925</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Fixed bug in lexical error ..">
+      <created>1524119364166</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1524119364166</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -776,7 +735,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="605697000" />
+    <option name="totallyTimeSpent" value="606279000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -800,13 +759,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32546374" sideWeight="0.5030303" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28652322" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28652322" sideWeight="0.4969697" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.82559454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.4969697" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973147" sideWeight="0.4889868" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1933405" sideWeight="0.4889868" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -870,7 +829,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="successfully generated AST" />
     <MESSAGE value="finalizing code .." />
     <MESSAGE value="fixing sibling issue while generating AST .." />
     <MESSAGE value="Implemented AST with visitor pattern" />
@@ -895,7 +853,8 @@
     <MESSAGE value="Completed code generation ..Fixed minor bugs" />
     <MESSAGE value="completed get statment and put statement with new line .." />
     <MESSAGE value="Return object from function ...&#10;Sorted by line num and col num .." />
-    <option name="LAST_COMMIT_MESSAGE" value="Return object from function ...&#10;Sorted by line num and col num .." />
+    <MESSAGE value="Fixed bug in lexical error .." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug in lexical error .." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1380,22 +1339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="151" column="36" lean-forward="false" selection-start-line="151" selection-start-column="36" selection-end-line="151" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/output/MoonCode.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1406,8 +1349,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TokenGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="81" column="16" lean-forward="false" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
+        <state relative-caret-position="378">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/input/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/LexicalResponseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="157" column="0" lean-forward="true" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
         </state>
       </provider>
