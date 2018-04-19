@@ -80,7 +80,12 @@ public class LexicalResponseManager {
         }
     }
 
-
+    public boolean isAnyError(){
+        if(errorMessageList.size()>0){
+            return true;
+        }
+        return false;
+    };
     public void initialize() {
 
     }

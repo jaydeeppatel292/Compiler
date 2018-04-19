@@ -233,12 +233,15 @@ public class TypeCheckingVisitor extends Visitor {
                         return;
                     }
 
-                    SymTabEntry funcType = getTypeForFuncCall(type, currentSymTable);
+                    SymTabEntry funcType = getTypeForFuncCall(type, currentSymTable,child);
                     if (funcType != null) {
                         nodeType = funcType.returnType;
                         // Set RETVAL symtab entry type
                         if(child.getChildren().size()>0 && child.getChildren().get(0) instanceof FCallNode){
                             child.getChildren().get(0).symtabentry.m_type = funcType.m_type;
+                        }
+                        if(!funcType.returnType.equals(Terminal.INT.getData()) && !funcType.returnType.equals(Terminal.FLOAT.getData()) ){
+                            currentSymTable = findSymbolTableForClass(funcType.returnType);
                         }
                     } else {
                         node.setType("typeerror");
@@ -265,7 +268,17 @@ public class TypeCheckingVisitor extends Visitor {
         return null;
     }
 
-    public SymTabEntry getTypeForFuncCall(String type, SymTabEntry currentSymTabEntry) {
+
+    private FuncDefNode getFuncDefNodeFromCurrentNode(Node node){
+        if(node==null || node instanceof ProgramBlockNode || node instanceof ProgNode)
+            return null;
+        if(node instanceof FuncDefNode){
+            return (FuncDefNode)node;
+        }
+        return getFuncDefNodeFromCurrentNode(node.getParent());
+    }
+
+    public SymTabEntry getTypeForFuncCall(String type, SymTabEntry currentSymTabEntry,Node varElementNode) {
         SymTab symTab = null;
         if (currentSymTabEntry != null) {
             symTab = currentSymTabEntry.m_subtable;
@@ -298,7 +311,23 @@ public class TypeCheckingVisitor extends Visitor {
                 }
             }
         }
+        FuncDefNode funcDefNode = getFuncDefNodeFromCurrentNode(varElementNode);
+        if(funcDefNode==null){
+            return null;
+        }
 
+        String classScope = funcDefNode.getChildren().get(1).getData();
+        if(classScope==null || classScope.isEmpty()){
+            return null;
+        }
+        symTab  = ASTManager.getInstance().getProgNode().symtab.lookupName(classScope).m_subtable;
+        if(symTab == null){
+            return null;
+        }
+        SymTabEntry symTabEntry = symTab.lookupName(varElementNode.getData());
+        if(symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION){
+            return symTab.lookupFunction(varElementNode.getData(),fParams);
+        }
         return null;
     }
 

@@ -120,6 +120,7 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
             m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ",r0,0\n";
         }
         boolean isDataMember = false;
+        boolean isFuncMember = false;
         for (int i = 0; i < node.getChildren().size(); i++) {
             if (node.getChildren().get(i) instanceof VarElementNode) {
                 VarElementNode varElementNode = (VarElementNode) node.getChildren().get(i);
@@ -127,6 +128,17 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
                 if (varElementOffset == -1) {
                     if (varElementNode.getChildren().get(0) instanceof FCallNode) {
                         m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ",r14," + varElementNode.getChildren().get(0).symtabentry.m_offset + "\n";
+                        FCallNode fCallNode = (FCallNode) varElementNode.getChildren().get(0);
+                        if(fCallNode!=null && fCallNode.symtabentry!=null && fCallNode.symtabentry.m_type!=null && !fCallNode.symtabentry.m_type.equals(Terminal.INT.getData()) && !fCallNode.symtabentry.m_type.equals(Terminal.FLOAT.getData())){
+                            if(i<(node.getChildren().size()-1)) {
+                                m_moonExecCode += m_mooncodeindent + "addi " + localregisterFinal + ",r14," + (varElementNode.getChildren().get(0).symtabentry.m_offset + varElementNode.getChildren().get(0).symtabentry.m_size) + "\n";
+                            }
+                            SymTab classSymTab  = ASTManager.getInstance().getProgNode().symtab.lookupName(fCallNode.symtabentry.m_type).m_subtable;
+                            if(classSymTab!=null){
+                                searchSymTab = classSymTab;
+                            }
+                        }
+                        isFuncMember=true;
                         isDataMember = false;
                     } else {
                         m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + "," + varElementNode.symtabentry.m_offset + "(r14)\n";
@@ -158,7 +170,7 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
                 }
             }
         }
-        if (isDataMember) {
+        if (isDataMember && !isFuncMember) {
             m_moonExecCode += m_mooncodeindent + "% Adding relative offset:\n";
             m_moonExecCode += m_mooncodeindent + "add " + localregisterFinal + "," + localregisterFinal + ",r14\n";
         }
@@ -796,7 +808,11 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         if (tableentryofcalled.m_subtable == null || !(tableentryofcalled instanceof FuncEntry)) {
             tableentryofcalled = generateCodeForObjectReference(p_node,paramsDec);
             if(tableentryofcalled==null || tableentryofcalled.m_subtable ==null)
-                return;
+            {
+                tableentryofcalled  = generateCodeForMemberNestedFunctionCall(p_node,paramsDec);
+                if(tableentryofcalled==null || tableentryofcalled.m_subtable ==null)
+                    return;
+            }
         }
         FuncEntry tableentryofcalledfunction =(FuncEntry) tableentryofcalled;
 
@@ -870,6 +886,37 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         this.m_registerPool.push(localregister1);
     }
 
+    private FuncDefNode getFuncDefNodeFromCurrentNode(Node node){
+        if(node==null || node instanceof ProgramBlockNode || node instanceof ProgNode)
+            return null;
+        if(node instanceof FuncDefNode){
+            return (FuncDefNode)node;
+        }
+        return getFuncDefNodeFromCurrentNode(node.getParent());
+    }
+
+    private SymTabEntry generateCodeForMemberNestedFunctionCall(Node fCallNode,String paramsDec){
+
+        FuncDefNode funcDefNode = getFuncDefNodeFromCurrentNode(fCallNode);
+        if(funcDefNode==null){
+            return null;
+        }
+
+        String classScope = funcDefNode.getChildren().get(1).getData();
+        if(classScope==null || classScope.isEmpty()){
+            return null;
+        }
+        SymTab symTab  = ASTManager.getInstance().getProgNode().symtab.lookupName(classScope).m_subtable;
+        if(symTab == null){
+            return null;
+        }
+        SymTabEntry symTabEntry = symTab.lookupName(fCallNode.getData());
+        if(symTabEntry.symbolType == SymTabEntry.SymbolType.FUNCTION){
+            return symTab.lookupFunction(fCallNode.getData(),paramsDec);
+        }
+
+        return null;
+    };
 
     // TODO paramsDEC need to check with symtabentry ...
     private SymTabEntry generateCodeForObjectReference(Node fCallNode,String paramsDec){

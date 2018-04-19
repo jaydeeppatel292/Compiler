@@ -79,6 +79,11 @@ public class Parser {
                 }
             }
         }
+        if(token==null || ((!token.getTokenType().getTokenType().equals("$")) && (success))){
+            derivation.add("\nSuccess");
+        }else{
+            derivation.add("\nError");
+        }
         LexicalResponseManager.getInstance().addDerivationToFIle(derivation);
         if(token==null){
             return success;

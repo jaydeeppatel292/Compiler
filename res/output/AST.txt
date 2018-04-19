@@ -15,270 +15,122 @@ ProgNode                                                                        
           TypeNode                                                                                   | int               | int       |               | 
           IdNode                                                                                     | b                 |           |               | 
           DimListNode                                                                                |                   |           |               | 
-        VarDeclNode                                                                                  |                   | int       |               | localvar:int:c:
-          TypeNode                                                                                   | int               | int       |               | 
-          IdNode                                                                                     | c                 |           |               | 
-          DimListNode                                                                                |                   |           |               | 
-        FuncDeclNode                                                                                 |                   |           |               | function:int:cnvrt:int:kmMultiplier:
-          TypeNode                                                                                   | int               | int       |               | 
-          IdNode                                                                                     | cnvrt             |           |               | 
-          FParamListNode                                                                             |                   |           |               | 
-            FParamNode                                                                               |                   |           |               | localvar:int:kmMultiplier:
-              TypeNode                                                                               | int               | int       |               | 
-              IdNode                                                                                 | kmMultiplier      |           |               | 
-              DimListNode                                                                            |                   |           |               | 
   FuncDefListNode                                                                                    |                   |           |               | 
-    FuncDefNode                                                                                      |                   |           |               | function:int:cnvrt:int:kmMultiplier:
+    FuncDefNode                                                                                      |                   |           |               | function:int:factorial:int:n:
       TypeNode                                                                                       | int               | int       |               | 
-      ScopeSpecNode                                                                                  | Utility           |           |               | 
-      IdNode                                                                                         | cnvrt             |           |               | 
+      ScopeSpecNode                                                                                  |                   |           |               | 
+      IdNode                                                                                         | factorial         |           |               | 
       FParamListNode                                                                                 |                   |           |               | 
-        FParamNode                                                                                   |                   |           |               | localvar:int:kmMultiplier:
+        FParamNode                                                                                   |                   |           |               | localvar:int:n:
           TypeNode                                                                                   | int               | int       |               | 
-          IdNode                                                                                     | kmMultiplier      |           |               | 
+          IdNode                                                                                     | n                 |           |               | 
           DimListNode                                                                                |                   |           |               | 
       StatBlockNode                                                                                  |                   |           |               | 
-        VarDeclNode                                                                                  |                   | int       |               | localvar:int:a:
-          TypeNode                                                                                   | int               | int       |               | 
-          IdNode                                                                                     | a                 |           |               | 
-          DimListNode                                                                                |                   |           |               | 
-        VarDeclNode                                                                                  |                   | int       |               | localvar:int:b:
-          TypeNode                                                                                   | int               | int       |               | 
-          IdNode                                                                                     | b                 |           |               | 
-          DimListNode                                                                                |                   |           |               | 
         StatementNode                                                                                |                   |           |               | 
-          ForStatNode                                                                                |                   |           |               | localvar:int:i:
-            TypeNode                                                                                 | int               | int       |               | 
-            IdNode                                                                                   | i                 |           |               | null
-            ExprNode                                                                                 | 0                 | int       |               | 
-              ArithExprNode                                                                          | 0                 | int       |               | 
-                TermNode                                                                             | 0                 | int       |               | 
-                  FactorNode                                                                         | 0                 | int       |               | 
-                    NumNode                                                                          | 0                 | int       |               | litval:t1 int
-            RelExprNode                                                                              | lt                | int       |               | tempvar:t3 null
-              ArithExprNode                                                                          | i                 | int       |               | 
-                TermNode                                                                             | i                 | int       |               | 
-                  FactorNode                                                                         | i                 | int       |               | 
-                    VarNode                                                                          | i                 | int       |               | 
-                      VarElementNode                                                                 | i                 | DATA#i#0  |               | 
-                        DataMemberNode                                                               | i                 | DATA#i#0  |               | 
-                          IdNode                                                                     | i                 |           |               | 
-                          IndexListNode                                                              |                   | 0         |               | 
-              ArithExprNode                                                                          | 5                 | int       |               | 
-                TermNode                                                                             | 5                 | int       |               | 
-                  FactorNode                                                                         | 5                 | int       |               | 
-                    NumNode                                                                          | 5                 | int       |               | litval:t2 int
-            AssignStatNode                                                                           | =                 | int       |               | 
-              VarNode                                                                                | i                 | int       |               | 
-                VarElementNode                                                                       | i                 | DATA#i#0  |               | 
-                  DataMemberNode                                                                     | i                 | DATA#i#0  |               | 
-                    IdNode                                                                           | i                 |           |               | 
-                    IndexListNode                                                                    |                   | 0         |               | 
-              ExprNode                                                                               | +                 | int       |               | 
-                ArithExprNode                                                                        | +                 | int       |               | tempvar:t5 null
-                  TermNode                                                                           | i                 | int       |               | 
-                    FactorNode                                                                       | i                 | int       |               | 
-                      VarNode                                                                        | i                 | int       |               | 
-                        VarElementNode                                                               | i                 | DATA#i#0  |               | 
-                          DataMemberNode                                                             | i                 | DATA#i#0  |               | 
-                            IdNode                                                                   | i                 |           |               | 
+          IfStatNode                                                                                 |                   |           |               | 
+            ExprNode                                                                                 | eq                | int       |               | 
+              RelExprNode                                                                            | eq                | int       |               | tempvar:t2 null
+                ArithExprNode                                                                        | n                 | int       |               | 
+                  TermNode                                                                           | n                 | int       |               | 
+                    FactorNode                                                                       | n                 | int       |               | 
+                      VarNode                                                                        | n                 | int       |               | 
+                        VarElementNode                                                               | n                 | DATA#n#0  |               | 
+                          DataMemberNode                                                             | n                 | DATA#n#0  |               | 
+                            IdNode                                                                   | n                 |           |               | 
                             IndexListNode                                                            |                   | 0         |               | 
-                  TermNode                                                                           | 1                 | int       |               | 
-                    FactorNode                                                                       | 1                 | int       |               | 
-                      NumNode                                                                        | 1                 | int       |               | litval:t4 int
-            StatBlockNode                                                                            |                   |           |               | 
-              StatementNode                                                                          |                   |           |               | 
-                PutStatNode                                                                          |                   |           |               | 
-                  ExprNode                                                                           | *                 | int       |               | 
-                    ArithExprNode                                                                    | *                 | int       |               | 
-                      TermNode                                                                       | *                 | int       |               | 
-                        MultOpNode                                                                   | *                 | int       |               | tempvar:t6 null
-                          FactorNode                                                                 | i                 | int       |               | 
-                            VarNode                                                                  | i                 | int       |               | 
-                              VarElementNode                                                         | i                 | DATA#i#0  |               | 
-                                DataMemberNode                                                       | i                 | DATA#i#0  |               | 
-                                  IdNode                                                             | i                 |           |               | 
-                                  IndexListNode                                                      |                   | 0         |               | 
-                          FactorNode                                                                 | kmMultiplier      | int       |               | 
-                            VarNode                                                                  | kmMultiplier      | int       |               | 
-                              VarElementNode                                                         | kmMultiplier      | DATA#kmMultiplier#0 |               | 
-                                DataMemberNode                                                       | kmMultiplier      | DATA#kmMultiplier#0 |               | 
-                                  IdNode                                                             | kmMultiplier      |           |               | 
-                                  IndexListNode                                                      |                   | 0         |               | 
-        StatementNode                                                                                |                   |           |               | 
-          ReturnStatNode                                                                             |                   |           |               | 
-            ExprNode                                                                                 | 25                | int       |               | 
-              ArithExprNode                                                                          | 25                | int       |               | 
-                TermNode                                                                             | 25                | int       |               | 
-                  FactorNode                                                                         | 25                | int       |               | 
-                    NumNode                                                                          | 25                | int       |               | litval:t7 int
-  ProgramBlockNode                                                                                   |                   |           |               | program
-    VarDeclNode                                                                                      |                   | Utility   |               | localvar:Utility:utility:
-      IdNode                                                                                         | Utility           |           |               | 
-      IdNode                                                                                         | utility           |           |               | 
-      DimListNode                                                                                    |                   |           |               | 
-    VarDeclNode                                                                                      |                   | int[5]    |               | localvar:int:a:5:
-      TypeNode                                                                                       | int               | int       |               | 
-      IdNode                                                                                         | a                 |           |               | 
-      DimListNode                                                                                    |                   |           |               | 
-        NumNode                                                                                      | 5                 | int       |               | litval:t8 int
-    VarDeclNode                                                                                      |                   | int[5]    |               | localvar:int:b:5:
-      TypeNode                                                                                       | int               | int       |               | 
-      IdNode                                                                                         | b                 |           |               | 
-      DimListNode                                                                                    |                   |           |               | 
-        NumNode                                                                                      | 5                 | int       |               | litval:t9 int
-    StatementNode                                                                                    |                   |           |               | 
-      AssignStatNode                                                                                 | =                 | int       |               | 
-        VarNode                                                                                      | b                 | int       |               | 
-          VarElementNode                                                                             | b                 | DATA#b#1  |               | tempvar:t11 null
-            DataMemberNode                                                                           | b                 | DATA#b#1  |               | 
-              IdNode                                                                                 | b                 |           |               | 
-              IndexListNode                                                                          |                   | 1         |               | 
                 ArithExprNode                                                                        | 0                 | int       |               | 
                   TermNode                                                                           | 0                 | int       |               | 
                     FactorNode                                                                       | 0                 | int       |               | 
-                      NumNode                                                                        | 0                 | int       |               | litval:t10 int
-        ExprNode                                                                                     | 1                 | int       |               | 
-          ArithExprNode                                                                              | 1                 | int       |               | 
-            TermNode                                                                                 | 1                 | int       |               | 
-              FactorNode                                                                             | 1                 | int       |               | 
-                NumNode                                                                              | 1                 | int       |               | litval:t12 int
-    StatementNode                                                                                    |                   |           |               | 
-      ForStatNode                                                                                    |                   |           |               | localvar:int:i:
-        TypeNode                                                                                     | int               | int       |               | 
-        IdNode                                                                                       | i                 |           |               | null
-        ExprNode                                                                                     | 0                 | int       |               | 
-          ArithExprNode                                                                              | 0                 | int       |               | 
-            TermNode                                                                                 | 0                 | int       |               | 
-              FactorNode                                                                             | 0                 | int       |               | 
-                NumNode                                                                              | 0                 | int       |               | litval:t13 int
-        RelExprNode                                                                                  | lt                | int       |               | tempvar:t15 null
-          ArithExprNode                                                                              | i                 | int       |               | 
-            TermNode                                                                                 | i                 | int       |               | 
-              FactorNode                                                                             | i                 | int       |               | 
-                VarNode                                                                              | i                 | int       |               | 
-                  VarElementNode                                                                     | i                 | DATA#i#0  |               | 
-                    DataMemberNode                                                                   | i                 | DATA#i#0  |               | 
-                      IdNode                                                                         | i                 |           |               | 
-                      IndexListNode                                                                  |                   | 0         |               | 
-          ArithExprNode                                                                              | 5                 | int       |               | 
-            TermNode                                                                                 | 5                 | int       |               | 
-              FactorNode                                                                             | 5                 | int       |               | 
-                NumNode                                                                              | 5                 | int       |               | litval:t14 int
-        AssignStatNode                                                                               | =                 | int       |               | 
-          VarNode                                                                                    | i                 | int       |               | 
-            VarElementNode                                                                           | i                 | DATA#i#0  |               | 
-              DataMemberNode                                                                         | i                 | DATA#i#0  |               | 
-                IdNode                                                                               | i                 |           |               | 
-                IndexListNode                                                                        |                   | 0         |               | 
-          ExprNode                                                                                   | +                 | int       |               | 
-            ArithExprNode                                                                            | +                 | int       |               | tempvar:t17 null
-              TermNode                                                                               | i                 | int       |               | 
-                FactorNode                                                                           | i                 | int       |               | 
-                  VarNode                                                                            | i                 | int       |               | 
-                    VarElementNode                                                                   | i                 | DATA#i#0  |               | 
-                      DataMemberNode                                                                 | i                 | DATA#i#0  |               | 
-                        IdNode                                                                       | i                 |           |               | 
-                        IndexListNode                                                                |                   | 0         |               | 
-              TermNode                                                                               | 1                 | int       |               | 
-                FactorNode                                                                           | 1                 | int       |               | 
-                  NumNode                                                                            | 1                 | int       |               | litval:t16 int
-        StatBlockNode                                                                                |                   |           |               | 
-          StatementNode                                                                              |                   |           |               | 
-            GetStatNode                                                                              |                   |           |               | 
-              VarNode                                                                                | a                 | int       |               | 
-                VarElementNode                                                                       | a                 | DATA#a#1  |               | tempvar:t21 null
-                  DataMemberNode                                                                     | a                 | DATA#a#1  |               | 
-                    IdNode                                                                           | a                 |           |               | 
-                    IndexListNode                                                                    |                   | 1         |               | 
-                      ArithExprNode                                                                  | +                 | int       |               | tempvar:t20 null
-                        TermNode                                                                     | b                 | int       |               | 
-                          FactorNode                                                                 | b                 | int       |               | 
-                            VarNode                                                                  | b                 | int       |               | 
-                              VarElementNode                                                         | b                 | DATA#b#1  |               | tempvar:t19 null
-                                DataMemberNode                                                       | b                 | DATA#b#1  |               | 
-                                  IdNode                                                             | b                 |           |               | 
-                                  IndexListNode                                                      |                   | 1         |               | 
-                                    ArithExprNode                                                    | 0                 | int       |               | 
-                                      TermNode                                                       | 0                 | int       |               | 
-                                        FactorNode                                                   | 0                 | int       |               | 
-                                          NumNode                                                    | 0                 | int       |               | litval:t18 int
-                        TermNode                                                                     | i                 | int       |               | 
-                          FactorNode                                                                 | i                 | int       |               | 
-                            VarNode                                                                  | i                 | int       |               | 
-                              VarElementNode                                                         | i                 | DATA#i#0  |               | 
-                                DataMemberNode                                                       | i                 | DATA#i#0  |               | 
-                                  IdNode                                                             | i                 |           |               | 
+                      NumNode                                                                        | 0                 | int       |               | litval:t1 int
+            StatBlockNode                                                                            |                   |           |               | 
+              StatementNode                                                                          |                   |           |               | 
+                ReturnStatNode                                                                       |                   |           |               | 
+                  ExprNode                                                                           | 1                 | int       |               | 
+                    ArithExprNode                                                                    | 1                 | int       |               | 
+                      TermNode                                                                       | 1                 | int       |               | 
+                        FactorNode                                                                   | 1                 | int       |               | 
+                          NumNode                                                                    | 1                 | int       |               | litval:t3 int
+            StatBlockNode                                                                            |                   |           |               | 
+              StatementNode                                                                          |                   |           |               | 
+                ReturnStatNode                                                                       |                   |           |               | 
+                  ExprNode                                                                           | *                 | int       |               | 
+                    ArithExprNode                                                                    | *                 | int       |               | 
+                      TermNode                                                                       | *                 | int       |               | 
+                        MultOpNode                                                                   | *                 | int       |               | tempvar:t7 null
+                          FactorNode                                                                 | n                 | int       |               | 
+                            VarNode                                                                  | n                 | int       |               | 
+                              VarElementNode                                                         | n                 | DATA#n#0  |               | 
+                                DataMemberNode                                                       | n                 | DATA#n#0  |               | 
+                                  IdNode                                                             | n                 |           |               | 
                                   IndexListNode                                                      |                   | 0         |               | 
+                          FactorNode                                                                 | factorial         | int       |               | 
+                            VarNode                                                                  | factorial         | int       |               | 
+                              VarElementNode                                                         | factorial         | FCALL#factorial#int_ |               | 
+                                FCallNode                                                            | factorial         | FCALL#factorial#int_ |               | retval:t6 null
+                                  IdNode                                                             | factorial         |           |               | 
+                                  AParamsNode                                                        |                   | int_      |               | 
+                                    ExprNode                                                         | -                 | int       |               | 
+                                      ArithExprNode                                                  | -                 | int       |               | tempvar:t5 null
+                                        TermNode                                                     | n                 | int       |               | 
+                                          FactorNode                                                 | n                 | int       |               | 
+                                            VarNode                                                  | n                 | int       |               | 
+                                              VarElementNode                                         | n                 | DATA#n#0  |               | 
+                                                DataMemberNode                                       | n                 | DATA#n#0  |               | 
+                                                  IdNode                                             | n                 |           |               | 
+                                                  IndexListNode                                      |                   | 0         |               | 
+                                        TermNode                                                     | 1                 | int       |               | 
+                                          FactorNode                                                 | 1                 | int       |               | 
+                                            NumNode                                                  | 1                 | int       |               | litval:t4 int
+  ProgramBlockNode                                                                                   |                   |           |               | program
+    VarDeclNode                                                                                      |                   | int       |               | localvar:int:n:
+      TypeNode                                                                                       | int               | int       |               | 
+      IdNode                                                                                         | n                 |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
+    VarDeclNode                                                                                      |                   | int       |               | localvar:int:ans:
+      TypeNode                                                                                       | int               | int       |               | 
+      IdNode                                                                                         | ans               |           |               | 
+      DimListNode                                                                                    |                   |           |               | 
     StatementNode                                                                                    |                   |           |               | 
-      ForStatNode                                                                                    |                   |           |               | localvar:int:i:
-        TypeNode                                                                                     | int               | int       |               | 
-        IdNode                                                                                       | i                 |           |               | null
-        ExprNode                                                                                     | 0                 | int       |               | 
-          ArithExprNode                                                                              | 0                 | int       |               | 
-            TermNode                                                                                 | 0                 | int       |               | 
-              FactorNode                                                                             | 0                 | int       |               | 
-                NumNode                                                                              | 0                 | int       |               | litval:t22 int
-        RelExprNode                                                                                  | lt                | int       |               | tempvar:t24 null
-          ArithExprNode                                                                              | i                 | int       |               | 
-            TermNode                                                                                 | i                 | int       |               | 
-              FactorNode                                                                             | i                 | int       |               | 
-                VarNode                                                                              | i                 | int       |               | 
-                  VarElementNode                                                                     | i                 | DATA#i#0  |               | 
-                    DataMemberNode                                                                   | i                 | DATA#i#0  |               | 
-                      IdNode                                                                         | i                 |           |               | 
+      GetStatNode                                                                                    |                   |           |               | 
+        VarNode                                                                                      | n                 | int       |               | 
+          VarElementNode                                                                             | n                 | DATA#n#0  |               | 
+            DataMemberNode                                                                           | n                 | DATA#n#0  |               | 
+              IdNode                                                                                 | n                 |           |               | 
+              IndexListNode                                                                          |                   | 0         |               | 
+    StatementNode                                                                                    |                   |           |               | 
+      AssignStatNode                                                                                 | =                 | int       |               | 
+        VarNode                                                                                      | ans               | int       |               | 
+          VarElementNode                                                                             | ans               | DATA#ans#0 |               | 
+            DataMemberNode                                                                           | ans               | DATA#ans#0 |               | 
+              IdNode                                                                                 | ans               |           |               | 
+              IndexListNode                                                                          |                   | 0         |               | 
+        ExprNode                                                                                     | factorial         | int       |               | 
+          ArithExprNode                                                                              | factorial         | int       |               | 
+            TermNode                                                                                 | factorial         | int       |               | 
+              FactorNode                                                                             | factorial         | int       |               | 
+                VarNode                                                                              | factorial         | int       |               | 
+                  VarElementNode                                                                     | factorial         | FCALL#factorial#int_ |               | 
+                    FCallNode                                                                        | factorial         | FCALL#factorial#int_ |               | retval:t8 null
+                      IdNode                                                                         | factorial         |           |               | 
+                      AParamsNode                                                                    |                   | int_      |               | 
+                        ExprNode                                                                     | n                 | int       |               | 
+                          ArithExprNode                                                              | n                 | int       |               | 
+                            TermNode                                                                 | n                 | int       |               | 
+                              FactorNode                                                             | n                 | int       |               | 
+                                VarNode                                                              | n                 | int       |               | 
+                                  VarElementNode                                                     | n                 | DATA#n#0  |               | 
+                                    DataMemberNode                                                   | n                 | DATA#n#0  |               | 
+                                      IdNode                                                         | n                 |           |               | 
+                                      IndexListNode                                                  |                   | 0         |               | 
+    StatementNode                                                                                    |                   |           |               | 
+      PutStatNode                                                                                    |                   |           |               | 
+        ExprNode                                                                                     | ans               | int       |               | 
+          ArithExprNode                                                                              | ans               | int       |               | 
+            TermNode                                                                                 | ans               | int       |               | 
+              FactorNode                                                                             | ans               | int       |               | 
+                VarNode                                                                              | ans               | int       |               | 
+                  VarElementNode                                                                     | ans               | DATA#ans#0 |               | 
+                    DataMemberNode                                                                   | ans               | DATA#ans#0 |               | 
+                      IdNode                                                                         | ans               |           |               | 
                       IndexListNode                                                                  |                   | 0         |               | 
-          ArithExprNode                                                                              | 5                 | int       |               | 
-            TermNode                                                                                 | 5                 | int       |               | 
-              FactorNode                                                                             | 5                 | int       |               | 
-                NumNode                                                                              | 5                 | int       |               | litval:t23 int
-        AssignStatNode                                                                               | =                 | int       |               | 
-          VarNode                                                                                    | i                 | int       |               | 
-            VarElementNode                                                                           | i                 | DATA#i#0  |               | 
-              DataMemberNode                                                                         | i                 | DATA#i#0  |               | 
-                IdNode                                                                               | i                 |           |               | 
-                IndexListNode                                                                        |                   | 0         |               | 
-          ExprNode                                                                                   | +                 | int       |               | 
-            ArithExprNode                                                                            | +                 | int       |               | tempvar:t26 null
-              TermNode                                                                               | i                 | int       |               | 
-                FactorNode                                                                           | i                 | int       |               | 
-                  VarNode                                                                            | i                 | int       |               | 
-                    VarElementNode                                                                   | i                 | DATA#i#0  |               | 
-                      DataMemberNode                                                                 | i                 | DATA#i#0  |               | 
-                        IdNode                                                                       | i                 |           |               | 
-                        IndexListNode                                                                |                   | 0         |               | 
-              TermNode                                                                               | 1                 | int       |               | 
-                FactorNode                                                                           | 1                 | int       |               | 
-                  NumNode                                                                            | 1                 | int       |               | litval:t25 int
-        StatBlockNode                                                                                |                   |           |               | 
-          StatementNode                                                                              |                   |           |               | 
-            PutStatNode                                                                              |                   |           |               | 
-              ExprNode                                                                               | a                 | int       |               | 
-                ArithExprNode                                                                        | a                 | int       |               | 
-                  TermNode                                                                           | a                 | int       |               | 
-                    FactorNode                                                                       | a                 | int       |               | 
-                      VarNode                                                                        | a                 | int       |               | 
-                        VarElementNode                                                               | a                 | DATA#a#1  |               | tempvar:t30 null
-                          DataMemberNode                                                             | a                 | DATA#a#1  |               | 
-                            IdNode                                                                   | a                 |           |               | 
-                            IndexListNode                                                            |                   | 1         |               | 
-                              ArithExprNode                                                          | +                 | int       |               | tempvar:t29 null
-                                TermNode                                                             | b                 | int       |               | 
-                                  FactorNode                                                         | b                 | int       |               | 
-                                    VarNode                                                          | b                 | int       |               | 
-                                      VarElementNode                                                 | b                 | DATA#b#1  |               | tempvar:t28 null
-                                        DataMemberNode                                               | b                 | DATA#b#1  |               | 
-                                          IdNode                                                     | b                 |           |               | 
-                                          IndexListNode                                              |                   | 1         |               | 
-                                            ArithExprNode                                            | 0                 | int       |               | 
-                                              TermNode                                               | 0                 | int       |               | 
-                                                FactorNode                                           | 0                 | int       |               | 
-                                                  NumNode                                            | 0                 | int       |               | litval:t27 int
-                                TermNode                                                             | i                 | int       |               | 
-                                  FactorNode                                                         | i                 | int       |               | 
-                                    VarNode                                                          | i                 | int       |               | 
-                                      VarElementNode                                                 | i                 | DATA#i#0  |               | 
-                                        DataMemberNode                                               | i                 | DATA#i#0  |               | 
-                                          IdNode                                                     | i                 |           |               | 
-                                          IndexListNode                                              |                   | 0         |               | 
 ===================================================================================

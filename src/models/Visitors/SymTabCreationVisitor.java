@@ -324,21 +324,6 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.returnType = node.getChildren().get(0).getData();
         node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
         node.symtabentry.createdFromNode = node;
-
-        //TODO check if it can able to add function in global scope and class scope from prog node visit ..
-        //node.symtab.addEntry(node.symtabentry);
-
-
-        //TODO remove below part ...
-        // the symbol table of the function is the symbol table of its statement block
-        // first, get the table and adapt its name to the function
-        /*SymTab table = node.getChildren().get(4).symtab;
-        table.m_name = node.getChildren().get(2).getData();
-        node.symtabentry = new SymTabEntry(declrecstring, table);
-
-        // add parameters of the function as local variables in the local symbol table
-        addAllSymbolInParentTable(node.symtabentry.m_subtable, node, node.getChildren().get(3).getChildren());
-		*/
     }
 
 
