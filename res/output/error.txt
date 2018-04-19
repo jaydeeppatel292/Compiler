@@ -1,1 +1,3 @@
 Format: TokenLineNumber : TokenColumnNumber , ErrorType , TokenValue
+1:1,Lexical Error,123.20
+2:1,Lexical Error,_

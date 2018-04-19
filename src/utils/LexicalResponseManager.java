@@ -152,7 +152,7 @@ public class LexicalResponseManager {
     public void writeLexicalResponseToFile(Token token) {
         if (token != null) {
             if (token.getTokenType() == TokenType.INVALID_IDENTIFIER || token.getTokenType() == TokenType.INVALID_NUMBER) {
-                addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Syntax Error",token.getTokenValue());
+                addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Lexical Error",token.getTokenValue());
                 return;
             }
 

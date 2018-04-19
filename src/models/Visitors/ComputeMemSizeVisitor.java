@@ -134,8 +134,12 @@ public class ComputeMemSizeVisitor extends Visitor {
             child.accept(this);
 
         for (SymTabEntry entry : node.symtab.m_symlist){
-            entry.m_offset     = node.symtab.m_size - entry.m_size;
-            node.symtab.m_size -= entry.m_size;
+            if(entry instanceof ForEntry){
+                calculateMemForStat(node,entry.m_subtable);
+            }else {
+                entry.m_offset     = node.symtab.m_size - entry.m_size;
+                node.symtab.m_size -= entry.m_size;
+            }
         }
     }
 
@@ -171,8 +175,23 @@ public class ComputeMemSizeVisitor extends Visitor {
         //then is the return addess is stored on the stack frame
         p_node.symtab.m_size -= 4;
         for (SymTabEntry entry : p_node.symtab.m_symlist) {
-            entry.m_offset = p_node.symtab.m_size - entry.m_size;
-            p_node.symtab.m_size -= entry.m_size;
+            if(entry instanceof ForEntry){
+                calculateMemForStat(p_node,entry.m_subtable);
+            }else {
+                entry.m_offset = p_node.symtab.m_size - entry.m_size;
+                p_node.symtab.m_size -= entry.m_size;
+            }
+        }
+    }
+
+    public void calculateMemForStat(Node parentNode,SymTab symTab){
+        for (SymTabEntry entry : symTab.m_symlist) {
+            if(entry instanceof ForEntry){
+                calculateMemForStat(parentNode,entry.m_subtable);
+            }else {
+                entry.m_offset = parentNode.symtab.m_size - entry.m_size;
+                parentNode.symtab.m_size -= entry.m_size;
+            }
         }
     }
 
@@ -213,7 +232,7 @@ public class ComputeMemSizeVisitor extends Visitor {
         for (Node child : node.getChildren())
             child.accept(this);
 
-        SymTab symTab = node.symtab;
+        /*SymTab symTab = node.symtab;
         while (symTab.m_name.equals("For")){
             symTab = symTab.m_uppertable;
         }
@@ -221,7 +240,7 @@ public class ComputeMemSizeVisitor extends Visitor {
         for (SymTabEntry entry : node.symtab.m_symlist) {
             entry.m_offset = symTab.m_size - entry.m_size;
             symTab.m_size -= entry.m_size;
-        }
+        }*/
     }
     public void visit(FParamNode p_node) {
         // propagate accepting the same visitor to all the children

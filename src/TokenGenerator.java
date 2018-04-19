@@ -79,7 +79,6 @@ public class TokenGenerator {
                         }
                     }
                 }
-
                 // Manage invalid token
                 if (generatedToken.length() == 0) {
                     // below code will work with whitespace also ..

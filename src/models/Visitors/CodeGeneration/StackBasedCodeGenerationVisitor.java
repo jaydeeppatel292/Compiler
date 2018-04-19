@@ -209,9 +209,19 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
             m_moonExecCode += m_mooncodeindent + "addi " + localregister1 + ",r0,1\n";
 
             for (Node dimNode : dimList) {
-                m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + "," + searchSymTab.lookupName(dimNode.m_moonVarName).m_offset + "(r14)\n";
-                // add operands
-                m_moonExecCode += m_mooncodeindent + "mul " + localregister1 + "," + localregister1 + "," + localregister2 + "\n";
+
+                SymTabEntry dimSymTabEntry = searchSymTab.lookupName(dimNode.m_moonVarName);
+                if(dimSymTabEntry.m_type==null && dimSymTabEntry.m_entry==null){
+                    VarNode varNode = getVarNodeFromArithNode(dimNode);
+                    String dimVarRegister = getRegisterOfVar(varNode);
+                    m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + ",0("+ dimVarRegister +")\n";
+                    // add operands
+                    m_moonExecCode += m_mooncodeindent + "mul " + localregister1 + "," + localregister1 + "," + localregister2 + "\n";
+                }else {
+                    m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + "," + dimSymTabEntry.m_offset + "(r14)\n";
+                    // add operands
+                    m_moonExecCode += m_mooncodeindent + "mul " + localregister1 + "," + localregister1 + "," + localregister2 + "\n";
+                }
                 // deallocate the registers
             }
 
