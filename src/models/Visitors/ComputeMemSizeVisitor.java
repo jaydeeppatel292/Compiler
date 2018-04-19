@@ -4,7 +4,6 @@ import models.AST.*;
 import models.SymbolTable.*;
 import models.Terminal;
 import utils.ASTManager;
-import utils.LexicalResponseManager;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -66,7 +65,9 @@ public class ComputeMemSizeVisitor extends Visitor {
                 size = 4;
             else if (p_node.symtabentry.symbolDataType == FLOAT || p_node.getType().equals(Terminal.FLOAT.getData()))
                 size = 8;
-
+            else{
+                size = getSizeOfClassObject(p_node.symtabentry.m_type);
+            }
             // if it is an array, multiply by all dimension sizes
             if (p_node.symtabentry.varDimensionSize > 0) {
                 for (Node dim : p_node.getChildren().get(2).getChildren()) {
@@ -93,15 +94,18 @@ public class ComputeMemSizeVisitor extends Visitor {
         return size;
     }
 
-    public int sizeOfTypeNode(Node p_node) {
+    public int sizeOfFuncRetrnTypeNode(Node p_node) {
         int size = 0;
         try {
-            if (p_node.symtabentry.symbolDataType == INT || p_node.getType().equals(Terminal.INT.getData()) )
+            if (p_node.getData().equals(Terminal.INT.getData()) )
                 size = 4;
-            else if (p_node.symtabentry.symbolDataType == FLOAT || p_node.getType().equals(Terminal.FLOAT.getData()) )
+            else if (p_node.getData().equals(Terminal.FLOAT.getData()) )
                 size = 8;
+            else if(p_node.getNodeCategory().equals("id")){
+                return getSizeOfClassObject(p_node.getData());
+            }
         }catch (Exception ex){
-
+            ex.printStackTrace();
         }
         return size;
     }
@@ -163,7 +167,7 @@ public class ComputeMemSizeVisitor extends Visitor {
         // this should be node on all nodes that represent
         // a scope and contain their own table
         // stack frame contains the return value at the bottom of the stack
-        p_node.symtab.m_size = -(this.sizeOfTypeNode(p_node.getChildren().get(0)));
+        p_node.symtab.m_size = -(this.sizeOfFuncRetrnTypeNode(p_node.getChildren().get(0)));
         //then is the return addess is stored on the stack frame
         p_node.symtab.m_size -= 4;
         for (SymTabEntry entry : p_node.symtab.m_symlist) {

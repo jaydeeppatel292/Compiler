@@ -5,6 +5,8 @@ import models.SymbolTable.FuncEntry;
 import models.SymbolTable.SymTab;
 import models.SymbolTable.SymTabEntry;
 import models.Terminal;
+import models.TokenType;
+import models.Visitors.ComputeMemSizeVisitor;
 import models.Visitors.Visitor;
 import utils.ASTManager;
 
@@ -243,8 +245,6 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         }
     }
 
-    ;
-
     public void visit(NumNode p_node) {
         // First, propagate accepting the same visitor to all the children
         // This effectively achieves Depth-First AST Traversal
@@ -481,19 +481,32 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         //generate code
         m_moonExecCode += m_mooncodeindent + "% processing: " + p_node.getChildren().get(0).m_moonVarName + " := " + p_node.getChildren().get(1).m_moonVarName + "\n";
 
-
         // TODO check conditions ..
         if ((p_node.getChildren().get(1).m_moonVarName)==null && rightAssignVarNode != null) {
             String rightAssignVarRegister = getRegisterOfVar(rightAssignVarNode);
-            m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + ",0(" + rightAssignVarRegister + ")\n";
+            // check if class object as assignstat ..
+            if(!p_node.getType().equals(Terminal.INT.getData()) && !p_node.getType().equals(Terminal.FLOAT.getData())){
+                int objectSize = p_node.symtab.lookupName(p_node.getChildren().get(0).getData()).m_size;
+                int startingOffset = 0;
+                m_moonExecCode += m_mooncodeindent + "% Copying data from object to variable\n";
+                while (startingOffset < objectSize) {
+                    m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + ", " + (startingOffset) + "(" + rightAssignVarRegister + ")\n";
+                    m_moonExecCode += m_mooncodeindent + "sw " + startingOffset + "("+localregister+")," + localregister2 + "\n";
+                    startingOffset += 4;
+                }
+            }else{
+                m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + ",0(" + rightAssignVarRegister + ")\n";
+                // assign the value to the assigned variable
+                m_moonExecCode += m_mooncodeindent + "sw -0(" + localregister + ")," + localregister2 + "\n";
+            }
         } else {
             // load the assigned value into a register
             m_moonExecCode += m_mooncodeindent + "lw " + localregister2 + "," + p_node.symtab.lookupName(p_node.getChildren().get(1).m_moonVarName).m_offset + "(r14)\n";
+            // assign the value to the assigned variable
+            m_moonExecCode += m_mooncodeindent + "sw -0(" + localregister + ")," + localregister2 + "\n";
         }
 
 
-        // assign the value to the assigned variable
-        m_moonExecCode += m_mooncodeindent + "sw -0(" + localregister + ")," + localregister2 + "\n";
         // deallocate local registers
         this.m_registerPool.push(localregister2);
         this.m_registerPool.push(localregister);
@@ -515,6 +528,7 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         // buffer used by the lib.m subroutines
         m_moonDataCode += String.format("%-10s", "buf") + "res 20\n";
         m_moonDataCode += String.format("%-10s", "m2") + "db  13, 10, 0\n";
+        m_moonDataCode += String.format("%-10s", "enternum") + "db \"Enter Input: \", 0\n";
         // halting point of the entire program
         m_moonExecCode += m_mooncodeindent + "hlt\n";
     }
@@ -602,6 +616,13 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonExecCode += m_mooncodeindent + "% processing: get(" + p_node.getChildren().get(0).m_moonVarName + ")\n";
         m_moonExecCode += m_mooncodeindent + "% get value from user\n";
         m_moonExecCode += m_mooncodeindent + "addi r14,r14," + p_node.symtab.m_size + "\n";
+
+        // Ask user for input ...
+        m_moonExecCode += m_mooncodeindent + "addi " + localregister2 + ",r0, enternum\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14),"+localregister2+"\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15,putstr\n";
+
+        // Get input from user ...
         m_moonExecCode += m_mooncodeindent + "addi " + localregister2 + ",r0, buf\n";
         m_moonExecCode += m_mooncodeindent + "sw -8(r14)," + localregister2 + "\n";
         m_moonExecCode += m_mooncodeindent + "jl r15, getstr\n";
@@ -642,7 +663,6 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
             // Accept else statement block
             m_moonExecCode += "else" + node.getChildren().get(0).m_moonVarName + "\n";
             node.getChildren().get(2).accept(this);
-
 
             m_moonExecCode += "elseif" + node.getChildren().get(0).m_moonVarName + "\n";
         }
@@ -686,12 +706,27 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonExecCode += m_mooncodeindent + "% processing function definition: " + p_node.m_moonVarName + "\n";
         //create the tag to jump onto
         // and copy the jumping-back address value in the called function's stack frame
-        m_moonExecCode += String.format("%-10s", p_node.getChildren().get(2).getData()) + "sw -4(r14),r15\n";
+        if(p_node.symtabentry.returnType.equals(Terminal.INT.getData())) {
+            m_moonExecCode += String.format("%-10s", p_node.getChildren().get(2).getData()) + "sw -4(r14),r15\n";
+        }else if(p_node.symtabentry.returnType.equals(Terminal.FLOAT.getData())) {
+            m_moonExecCode += String.format("%-10s", p_node.getChildren().get(2).getData()) + "sw -8(r14),r15\n";
+        }else{
+            int size = new ComputeMemSizeVisitor().getSizeOfClassObject(p_node.symtabentry.returnType);
+            m_moonExecCode += String.format("%-10s", p_node.getChildren().get(2).getData()) + "sw -"+ size +"(r14),r15\n";
+        }
+
         //generate the code for the function body
         for (Node child : p_node.getChildren())
             child.accept(this);
         // copy back the jumping-back address into r15
-        m_moonExecCode += m_mooncodeindent + "lw r15,-4(r14)\n";
+        if(p_node.symtabentry.returnType.equals(Terminal.INT.getData())) {
+            m_moonExecCode += m_mooncodeindent + "lw r15 ,-4(r14)\n";
+        }else if(p_node.symtabentry.returnType.equals(Terminal.FLOAT.getData())) {
+            m_moonExecCode += m_mooncodeindent + "lw r15 ,-8(r14)\n";
+        }else{
+            int size = new ComputeMemSizeVisitor().getSizeOfClassObject(p_node.symtabentry.returnType);
+            m_moonExecCode += m_mooncodeindent + "lw r15 ,-"+size+"(r14)\n";
+        }
         // jump back to the calling function
         m_moonExecCode += m_mooncodeindent + "jr r15\n";
     }
@@ -712,12 +747,25 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         VarNode varNode = getVarNodeFromExprNode(p_node.getChildren().get(0));
         if (varNode != null) {
             String varNodeRegister = getRegisterOfVar(varNode);
-            m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + ",0(" + varNodeRegister + ")\n";
+            SymTabEntry varEntry = p_node.symtab.lookupName(varNode.getData());
+            if(varEntry!=null && varEntry.m_size>4){
+                int startingOffset = 0;
+                int varSize = varEntry.m_size;
+                m_moonExecCode += m_mooncodeindent + "% Copying data from return var to function called stack \n";
+                while (startingOffset < varSize) {
+                    m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + ", " + (varSize-startingOffset-4) + "(" + varNodeRegister + ")\n";
+                    m_moonExecCode += m_mooncodeindent + "sw " + -startingOffset + "(r14)," + localregister1 + "\n";
+                    startingOffset += 4;
+                }
+            }else {
+                m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + ",0(" + varNodeRegister + ")\n";
+                m_moonExecCode += m_mooncodeindent + "sw " + "0(r14)," + localregister1 + "\n";
+            }
             this.m_registerPool.push(varNodeRegister);
         } else {
             m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + "," + p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).m_offset + "(r14)\n";
+            m_moonExecCode += m_mooncodeindent + "sw " + "0(r14)," + localregister1 + "\n";
         }
-        m_moonExecCode += m_mooncodeindent + "sw " + "0(r14)," + localregister1 + "\n";
         this.m_registerPool.push(localregister1);
     }
 
@@ -793,8 +841,22 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
         m_moonExecCode += m_mooncodeindent + "subi r14,r14," + p_node.symtab.m_size + "\n";
         // copy the return value in memory space to store it on the current stack frame
         // to evaluate the expression in which it is
-        m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + "," + (p_node.symtab.m_size) + "(r14)\n";
-        m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister1 + "\n";
+        SymTabEntry varEntry = p_node.symtab.lookupName(p_node.m_moonVarName);
+        if(varEntry.m_size>4){
+            int varOffset = varEntry.m_offset + varEntry.m_size -4;
+            int endOffset = varEntry.m_offset;
+            int funcReturnRelativeOffset=0;
+            m_moonExecCode += m_mooncodeindent + "% Copying data from function return var to temp var\n";
+            while (varOffset >= endOffset) {
+                m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + ", " + (p_node.symtab.m_size-funcReturnRelativeOffset) + "(r14)\n";
+                m_moonExecCode += m_mooncodeindent + "sw " + varOffset + "(r14)," + localregister1 + "\n";
+                varOffset -= 4;
+                funcReturnRelativeOffset+=4;
+            }
+        }else {
+            m_moonExecCode += m_mooncodeindent + "lw " + localregister1 + "," + (p_node.symtab.m_size) + "(r14)\n";
+            m_moonExecCode += m_mooncodeindent + "sw " + p_node.symtab.lookupName(p_node.m_moonVarName).m_offset + "(r14)," + localregister1 + "\n";
+        }
         this.m_registerPool.push(localregister1);
     }
 
@@ -1009,8 +1071,6 @@ public class StackBasedCodeGenerationVisitor extends Visitor {
             child.accept(this);
 
     }
-
-    ;
 
     @Override
     public void visit(VarElementNode node) {

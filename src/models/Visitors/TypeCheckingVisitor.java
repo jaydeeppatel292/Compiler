@@ -199,6 +199,8 @@ public class TypeCheckingVisitor extends Visitor {
                             node.generatePosition();
                             LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "Semantic", "Can not resolved symbol:" + varType.symbolName);
                             return;
+                        }else{
+                            nodeType = varType.extraData;
                         }
                     } else {
                         if (dimension == 0 && varType.varDimensionSize > 0) {

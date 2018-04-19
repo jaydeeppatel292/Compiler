@@ -89,7 +89,10 @@ public class LexicalResponseManager {
         errorMessageList.sort(new Comparator<ErrorMessage>() {
             @Override
             public int compare(ErrorMessage o1, ErrorMessage o2) {
-                return o1.getLineNum()-o2.getLineNum();
+                if(o1.getLineNum()!=o2.getLineNum()) {
+                    return o1.getLineNum() - o2.getLineNum();
+                }
+                return o1.getColNum()- o2.getColNum();
             }
         });
     }
