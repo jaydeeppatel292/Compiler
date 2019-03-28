@@ -96,14 +96,13 @@ if | then | else | for | get | put | return |
 int | float  
 
 # Opreators 
-eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)  
-+ | - | * | /  
+eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=) | + | - | * | /  
+sr (::) |
+= | 
 not | and | or  
-=  
-sr (::)  
 
 # Punctuation 
-: | , | . | ; | [ | ] | { | } | ( | )   
+:  | ,  | .  | ;  | [  |  ]  |  {  | }  | (  | )   
 
 
 # Atomic lexical elements of the language
