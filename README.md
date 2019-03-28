@@ -1,4 +1,48 @@
 # Compiler
+Designed and implemented a scanner for a programming language whose lexical specifications are given below.
+The scanner identifies and outputs tokens (valid words and punctuation) in the source program. Its output
+is a token that can thereafter be used by the syntactic analyzer to verify that the program is syntactically
+valid. When called, the lexical analyzer should extract the next token from the source program. The lexical
+analyzer should be able to output a token even if the input does not form a correct program. The syntax of
+the language will be specified later in assignment #2. Note that completeness of testing is a major grading
+topic. You are responsible for providing appropriate test cases that test for a wide variety of valid and invalid
+cases
+
+Designed and implemented a syntactic analyzer for the language specified by the grammar specified below. The
+syntactical definition is using the following conventions:
+• Terminals (lexical elements, or tokens) are represented in single quotes 'likeThis'.
+• Non-terminals are represented in italics likeThis.
+• The empty phrase is represented by EPSILON.
+• EBNF-style repetition notation is represented using curly brackets {like this}. It represents zero or more
+occurrence of the sentential form enclosed in the brackets.
+• EBNF-style optionality notation is represented using square brackets [like this]. It represents zero or one
+occurrence of the sentential form enclosed in the brackets.
+• The non-terminal <prog> is the starting symbol of the grammar.
+Except from the EBNF constructs, the grammar is expressed using the syntax used by the kfgEdit AtoCC toolkit
+application. 
+
+Modified the productions so that the left recursions and ambiguities are removed without modifying the language and implemented a LL(1) predictive parser using table-driven technique for the modified production rules.   
+
+Implemented a semantic analysis phase which implies two inter-related sub-phases: (1) implementation of semantic actions for the generation of symbol tables and (2) implementation of semantic checking and typechecking semantic actions. AST is generated using Syntax-directed translation. Using visitor pattern parser can traverse AST tree traversal that triggers semantic actions for symbol table generation and sementic type checking. 
+
+
+Implemented a moon code generation phase.The following is a list of different specific constructs/concepts for which code generation needs to be implemented for all the aspects of the language to become executable:
+
+<b>Memory allocation</b>: Allocate memory for arrays of basic types,objects,objects with inheritance,objects having object members,arrays of objects.  
+
+Functions: Branch to a function’s code block, execute the code block, branch back to the calling function,Branch to a function that has been branched upon, Pass parameters as local values to the function’s code block, Upon function resolution, pass the return value back to the calling function, Function call stack mechanism and recursive function calls, Call to member functions, Call to deeply nested member function.   
+ 
+Statements: Implementation of Moon code for every kind of statement as defined in the grammar: assignment conditional statement, loop statement, input/output statement, return statement. Correct implementation the specific branching mechanisms for control flow statements. 
+
+Aggregate data members access: Aggregate data types such as arrays and objects contain a group of data values. Code is generated so that contained member values in such an aggregated value can be accessed when referred to as factors in an expression, or the left hand side of an assignment statement.
+
+Expressions: Computing of the resulting value of an entire expression, including the simple case when an
+expression is either a variable name of even a single literal value, up to complex expressions involving a kinds of
+operators, array indexed with expressions, deeply nested object members, etc
+
+
+The parser can also identify all the errors in the input program and print a meaningful message to the user for each error encountered as well as the location of the errors in the input file. It also has an error recovery method that permits to report all errors present in the source code. 
+
 
 # Grammar
 
