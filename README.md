@@ -40,7 +40,7 @@ expression is either a variable name of even a single literal value, up to compl
 operators, array indexed with expressions, deeply nested object members, etc
 
 
-## 6 
+## 6 Error/Warning Identification
 The parser can also identify all the errors in the input program and print a meaningful message to the user for each error encountered as well as the location of the errors in the input file. It also has an error recovery method that permits to report all errors present in the source code. 
 
 
