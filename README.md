@@ -53,16 +53,18 @@ Keywords program | class |
 if | then | else | for | get | put | return |
 int | float
 
-# Opreators eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)
+# Opreators 
+eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)
  + | - | * | /
  not | and | or
  =
  sr (::)
 
-# Punctuation : | , | . | ; | [ | ] | { | } | ( | )
+# Punctuation 
+: | , | . | ; | [ | ] | { | } | ( | )
 
 
-#Atomic lexical elements of the language
+# Atomic lexical elements of the language
 id ::= letter alphanum*
 alphanum ::= letter | digit | _
 integer ::= nonzero digit* | 0
@@ -71,20 +73,6 @@ fraction ::= .digit* nonzero | .0
 letter ::= a..z |A..Z
 digit ::= 0..9
 nonzero ::= 1..9
-
-
-# Operators,punctuation and reserved words
-==  +     (   if
-<>  -     )   then
-<   *     {   else
->   /     }   for
-<=  =     [   class
->=  and   ]   int
-;   not   /*  float
-,   or    */  get
-.   //    put
-:   return
-::  program
 
 
 
