@@ -1,4 +1,5 @@
 # Compiler
+##1##
 Designed and implemented a scanner for a programming language whose lexical specifications are given below.
 The scanner identifies and outputs tokens (valid words and punctuation) in the source program. Its output
 is a token that can thereafter be used by the syntactic analyzer to verify that the program is syntactically
@@ -8,18 +9,7 @@ the language will be specified later in assignment #2. Note that completeness of
 topic. You are responsible for providing appropriate test cases that test for a wide variety of valid and invalid
 cases
 
-Designed and implemented a syntactic analyzer for the language specified by the grammar specified below. The
-syntactical definition is using the following conventions:
-• Terminals (lexical elements, or tokens) are represented in single quotes 'likeThis'.
-• Non-terminals are represented in italics likeThis.
-• The empty phrase is represented by EPSILON.
-• EBNF-style repetition notation is represented using curly brackets {like this}. It represents zero or more
-occurrence of the sentential form enclosed in the brackets.
-• EBNF-style optionality notation is represented using square brackets [like this]. It represents zero or one
-occurrence of the sentential form enclosed in the brackets.
-• The non-terminal <prog> is the starting symbol of the grammar.
-Except from the EBNF constructs, the grammar is expressed using the syntax used by the kfgEdit AtoCC toolkit
-application. 
+Designed and implemented a syntactic analyzer for the language specified by the grammar specified below.
 
 Modified the productions so that the left recursions and ambiguities are removed without modifying the language and implemented a LL(1) predictive parser using table-driven technique for the modified production rules.   
 
