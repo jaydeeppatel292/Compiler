@@ -97,10 +97,10 @@ int | float
 
 # Opreators 
 eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)  
- + | - | * | /  
- not | and | or  
- =  
- sr (::)  
++ | - | * | /  
+not | and | or  
+=  
+sr (::)  
 
 # Punctuation 
 : | , | . | ; | [ | ] | { | } | ( | )   
