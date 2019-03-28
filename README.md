@@ -1,6 +1,6 @@
 # Compiler
 
-#Grammar
+# Grammar
 
 prog -> {classDecl} {funcDef} 'program' funcBody ';'
 classDecl -> 'class' 'id' [':' 'id' {',' 'id'}] '{' {varDecl} {funcDecl} '}' ';'
@@ -48,18 +48,18 @@ multOp -> '*' | '/' | 'and'
 
 
 
-#Tokens
+# Tokens
 Keywords program | class |
 if | then | else | for | get | put | return |
 int | float
 
-#Opreators eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)
+# Opreators eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=)
  + | - | * | /
  not | and | or
  =
  sr (::)
 
-#Punctuation : | , | . | ; | [ | ] | { | } | ( | )
+# Punctuation : | , | . | ; | [ | ] | { | } | ( | )
 
 
 #Atomic lexical elements of the language
@@ -73,7 +73,7 @@ digit ::= 0..9
 nonzero ::= 1..9
 
 
-#Operators,punctuation and reserved words
+# Operators,punctuation and reserved words
 ==  +     (   if
 <>  -     )   then
 <   *     {   else
@@ -88,7 +88,7 @@ nonzero ::= 1..9
 
 
 
-#Example program
+# Example program
 
 class InheritedUtility {
  int member1;};
