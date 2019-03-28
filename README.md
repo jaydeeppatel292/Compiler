@@ -46,8 +46,6 @@ multOp -> '*' | '/' | 'and'
 
 
 
-
-
 # Tokens
 Keywords program | class |
 if | then | else | for | get | put | return |
@@ -80,6 +78,7 @@ nonzero ::= 1..9
 
 class InheritedUtility {
  int member1;};
+ 
 class Utility : InheritedUtility {
  int var1[4][5][7][8][9][1][0];
  float var2;
@@ -95,21 +94,26 @@ int Utility::findMax(int array[100]){
  else{};
  };
  return (maxValue);};
+
 int Utility::findMin(int array[100]){
- int minValue;
- int idx;
- minValue = array[100];
- for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
- if(array[idx] < maxValue + 1 / 8 or idx) then {
- maxValue = array[idx];}
- else{};
- };
- return (minValue);};
+  int minValue;
+  int idx;
+  minValue = array[100];
+  for( int idx = 1; idx <= 99; idx = ( idx ) + 1) {
+  if(array[idx] < maxValue + 1 / 8 or idx) then {
+  maxValue = array[idx];}
+  else{};
+  };
+  return (minValue);
+};
+
 float randomize(){
  float value;
  value = 100 * (2 + 3.0 / 7.0006);
  value = 1.05 + ((2.04 * 2.47) - 3.0) + 7.0006 > 1 and not - 1;
- return (value);};
+ return (value);
+ };
+
 program {
  int sample[100];
  int idx;
@@ -126,5 +130,6 @@ program {
  utility.var1[4][1][0][0][0][0][0] = 10;
  arrayUtility[utility.var1[1][2][3][4][5][6][idx+maxValue]][1][1][1].var2 = 2.5;
  put(maxValue);
- put(minValue);}; 
+ put(minValue);
+}; 
 
