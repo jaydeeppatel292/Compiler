@@ -97,8 +97,8 @@ int | float
 
 # Opreators 
 eq (==) | neq (<>) | lt (<) | gt (>) | leq (<=) | geq (>=) | + | - | * | /  
-sr (::) |
-= | 
+sr (::) |  
+= |  
 not | and | or  
 
 # Punctuation 
