@@ -26,25 +26,64 @@ import java.util.Vector;
 
 public class SymTabCreationVisitor extends Visitor {
 
-    public void visit(ProgNode node) {
-        System.out.println("visiting ProgNode");
-        node.symtab = new SymTab("global");
-        // for classes, loop over all class declaration nodes
-        for (Node classelt : node.getChildren().get(0).getChildren()) {
-            //add the symbol table entry of each class in the global symbol table
-            if (classelt.symtabentry.symbolType == SymTabEntry.SymbolType.CLASS) {
-                for (SymTabEntry symTab : node.symtab.m_symlist) {
-                    try {
-                        if (symTab.symbolType == SymTabEntry.SymbolType.CLASS && symTab.m_subtable.m_name.equals(classelt.symtabentry.m_subtable.m_name)) {
-                            classelt.symtabentry.createdFromNode.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(classelt.symtabentry.createdFromNode.lineNumber, classelt.symtabentry.createdFromNode.colNumber, "SemanticError", "Class multiple declaration :" + symTab.m_subtable.m_name);
+    public Integer m_tempVarNum = 0;
+
+    public String getNewTempVarName() {
+        m_tempVarNum++;
+        return "t" + m_tempVarNum.toString();
+    }
+
+    public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList, List<SymTabEntry> fromSymTabEntryList) {
+        for (SymTabEntry symTabEntry : fromSymTabEntryList) {
+            if (!intoSymTabEntryList.contains(symTabEntry)) {
+                intoSymTabEntryList.add(symTabEntry);
+            }
+        }
+    }
+
+    public void checkShadowedVarDecl(SymTab symTab) {
+        for (SymTabEntry tabEntry : symTab.m_symlist) {
+            if (tabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
+                for (SymTabEntry currentClassSymTab : tabEntry.m_subtable.m_symlist) {
+                    for (SymTabEntry inheritedTabEntry : tabEntry.multiLevelInheritedSymTab) {
+                        for (SymTabEntry inheritedTable : inheritedTabEntry.m_subtable.m_symlist) {
+                            if (inheritedTable.m_entry.equals(currentClassSymTab.m_entry)) {
+                                currentClassSymTab.createdFromNode.generatePosition();
+                                LexicalResponseManager.getInstance().addErrorMessage(currentClassSymTab.createdFromNode.lineNumber, currentClassSymTab.createdFromNode.colNumber, "Semantic Warning", "Shadowed variable:: Class: " + tabEntry.m_subtable.m_name + " : " + currentClassSymTab.m_entry + " Already declared in Class: " + inheritedTabEntry.m_subtable.m_name);
+                            }
                         }
-                    } catch (Exception ex) {
                     }
                 }
             }
-            node.symtab.addEntry(classelt.symtabentry);
         }
+    }
+
+    public boolean isCircularDependence(SymTabEntry symTabEntry, List<SymTabEntry> classSymListTraversal) {
+        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
+            if (classSymListTraversal.contains(inheritedSymTab)) {
+                return true;
+            }
+            classSymListTraversal.add(inheritedSymTab);
+        }
+        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
+            if (isCircularDependence(inheritedSymTab, classSymListTraversal)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void visit(ProgNode node) {
+        System.out.println("visiting ProgNode");
+        node.symtab = new SymTab(0, "global", null);
+
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
         // for function definitions, loop over all function definition nodes
         for (Node fndefelt : node.getChildren().get(1).getChildren()) {
             //add the symbol table entry of each function definition in the global symbol table
@@ -83,13 +122,15 @@ public class SymTabCreationVisitor extends Visitor {
                 for (SymTabEntry symTabEntry : node.symtab.m_symlist) {
                     if (symTabEntry.symbolType == SymTabEntry.SymbolType.CLASS && symTabEntry.m_subtable != null && symTabEntry.m_subtable.m_name.equals(inheritedNode.getData())) {
                         // Circular dependence at first level: Check if already entry exist
-                        if (classNode.symtabentry.inheritedSymTab.contains(symTabEntry.m_subtable)) {
-                            classNode.generatePosition();
-                            LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "SemanticError", "Circular class dependencies found for " + inheritedNode.getData() + " In class inheritance :" + classNode.getChildren().get(0).getData());
+                        //TODO test below conditiion not sure it will work..
+                        clasSymTabFound = true;
+                        if (classNode.symtabentry.inheritedSymTab.contains(symTabEntry)) {
+                            inheritedNode.generatePosition();
+                            LexicalResponseManager.getInstance().addErrorMessage(inheritedNode.lineNumber, inheritedNode.colNumber, "SemanticError", "Multiple times inherited same class " + inheritedNode.getData() + " In class :" + classNode.getChildren().get(0).getData());
                         } else {
                             classNode.symtabentry.addInheritedSymTab(symTabEntry);
-                            clasSymTabFound = true;
                         }
+                        break;
                     }
                 }
                 if (!clasSymTabFound) {
@@ -123,86 +164,137 @@ public class SymTabCreationVisitor extends Visitor {
 
         // for the program function, get its local symbol table from node 2 and create an entry for it in the global symbol table
         // first, get the table and change its name
-        SymTab table = node.getChildren().get(2).symtab;
+        /*SymTab table = node.getChildren().get(2).symtab;
         table.m_name = "program";
-        node.symtab.addEntry("function:program", table);
+        node.symtab.addEntry("function:program", table);*/
         checkShadowedVarDecl(node.symtab);
     }
 
-    ;
-
-    public void addUniqueSymTabFromInheritence(List<SymTabEntry> intoSymTabEntryList, List<SymTabEntry> fromSymTabEntryList) {
-        for (SymTabEntry symTabEntry : fromSymTabEntryList) {
-            if (!intoSymTabEntryList.contains(symTabEntry)) {
-                intoSymTabEntryList.add(symTabEntry);
-            }
-        }
-    }
-
-    public void checkShadowedVarDecl(SymTab symTab) {
-        for (SymTabEntry tabEntry : symTab.m_symlist) {
-            if (tabEntry.symbolType == SymTabEntry.SymbolType.CLASS) {
-                for (SymTabEntry currentClassSymTab : tabEntry.m_subtable.m_symlist) {
-                    for (SymTabEntry inheritedTabEntry : tabEntry.multiLevelInheritedSymTab) {
-                        for (SymTabEntry inheritedTable : inheritedTabEntry.m_subtable.m_symlist) {
-                            if (inheritedTable.m_entry.equals(currentClassSymTab.m_entry)) {
-                                currentClassSymTab.createdFromNode.generatePosition();
-                                LexicalResponseManager.getInstance().addErrorMessage(currentClassSymTab.createdFromNode.lineNumber, currentClassSymTab.createdFromNode.colNumber, "Semantic Warning", "Shadowed variable:: Class: " + tabEntry.m_subtable.m_name + " : " + currentClassSymTab.m_entry + " Already declared in Class: " + inheritedTabEntry.m_subtable.m_name);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public boolean isCircularDependence(SymTabEntry symTabEntry, List<SymTabEntry> classSymListTraversal) {
-        boolean isCircularDependence = false;
-        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
-            if (classSymListTraversal.contains(inheritedSymTab)) {
-                return true;
-            }
-            classSymListTraversal.add(inheritedSymTab);
-        }
-        for (SymTabEntry inheritedSymTab : symTabEntry.inheritedSymTab) {
-            if (isCircularDependence(inheritedSymTab, classSymListTraversal)) {
-                return true;
-            }
-        }
-        return isCircularDependence;
-    }
 
     public void visit(StatBlockNode node) {
         System.out.println("visiting StatNode");
-        node.symtab = new SymTab();
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
 
-
-        // add the symbol table entries of all the variables declared in the statement block
+        //TODO remove below code ...
+        /*// add the symbol table entries of all the variables declared in the statement block
         addAllSymbolInParentTable(node.symtab, node, node.getChildren());
 
         for (Node stat : node.getChildren()) {
-			/*if (stat.symtabentry != null)
-				node.symtab.addEntry(stat.symtabentry);*/
+			*//*if (stat.symtabentry != null)
+				node.symtab.addEntry(stat.symtabentry);*//*
             if (stat.getNodeCategory().equals("statement") && stat.getChildren().get(0).getNodeCategory().equals("forStat")) {
                 SymTab table = stat.getChildren().get(0).symtab;
                 SymTabEntry symTabEntry = new SymTabEntry("For:", table);
                 symTabEntry.createdFromNode = node;
                 node.symtab.addEntry(symTabEntry);
             }
+        }*/
+    }
+
+    public void visit(ProgramBlockNode node) {
+        System.out.println("visiting Prog StatBlockNode");
+        SymTab localtable = new SymTab(1, "program", node.symtab);
+        node.symtabentry = new FuncEntry("void", "program", new Vector<VarEntry>(), localtable);
+        node.symtabentry.m_entry = "program";
+        node.symtab.addEntry(node.symtabentry);
+        node.symtab = localtable;
+
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
         }
+
+        /*// add the symbol table entries of all the variables declared in the statement block
+        addAllSymbolInParentTable(node.symtab, node, node.getChildren());
+
+        for (Node stat : node.getChildren()) {
+			*//*if (stat.symtabentry != null)
+				node.symtab.addEntry(stat.symtabentry);*//*
+            if (stat.getNodeCategory().equals("statement") && stat.getChildren().get(0).getNodeCategory().equals("forStat")) {
+                SymTab table = stat.getChildren().get(0).symtab;
+                SymTabEntry symTabEntry = new SymTabEntry("For:", table);
+                symTabEntry.createdFromNode = node;
+                node.symtab.addEntry(symTabEntry);
+            }
+        }*/
+    }
+
+
+    public void visit(FuncDeclNode node) {
+        System.out.println("visiting FuncDeclNode");
+
+        String ftype = node.getChildren().get(0).getData();
+        String fname = node.getChildren().get(1).getData();
+
+        SymTab localtable = new SymTab(1, fname, node.symtab);
+        node.symtab = localtable;
+
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        String declrecstring;
+        declrecstring = "function:";
+        // function return value
+        declrecstring += node.getChildren().get(0).getData() + ':';
+        // function name
+        declrecstring += node.getChildren().get(1).getData() + ':';
+        // loop over function parameter list
+        String extraData = "";
+        Vector<VarEntry> paramlist = new Vector<VarEntry>();
+        for (Node param : node.getChildren().get(2).getChildren()) {
+            if (param.getChildren().get(2).getChildren().size() > 0) {
+                extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
+            } else {
+                extraData += param.getChildren().get(0).getData() + "_";
+            }
+            // parameter type
+            declrecstring += param.getChildren().get(0).getData() + ':';
+            // parameter name
+            declrecstring += param.getChildren().get(1).getData() + ':';
+            // parameter dimension list
+            for (Node dim : param.getChildren().get(2).getChildren()) {
+                // parameter dimension
+                declrecstring += dim.getData() + ':';
+            }
+            paramlist.add((VarEntry) param.symtabentry);
+        }
+
+        // the symbol table of the function is the symbol table of its statement block
+        // first, get the table and adapt its name to the function
+        node.symtabentry = new FuncEntry(ftype, fname, paramlist, localtable);
+        node.symtabentry.m_entry = declrecstring;
+        node.symtabentry.extraData = extraData;
+        node.symtabentry.createdFromNode = node;
+        node.symtabentry.symbolName = node.getChildren().get(1).getData();
+        node.symtabentry.returnType = node.getChildren().get(0).getData();
+        node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
+        node.symtab.m_uppertable.addEntry(node.symtabentry);
     }
 
 
     public void visit(FuncDefNode node) {
         System.out.println("visiting FuncDefNode");
-        String fname = node.getChildren().get(1).getData();
-        node.symtab = new SymTab(fname);
+        String ftype = node.getChildren().get(0).getData();
+        String fname = node.getChildren().get(2).getData();
+        SymTab localtable = new SymTab(1, fname, node.symtab);
+        node.symtab = localtable;
+
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        Vector<VarEntry> paramlist = new Vector<VarEntry>();
+
         String declrecstring;
         declrecstring = "function:";
         // function return value
         declrecstring += node.getChildren().get(0).getData() + ':';
-		/*// function scop spec
-		declrecstring += node.getChildren().get(1).getData() + ':';*/
         // function name
         declrecstring += node.getChildren().get(2).getData() + ':';
         // loop over function parameter list
@@ -218,52 +310,64 @@ public class SymTabCreationVisitor extends Visitor {
             // parameter name
             declrecstring += param.getChildren().get(1).getData() + ':';
             // parameter dimension list
-            for (Node dim : param.getChildren().get(2).getChildren())
+            for (Node dim : param.getChildren().get(2).getChildren()) {
                 // parameter dimension
                 declrecstring += dim.getData() + ':';
+            }
+            paramlist.add((VarEntry) param.symtabentry);
         }
-        // the symbol table of the function is the symbol table of its statement block
-        // first, get the table and adapt its name to the function
-        SymTab table = node.getChildren().get(4).symtab;
-        table.m_name = node.getChildren().get(2).getData();
-        node.symtabentry = new SymTabEntry(declrecstring, table);
 
-        // add parameters of the function as local variables in the local symbol table
-        addAllSymbolInParentTable(node.symtabentry.m_subtable, node, node.getChildren().get(3).getChildren());
-
+        node.symtabentry = new FuncEntry(ftype, fname, paramlist, localtable);
+        node.symtabentry.m_entry = declrecstring;
         node.symtabentry.extraData = extraData;
         node.symtabentry.symbolName = node.getChildren().get(2).getData();
         node.symtabentry.returnType = node.getChildren().get(0).getData();
         node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
         node.symtabentry.createdFromNode = node;
-
-		/*for (Node param : node.getChildren().get(3).getChildren())
-		node.symtabentry.m_subtable.addEntry(param.symtabentry);*/
     }
 
-    ;
 
     public void visit(ClassNode node) {
         System.out.println("visiting ClassNode");
         // get the class name from node 0
         String classname = node.getChildren().get(0).getData();
-        // create a new table with the class name
-        node.symtab = new SymTab(classname);
-        // loop over all children of the class and migrate their symbol table entries in class table
-
-        addAllSymbolInParentTable(node.symtab, node, node.getChildren().get(2).getChildren());
-
-        // create the symbol table entry for the class
-        node.symtabentry = new SymTabEntry("class:" + classname, node.symtab);
+        SymTab localtable = new SymTab(1, classname, node.symtab);
+        node.symtabentry = new ClassEntry(classname, localtable);
+        node.symtabentry.m_entry = classname;
         node.symtabentry.symbolType = SymTabEntry.SymbolType.CLASS;
         node.symtabentry.createdFromNode = node;
+
+        boolean isEntryExist = false;
+        for (SymTabEntry symTab : node.symtab.m_symlist) {
+            try {
+                if (symTab.symbolType == SymTabEntry.SymbolType.CLASS && symTab.m_subtable.m_name.equals(classname)) {
+                    node.generatePosition();
+                    LexicalResponseManager.getInstance().addErrorMessage(node.lineNumber, node.colNumber, "SemanticError", "Class multiple declaration :" + symTab.m_subtable.m_name);
+                    isEntryExist = true;
+                }
+            } catch (Exception ex) {
+            }
+        }
+        if (!isEntryExist) {
+            node.symtab.addEntry(node.symtabentry);
+        }
+        node.symtab = localtable;
+
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        // TODO: Remove below code ..
+        // loop over all children of the class and migrate their symbol table entries in class table
+
+//        addAllSymbolInParentTable(node.symtab, node, node.getChildren().get(2).getChildren());
+
     }
 
-    ;
 
     public void visit(ForStatNode node) {
         System.out.println("visiting ForStatNode");
-        node.symtab = new SymTab("For");
 
         // aggregate information from the subtree
         String declrecstring;
@@ -274,18 +378,39 @@ public class SymTabCreationVisitor extends Visitor {
         // get the id from the second child node and aggregate here
         declrecstring += node.getChildren().get(1).getData() + ':';
 
-        SymTabEntry symTabEntry = new SymTabEntry(declrecstring);
+        SymTab localtable = new SymTab(2, "For", node.symtab);
+        node.symtabentry = new ForEntry("", "For", localtable);
+
+//        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, new ArrayList<>());
+        node.symtabentry.m_entry = declrecstring;
+        node.symtabentry.extraData = "For"; // type
+        node.symtabentry.symbolType = SymTabEntry.SymbolType.FOR;
+        node.symtabentry.createdFromNode = node;
+        node.symtab.addEntry(node.symtabentry);
+        node.symtab = localtable;
+
+
+        SymTabEntry symTabEntry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, new ArrayList<>());
         symTabEntry.extraData = node.getChildren().get(0).getData(); // type
-        symTabEntry.symbolName = node.getChildren().get(1).getData(); // var name
         symTabEntry.symbolType = SymTabEntry.SymbolType.VARIABLE;
         symTabEntry.createdFromNode = node;
-
         node.symtab.addEntry(symTabEntry);
-        node.symtabentry = new SymTabEntry("For:", node.symtab);
-
+        node.getChildren().get(1).symtabentry = symTabEntry;
+        node.getChildren().get(1).m_moonVarName = node.getChildren().get(1).getData();
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
     }
 
+
     public void visit(VarDeclNode node) {
+
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
         System.out.println("visiting VarDeclNode");
         List<Integer> dimList = new ArrayList<>();
         // aggregate information from the subtree
@@ -310,15 +435,17 @@ public class SymTabCreationVisitor extends Visitor {
         }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
-        node.symtabentry = new SymTabEntry(declrecstring, null);
+
         node.setType(type);
+        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.VARIABLE, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, dimList);
+        node.symtabentry.m_entry = declrecstring;
         node.symtabentry.createdFromNode = node;
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
         node.symtabentry.varDimensionSize = node.getChildren().get(2).getChildren().size();
         node.symtabentry.dimList = dimList;
-
         node.symtabentry.symbolType = SymTabEntry.SymbolType.VARIABLE;
+
         switch (node.getChildren().get(0).getData()) {
             case "int":
                 node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
@@ -329,43 +456,16 @@ public class SymTabCreationVisitor extends Visitor {
             default:
                 node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.CLASS;
         }
+        addSymbolEntryInSymbolTable(node.symtab, node.symtabentry);
     }
 
-    public void visit(FuncDeclNode node) {
-        System.out.println("visiting FuncDeclNode");
-        String fname = node.getChildren().get(1).getData();
-        node.symtab = new SymTab(fname);
-        String declrecstring;
-        declrecstring = "function:";
-        // function return value
-        declrecstring += node.getChildren().get(0).getData() + ':';
-        // function name
-        declrecstring += node.getChildren().get(1).getData() + ':';
-        // loop over function parameter list
-        String extraData = "";
-        for (Node param : node.getChildren().get(2).getChildren()) {
-            extraData += param.getChildren().get(0).getData() + ":" + param.getChildren().get(2).getChildren().size() + "_";
-            // parameter type
-            declrecstring += param.getChildren().get(0).getData() + ':';
-            // parameter name
-            declrecstring += param.getChildren().get(1).getData() + ':';
-            // parameter dimension list
-            for (Node dim : param.getChildren().get(2).getChildren())
-                // parameter dimension
-                declrecstring += dim.getData() + ':';
-        }
-
-        // the symbol table of the function is the symbol table of its statement block
-        // first, get the table and adapt its name to the function
-        node.symtabentry = new SymTabEntry(declrecstring, null);
-        node.symtabentry.extraData = extraData;
-        node.symtabentry.createdFromNode = node;
-        node.symtabentry.symbolName = node.getChildren().get(1).getData();
-        node.symtabentry.returnType = node.getChildren().get(0).getData();
-        node.symtabentry.symbolType = SymTabEntry.SymbolType.FUNCTION;
-    }
 
     public void visit(FParamNode node) {
+        for (Node child : node.getChildren()) {
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
         List<Integer> dimList = new ArrayList<>();
         System.out.println("visiting FParamNode");
         // aggregate information from the subtree
@@ -383,7 +483,8 @@ public class SymTabCreationVisitor extends Visitor {
         }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
-        node.symtabentry = new SymTabEntry(declrecstring, null);
+        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.PARAMETER, node.getChildren().get(0).getData(), node.getChildren().get(1).getData() /*Sym Name : var name */, dimList);
+        node.symtabentry.m_entry = declrecstring;
         node.symtabentry.createdFromNode = node;
         node.symtabentry.extraData = node.getChildren().get(0).getData(); // type
         node.symtabentry.symbolName = node.getChildren().get(1).getData(); // var name
@@ -391,26 +492,465 @@ public class SymTabCreationVisitor extends Visitor {
         node.symtabentry.dimList = dimList;
         node.symtabentry.symbolType = SymTabEntry.SymbolType.PARAMETER;
 
+        switch (node.getChildren().get(0).getData()) {
+            case "int":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
+                break;
+            case "float":
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.FLOAT;
+                break;
+            default:
+                node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.CLASS;
+        }
+
+        addFparamEntryInSymbolTable(node.symtab, node.symtabentry);
     }
 
 
-    public void addAllSymbolInParentTable(SymTab symTab, Node parent, List<Node> childNodeList) {
-        for (Node member : childNodeList) {
-            if (member.symtabentry != null) {
-                boolean isSymAlreadyDeclared = false;
-                for (SymTabEntry symTabEntry : parent.symtab.m_symlist) {
-                    if (symTabEntry.m_entry.equals(member.symtabentry.m_entry)) {
-                        member.generatePosition();
-                        LexicalResponseManager.getInstance().addErrorMessage(member.lineNumber, member.colNumber, "SemanticError", "Multiple declaration of :" + member.symtabentry.m_entry);
-                        System.out.println("Multiple declaration of :" + member.symtabentry.m_entry);
-                        isSymAlreadyDeclared = true;
-                    }
+    public void addSymbolEntryInSymbolTable(SymTab symTab, SymTabEntry needToAddSymTabEntry) {
+        Node createdFromNode = needToAddSymTabEntry.createdFromNode;
+        boolean isSymAlreadyDeclared = false;
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
+            if (symTabEntry.m_entry.equals(needToAddSymTabEntry.m_entry)) {
+                createdFromNode.generatePosition();
+                LexicalResponseManager.getInstance().addErrorMessage(createdFromNode.lineNumber, createdFromNode.colNumber, "SemanticError", "Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                System.out.println("Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                isSymAlreadyDeclared = true;
+            }
+        }
+        if (!isSymAlreadyDeclared) {
+            symTab.addEntry(needToAddSymTabEntry);
+        }
+    }
+    public void addFparamEntryInSymbolTable(SymTab symTab, SymTabEntry needToAddSymTabEntry) {
+        Node createdFromNode = needToAddSymTabEntry.createdFromNode;
+        boolean isSymAlreadyDeclared = false;
+        int fparamsCount=0;
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
+            if(symTabEntry.symbolType == SymTabEntry.SymbolType.PARAMETER){
+                fparamsCount++;
+            }
+            if (symTabEntry.m_entry.equals(needToAddSymTabEntry.m_entry)) {
+                createdFromNode.generatePosition();
+                LexicalResponseManager.getInstance().addErrorMessage(createdFromNode.lineNumber, createdFromNode.colNumber, "SemanticError", "Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                System.out.println("Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                isSymAlreadyDeclared = true;
+            }
+        }
+        if (!isSymAlreadyDeclared) {
+            symTab.addEntry(fparamsCount,needToAddSymTabEntry);
+        }
+    }
+
+    public boolean isSymbolAlreadyExist(SymTab symTab, SymTabEntry needToAddSymTabEntry,boolean needToThrowError){
+        Node createdFromNode = needToAddSymTabEntry.createdFromNode;
+        boolean isSymAlreadyDeclared = false;
+        for (SymTabEntry symTabEntry : symTab.m_symlist) {
+            if (symTabEntry.m_entry.equals(needToAddSymTabEntry.m_entry)) {
+                if(needToThrowError) {
+                    createdFromNode.generatePosition();
+                    LexicalResponseManager.getInstance().addErrorMessage(createdFromNode.lineNumber, createdFromNode.colNumber, "SemanticError", "Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
+                    System.out.println("Multiple declaration of :" + createdFromNode.symtabentry.m_entry);
                 }
-                if (!isSymAlreadyDeclared) {
-                    symTab.addEntry(member.symtabentry);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public void visit(IdNode p_node) {
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        p_node.m_moonVarName = p_node.getData();
+    }
+
+    @Override
+    public void visit(ArithExprNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        // only term in arithexpr node ///
+        if (p_node.getChildren().size() == 1) {
+            return;
+        }
+        // multop as child ..
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, p_node.getType(), p_node.m_moonVarName, p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).dimList);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+
+    @Override
+    public void visit(RelExprNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        String tempvarname = this.getNewTempVarName();
+        Vector<Integer> dimList = new Vector<Integer>();
+        node.m_moonVarName = tempvarname;
+        node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, node.getType(), node.m_moonVarName, dimList);
+        node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + node.getType();
+        node.symtab.addEntry(node.symtabentry);
+    }
+
+    @Override
+    public void visit(VarElementNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+        if (node.getChildren().size() > 0) {
+            if (node.getChildren().get(0) instanceof DataMemberNode) {
+                Node dataMember = node.getChildren().get(0);
+                // introduce new tempvar if datamember have any dimlist ...
+                if (dataMember.getChildren().size() > 1 && dataMember.getChildren().get(1).getChildren().size() > 0) {
+                    String tempvarname = this.getNewTempVarName();
+                    node.m_moonVarName = tempvarname;
+                    node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, "int", node.m_moonVarName, new ArrayList<>());
+                    node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + node.getType();
+                    node.symtabentry.symbolDataType = SymTabEntry.SymbolDataType.INT;
+                    node.symtab.addEntry(node.symtabentry);
                 }
             }
         }
+    }
+
+    @Override
+    public void visit(MultOpNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        Vector<Integer> dimlist = new Vector<Integer>();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, vartype, p_node.m_moonVarName, dimlist);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+    @Override
+    public void visit(AddOpNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.TEMPVAR, p_node.getType(), p_node.m_moonVarName, p_node.symtab.lookupName(p_node.getChildren().get(0).m_moonVarName).dimList);
+        p_node.symtabentry.m_entry = "tempvar:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+    @Override
+    public void visit(NumNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.LITVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
+        p_node.symtabentry.m_entry = "litval:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+
+    @Override
+    public void visit(FCallNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (Node child : p_node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = p_node.symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        String vartype = p_node.getType();
+        p_node.symtabentry = new VarEntry(SymTabEntry.SymbolType.RETVAL, vartype, p_node.m_moonVarName, new Vector<Integer>());
+        p_node.symtabentry.m_entry = "retval:" + tempvarname + " " + p_node.getType();
+        p_node.symtab.addEntry(p_node.symtabentry);
+    }
+
+
+    @Override
+    public void visit(StatementNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(TermNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(TypeNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(FParamListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+
+    @Override
+    public void visit(VarNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(FuncDefListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(GetStatNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+
+    @Override
+    public void visit(IfStatNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(IndexListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(InherListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(MemberListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(Node node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+
+    @Override
+    public void visit(OpNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(ParamListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+
+    @Override
+    public void visit(AParamsNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(AssignStatNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(ClassListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(DataMemberNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(DimListNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(ExprNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(FactorNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(FactorSignNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(PutStatNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+
+    @Override
+    public void visit(ReturnStatNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
+    }
+
+    @Override
+    public void visit(ScopeSpecNode node) {
+        for (Node child : node.getChildren()) {
+            //make all children use this scopes' symbol table
+            child.symtab = node.symtab;
+            child.accept(this);
+        }
+
     }
 
 }

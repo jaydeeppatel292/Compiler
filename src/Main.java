@@ -1,10 +1,7 @@
-import com.sun.corba.se.impl.orb.ParserTable;
 import global.Constants;
-import models.LL1ParseTable;
-import models.Token;
+import models.Visitors.CodeGeneration.StackBasedCodeGenerationVisitor;
 import models.Visitors.ComputeMemSizeVisitor;
 import models.Visitors.SymTabCreationVisitor;
-import models.Visitors.SymTabTempVarCreationVisitor;
 import models.Visitors.TypeCheckingVisitor;
 import utils.ASTManager;
 import utils.BufferManager;
@@ -23,47 +20,37 @@ public class Main {
 
         startSecondPhase();
 
-        if(success){
+        if (success) {
+
             System.out.println("Successfully Parsed Input");
-        }else{
+        } else {
             System.out.println("Error while parsing Input");
         }
         LexicalResponseManager.getInstance().finisheWriting();
     }
 
 
-
-
-    public static void startSecondPhase(){
-        if(ASTManager.getInstance().getProgNode()==null){
+    public static void startSecondPhase() {
+        if (ASTManager.getInstance().getProgNode() == null) {
             System.out.println("Could not able to create AST for given program!");
             return;
         }
-        SymTabCreationVisitor STCVisitor = new SymTabCreationVisitor();
+        try {
+            ASTManager.getInstance().getProgNode().accept(new SymTabCreationVisitor());
+            System.out.println("==TYPE CHECKING PHASE STARTED======");
+            ASTManager.getInstance().getProgNode().accept(new TypeCheckingVisitor());
+            if (!LexicalResponseManager.getInstance().isAnyError()) {
+                ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
+                ASTManager.getInstance().getProgNode().accept(new StackBasedCodeGenerationVisitor(Constants.OUTPUT_PROGRAM_M));
+            }
+        } catch (Exception ex) {
+        }
 
-        ASTManager.getInstance().getProgNode().accept(STCVisitor);
-
-        System.out.println("==TYPE CHECKING PHASE STARTED======");
-
-        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
-        ASTManager.getInstance().getProgNode().accept(typeCheckingVisitor);
-        ASTManager.getInstance().getProgNode().accept(new SymTabTempVarCreationVisitor());
-        ASTManager.getInstance().getProgNode().accept(new ComputeMemSizeVisitor());
-
-        System.out.println("==PRINTING TREE======");
-
-        ASTManager.getInstance().getProgNode().print();
-
-
-        System.out.println("==PRINTING TABLE=====");
-        System.out.println(ASTManager.getInstance().getProgNode().symtab);
-
-        System.out.println("==TABLE PRINTED=======");
-
-        ASTManager.getInstance().getProgNode().print( LexicalResponseManager.getInstance().getASTWriter());
+        ASTManager.getInstance().getProgNode().print(LexicalResponseManager.getInstance().getASTWriter());
         LexicalResponseManager.getInstance().getSymbolTableWriter().println(ASTManager.getInstance().getProgNode().symtab);
 
     }
+
     public static void initializeParser(String[] args) {
 
         createRequiredFolders();
@@ -84,21 +71,21 @@ public class Main {
 
     private static void createRequiredFolders() {
         File resDir = new File("res");
-        if(!resDir.isFile()){
+        if (!resDir.isFile()) {
             resDir.mkdir();
         }
 
         File inputDir = new File("res/input");
-        if(!inputDir.isFile()){
+        if (!inputDir.isFile()) {
             inputDir.mkdir();
         }
 
         File outputDir = new File("res/output");
-        if(!outputDir.isFile()){
+        if (!outputDir.isFile()) {
             outputDir.mkdir();
         }
         File assetsDir = new File("res/assets");
-        if(!assetsDir.isFile()){
+        if (!assetsDir.isFile()) {
             assetsDir.mkdir();
         }
     }

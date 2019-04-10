@@ -1,0 +1,28 @@
+class Utility{
+    int var1;
+};
+
+int factorial(int a){
+    int b;
+    if(a>1) then {
+       put(a);
+       b = factorial(a-1);
+       return(a*b);
+    }
+    else {
+        put (a);
+        return (1);
+    };
+};
+
+program {
+    int max;
+    int a;
+    max = 5;
+    a = 5;
+    put(a);
+    a = factorial(a);
+    put(a);
+    a = 25/5;
+    put(a);
+};

@@ -80,7 +80,12 @@ public class LexicalResponseManager {
         }
     }
 
-
+    public boolean isAnyError(){
+        if(errorMessageList.size()>0){
+            return true;
+        }
+        return false;
+    };
     public void initialize() {
 
     }
@@ -89,7 +94,10 @@ public class LexicalResponseManager {
         errorMessageList.sort(new Comparator<ErrorMessage>() {
             @Override
             public int compare(ErrorMessage o1, ErrorMessage o2) {
-                return o1.getLineNum()-o2.getLineNum();
+                if(o1.getLineNum()!=o2.getLineNum()) {
+                    return o1.getLineNum() - o2.getLineNum();
+                }
+                return o1.getColNum()- o2.getColNum();
             }
         });
     }
@@ -149,7 +157,7 @@ public class LexicalResponseManager {
     public void writeLexicalResponseToFile(Token token) {
         if (token != null) {
             if (token.getTokenType() == TokenType.INVALID_IDENTIFIER || token.getTokenType() == TokenType.INVALID_NUMBER) {
-                addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Syntax Error",token.getTokenValue());
+                addErrorMessage(token.getLineNumber(),token.getColumnNumber(),"Lexical Error:"+token.getTokenType().getTokenType(),token.getTokenValue());
                 return;
             }
 

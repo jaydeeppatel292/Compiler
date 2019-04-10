@@ -1,0 +1,91 @@
+class InheritedUtility{
+};
+
+// Multiple declaration of class
+class InheritedUtility{
+};
+
+
+
+// Should through error for NotDefinedClass
+
+class Utility:InheritedUtility,NotDefinedClass{
+    int var1;
+    int getMax();
+    int getMax2(int var1[3],int var2);
+};
+
+class ExtendedUtility{
+    Utility utility;
+};
+
+int Utility:: getMax2(int var1[3],int var2){
+    if(var1[1]>var2)
+    then {
+        return (var1[1]);
+    }
+    else {
+    };
+    return (var2);
+
+};
+
+int Utility:: getMax(){
+    int var2;
+    var2 = 5;
+    return (var2);
+};
+int getMin(int a[3],int b){
+    int var2;
+    var2 = 5;
+    return (var2);
+};
+
+float randomize(){
+ int value;
+
+ // As I declared Relational operator will return int (0 for false and 1 for true) as we dont have bool type
+ value = 1>2;
+ return (value);};
+
+
+program {
+    Utility utility;
+    int var3[3];
+    int max;
+
+    // multiple declaration of variable
+    int max;
+
+    Utility myUtility[3][4];
+
+    ExtendedUtility extendedUtility[2][2][2];
+
+    max = extendedUtility[1][1][1].utility.getMax2(var3,var3[1]);
+
+    // Success : type checking
+    max = 4*5;
+
+    // Error : type checking
+    max = 4 * 5.4;
+
+    // Error : type checking with function call
+    max = 4 * randomize();
+
+    // Success : type checking with function call
+    max = 4 * getMin(var3,max);
+
+    // Error : type checking for var3[] as getMin needs array type
+    max = 4 * getMin(var3[3],max);
+
+    // Error: The . operator should be used only on variables of a class type. If so, its right operand must be a member of that class
+     max.var1 =5;
+
+    // Correct usage :
+     myUtility[3][4].var1 = 5;
+
+     max = extendedUtility.utility.getMax(max,var3);
+
+     max = extendedUtility.utility.getMax(max,var3[2]);
+
+};

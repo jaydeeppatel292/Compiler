@@ -23,9 +23,12 @@ public abstract class Node {
     // triggered by a visitor
     private String type            = null;
     private String subtreeString   = null;
+    public String m_moonVarName;
+
+
+    // introduced by symbol table creation visitor
     public SymTab symtab           = null;
     public SymTabEntry symtabentry = null;
-    public String m_moonVarName;
 
     public Node(String data) {
         this.setData(data);

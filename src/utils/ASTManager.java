@@ -32,9 +32,10 @@ public class ASTManager {
                 case "SEMANTIC_MAKE_FAMILY_PROG": {
                     Node classList = new ClassListNode();
                     Node funcDefList = new FuncDefListNode();
-                    Node statBlock = new StatBlockNode();
+                    Node progBlock = new ProgramBlockNode();
                     if (semanticStack.peek().getNodeCategory().equals("statBlock")) {
-                        statBlock = (semanticStack.pop());
+                        Node statBlock = (semanticStack.pop());
+                        progBlock = new ProgramBlockNode(statBlock.getChildren());
                     }
                     if (semanticStack.peek().getNodeCategory().equals("funcDefList")) {
                         funcDefList = (semanticStack.pop());
@@ -42,7 +43,7 @@ public class ASTManager {
                     if (semanticStack.peek().getNodeCategory().equals("classList")) {
                         classList = (semanticStack.pop());
                     }
-                    progNode = new ProgNode(classList, funcDefList, statBlock);
+                    progNode = new ProgNode(classList, funcDefList, progBlock);
                     progNode.setNodeCategory("prog");
                     semanticStack.push(progNode);
                     break;

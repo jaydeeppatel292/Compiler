@@ -23,8 +23,6 @@ public class AssignStatNode extends Node {
 	 * the visitor before itself being visited. 
 	 */
 	public void accept(Visitor visitor) {
-		for (Node child : this.getChildren())
-			child.accept(visitor);
 		visitor.visit(this);
 	}
 }

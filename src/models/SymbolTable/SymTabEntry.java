@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SymTabEntry {
-	private String m_type;
+	public String m_type;
 	public String m_entry    = null;
 	public SymTab m_subtable = null;
 	public SymbolType symbolType;
@@ -27,6 +27,13 @@ public class SymTabEntry {
 	}
 
 
+	public SymTabEntry(SymbolType p_kind, String p_type, String p_name, SymTab p_subtable){
+		symbolType = p_kind;
+		m_type = p_type;
+		symbolName = p_name;
+		m_subtable = p_subtable;
+	}
+
 	public SymTabEntry(SymbolType p_kind, String p_type, String p_name){
 		symbolType = p_kind;
 		m_type = p_type;
@@ -34,14 +41,39 @@ public class SymTabEntry {
 	}
 
 	public List<SymTabEntry> inheritedSymTab=new ArrayList<>();
-	public SymTabEntry(String p_entry, SymTab p_subtable){
-		m_entry = p_entry;		
+	public SymTabEntry(String p_name, SymTab p_subtable){
+		symbolName = p_name;
 		m_subtable = p_subtable;
+	}
+
+	public SymTabEntry() {
+
 	}
 
 	public void addInheritedSymTab(SymTabEntry symTab){
 		inheritedSymTab.add(symTab);
 	}
+
+	public SymTabEntry lookupClass(SymTabEntry symTabEntry,String p_className){
+
+		if(symTabEntry.m_subtable!=null)
+		{
+//			for(SymTabEntry)
+		}
+
+		return lookupInheritedClass(symTabEntry,p_className);
+	};
+	public SymTabEntry lookupInheritedClass(SymTabEntry symTabEntry,String p_tolookup) {
+		for (SymTabEntry rec : inheritedSymTab) {
+			if (rec.symbolName.equals(p_tolookup)) {
+				return rec;
+			}
+			return lookupInheritedClass(rec, p_tolookup);
+		}
+		return null;
+	}
+
+
 	public enum SymbolType{
 		FUNCTION,
 		CLASS,
@@ -49,6 +81,7 @@ public class SymTabEntry {
 		VARIABLE,
 		TEMPVAR,
 		LITVAL,
+		FOR,
 		RETVAL;
 	}
 	public enum SymbolDataType{
