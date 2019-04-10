@@ -8,26 +8,57 @@
 |    =====================================================
 |    | VARIABLE  | a         | int       | 4     | -4    |
 |    | VARIABLE  | b         | int       | 4     | -8    |
+|    | FUNCTION  | sum       | int                       |
+|    =====================================================
+|    | table: sum              scope offset: 24          |
+|    =====================================================
+|    | PARAMETER | x         | int       | 4     | -12   |
+|    | PARAMETER | y         | int       | 4     | -16   |
+|    | VARIABLE  | ans       | int       | 4     | -20   |
+|    | TEMPVAR   | t2        | null      | 4     | -24   |
+|    =====================================================
+|    | FUNCTION  | doSum     | int                       |
+|    =====================================================
+|    | table: doSum            scope offset: 20          |
+|    =====================================================
+|    | PARAMETER | x         | int       | 4     | -12   |
+|    | PARAMETER | y         | int       | 4     | -16   |
+|    | RETVAL    | t1        | int       | 4     | -20   |
+|    =====================================================
 |    =====================================================
 | FUNCTION  | program   | void                      |
 |    =====================================================
-|    | table: program          scope offset: 12          |
+|    | table: program          scope offset: 36          |
 |    =====================================================
-|    | VARIABLE  | n         | int       | 4     | -4    |
-|    | VARIABLE  | ans       | int       | 4     | -8    |
-|    | RETVAL    | t8        | int       | 4     | -12   |
+|    | VARIABLE  | utility   | Utility   | 8     | -8    |
+|    | VARIABLE  | n         | int       | 4     | -12   |
+|    | LITVAL    | t12       | int       | 4     | -16   |
+|    | LITVAL    | t13       | int       | 4     | -20   |
+|    | RETVAL    | t14       | Utility   | 8     | -28   |
+|    | RETVAL    | t15       | int       | 4     | -32   |
+|    | RETVAL    | t16       | int       | 4     | -36   |
 |    =====================================================
 | FUNCTION  | factorial | int                       |
 |    =====================================================
 |    | table: factorial        scope offset: 40          |
 |    =====================================================
 |    | PARAMETER | n         | int       | 4     | -12   |
-|    | LITVAL    | t1        | int       | 4     | -16   |
-|    | TEMPVAR   | t2        | null      | 4     | -20   |
-|    | LITVAL    | t3        | int       | 4     | -24   |
-|    | LITVAL    | t4        | int       | 4     | -28   |
-|    | TEMPVAR   | t5        | null      | 4     | -32   |
-|    | RETVAL    | t6        | int       | 4     | -36   |
-|    | TEMPVAR   | t7        | null      | 4     | -40   |
+|    | LITVAL    | t3        | int       | 4     | -16   |
+|    | TEMPVAR   | t4        | null      | 4     | -20   |
+|    | LITVAL    | t5        | int       | 4     | -24   |
+|    | LITVAL    | t6        | int       | 4     | -28   |
+|    | TEMPVAR   | t7        | null      | 4     | -32   |
+|    | RETVAL    | t8        | int       | 4     | -36   |
+|    | TEMPVAR   | t9        | null      | 4     | -40   |
+|    =====================================================
+| FUNCTION  | getClass  | Utility                   |
+|    =====================================================
+|    | table: getClass         scope offset: 36          |
+|    =====================================================
+|    | PARAMETER | a         | int       | 4     | -16   |
+|    | PARAMETER | b         | int       | 4     | -20   |
+|    | VARIABLE  | utility   | Utility   | 8     | -28   |
+|    | TEMPVAR   | t10       | null      | 4     | -32   |
+|    | TEMPVAR   | t11       | null      | 4     | -36   |
 |    =====================================================
 =====================================================

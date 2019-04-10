@@ -1,25 +1,65 @@
-// Code generation : Recursion program of Factorial
-
+// 6.2 functions
 class Utility{
     int a;
     int b;
+    int sum(int x,int y);
+    int doSum(int x,int y);
 };
 
+// 6.2.3 pass parameters as local values to the function’s code block.
+int Utility:: doSum(int x,int y){
+    // 6.2.2 branch to a function that has been branched upon.
+    // 6.2.7 call to deeply nested member function.
+    return(sum(x,y));
+};
+
+int Utility:: sum(int x,int y){
+    int ans;
+    ans = x+y;
+    return(ans);
+};
+
+// Recursive program of factorial
+
 int factorial(int n){
-    if(n == 0) then {
-       return (1);
+    if(n==0) then {
+        return(1);
     }else{
-       return (n*factorial(n-1));
+        return(n*factorial(n-1));
     };
 };
 
+// 6.2.8 returning object from a function
+
+Utility getClass(int a,int b){
+    Utility utility;
+    utility.a =a*b;
+    utility.b =a+b;
+    return(utility);
+};
 
 program {
-   int n;
-   int ans;
-   get(n);
-   // Call recursive function ...
-   ans = factorial(n);
-   put(ans);
+    Utility utility;
+    int n;
+
+    // 6.2.1 branch to a function’s code block, execute the code block, branch back to the calling function.
+    // 6.2.4 upon function resolution, pass the return value back to the calling function. Also get Object
+    // Get object as return type ...
+    // 6.3.1 assignment statement: correct assignment of the resulting value of an expression to a variable, independently of what is the expression.
+    utility = getClass(10,15);
+
+    // 6.3.4 input/output statement: get()/put()
+    put(utility.a);
+    put(utility.b);
+
+    // 6.2.6 call to member functions.
+    n  = utility.doSum(utility.a,utility.b);
+    put(n);
+
+    get(n);
+
+    // 6.2.5 function call stack mechanism and recursive function calls.
+    put(factorial(n));
+
 
 };

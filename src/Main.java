@@ -45,15 +45,6 @@ public class Main {
             }
         } catch (Exception ex) {
         }
-        System.out.println("==PRINTING TREE======");
-
-//        ASTManager.getInstance().getProgNode().print();
-
-
-        System.out.println("==PRINTING TABLE=====");
-        System.out.println(ASTManager.getInstance().getProgNode().symtab);
-
-        System.out.println("==TABLE PRINTED=======");
 
         ASTManager.getInstance().getProgNode().print(LexicalResponseManager.getInstance().getASTWriter());
         LexicalResponseManager.getInstance().getSymbolTableWriter().println(ASTManager.getInstance().getProgNode().symtab);
